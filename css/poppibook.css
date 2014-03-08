@@ -1,0 +1,57 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 8, 2014, 3:35:35 PM
+    Author     : weiwei
+*/
+
+/* style for the left sidebar in editpage*/
+.nav-sidebar{
+    margin-left: -50px;
+}
+.nav-sidebar>ul{
+    margin-top: -20%;
+}
+.nav-sidebar>li{
+    display: list-item;
+    list-style-type: none;
+    width: 100px;
+    height: 100px;
+    padding: 0px;
+    margin: 0px;
+     
+}
+.nav-sidebar>li>a{
+    display:block;
+    padding:0px;
+    width: auto;
+    height: auto;
+}
+
+ 
+ 
+
+.catgories div{
+    
+    display: none;
+    
+}
+
+.catgories>a>img{
+    display: block;
+    transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    
+}
+
+#icon_bg>img{
+    display: block;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    
+}
