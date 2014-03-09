@@ -36,8 +36,8 @@
            </div>
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right form-inline">
-            <button class="btn btn-success">CREATE YOUR BOOK!</button>
-			<button class="btn btn-success">DONE!</button>
+            <button class="btn btn-success">CREATE YOUR BOOK </button>
+			<button class="btn btn-success">PREVIEW</button>
 			<button class="btn btn-success">ORDER</button>
 			<button class="btn btn-warning">GO BACK</button>
 			<button class="btn btn-success">CONFIRM</button>
@@ -106,14 +106,15 @@
 		<!-- content view(story name, canvas)-->
 				<div class="col-sm-8 col-sm-offset-2 col-md-9 col-md-offset-2 col-lg-8 col-lg-offset-1">
 				  <!--<h1 class="page-header">Your story canvas</h1> -->
-					  <div class="row">
-						  <div class="col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-2 col-lg-5 col-lg-offset-2">
+					  <div class="row jumbotron">
+						  <div class="col-sm-6 col-sm-offset-4 col-md-5 col-md-offset-4 col-lg-5 col-lg-offset-4">
 							  <input type="text" class="form-control" placeholder="Input the name of your story book">
 						  </div>
 					  </div>
 
 					<div class="row placeholders">
 						<div class="row Canvas">
+							 <img data-src="holder.js/800x600" alt="">
 						</div>          
 					</div>
 			   </div>
@@ -125,16 +126,111 @@
 			 <div class="row">
 			    <img data-src="holder.js/500x500" alt="">
 		     </div>
-			 <div class="row">
-				 <!--thumbnails of preview pages-->
-			 </div>
+			  <div class="jumbotron">
+      
+              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">
+              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">
+              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">
+             </div>
 		 </div>
+		 
 	 </div>
 
 	<!-- order form -->
 	  <div class="row" id="orderView">
 		  <div class="jumbotron">
 			 <h2> Please fill the order form</h2>
+			 <form class="form-horizontal" role="form">
+				 <div class="form-group">
+					 <label for="fullName" class="col-lg-2 control-label">
+						 Full name:
+					 </label>
+					 <div class="col-lg-3">
+						 <input type="text" id="fullName" class="form-control" placeholder="First Name, Family Name">
+					 </div>
+				 </div>
+				 <div class="form-group">
+					 <label for="email" class="col-lg-2 control-label">
+						 Email:
+					 </label>
+					 <div class="col-lg-3">
+						 <input type="email" id="email" class="form-control" placeholder="XXX@XXX.XX">
+					 </div> 
+				 </div>
+				 <div class="form-group">
+					 <label for="telephone" class="col-lg-2 control-label">
+						 Telephone :
+					 </label>
+					 <div class="col-lg-3">
+						 <input type="text" id="telephone" class="form-control" placeholder="telephone number">
+					 </div> 
+				 </div>
+				 
+				 <div class="row">
+					 <label class="col-lg-1 col-lg-offset-1"> <h4> Address</h4> </label>
+				 </div>
+				 <div class="form-group">
+					 
+					 <label for="street" class="col-lg-2 control-label">
+						 street:
+					 </label>
+					 <div class="col-lg-5">
+						 <input type="text" id="street" class="form-control" placeholder="street">
+					 </div> 
+					 
+				 </div>
+				 <div class="form-group">
+					
+					 <label for="Co" class="col-lg-2 control-label">
+						 C/o:
+					 </label>
+					 <div class="col-lg-5">
+						 <input type="text" id="Co" class="form-control" placeholder="Only if you rent in second hand or have some other name on your letterbox">
+					 </div> 
+					 
+				 </div>
+				 <div class="form-group">
+					 <label for="postalCode" class="col-lg-2 control-label">
+						 Postal Code:
+					 </label>
+					 <div class="col-lg-5">
+						 <input type="text" id="postalCode" class="form-control" placeholder="Input the postal code">
+					 </div> 
+				 </div>
+				   <div class="form-group">
+					 <label for="City" class="col-lg-2 control-label">
+						City:
+					 </label>
+					 <div class="col-lg-5">
+						 <input type="text" id="city" class="form-control" placeholder="City">
+					 </div> 
+					 
+				 </div>
+				 <div class="form-group">
+					 <label for="country" class="col-lg-2 control-label">
+						 Country:
+					 </label>
+					 <div class="col-lg-5">
+						 <input type="text" id="country" class="form-control" placeholder="Country">
+					 </div> 
+				 </div>
+				 <div class=" row">
+					 <label for="inlineRadiobox1" class="col-lg-2">
+						 Book type:  
+					 </label>
+					 <div class="col-lg-5 col-lg-offset-0">
+						 <label class="radio-inline">
+	                        <input type="radio" name="bookType" id="inlineRadiobox1" value="hardcover"> Hardcover
+	                     </label>
+					     <label class="radio-inline">
+	                        <input type="radio" name="bookType" id="inlineRadiobox2" value="standard"> Standard
+	                     </label>
+					    <label class="radio-inline">
+	                        <input type="radio" name="bookType" id="inlineRadiobox3" value="waterProof"> Water-proof
+	                     </label>
+					 </div>
+				 </div>
+			 </form>
 		  </div>
 	  </div>
 	  
