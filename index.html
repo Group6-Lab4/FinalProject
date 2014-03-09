@@ -14,8 +14,9 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/justified-nav.css" rel="stylesheet">
-
+     <link href="css/justified-nav.css" rel="stylesheet">
+     <link href="css/menu.css" rel="stylesheet">
+	 <link href="css/poppibook.css" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -27,64 +28,120 @@
   </head>
 
   <body>
-  
+       <!-- navigation view -->
        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Poppi Book</a>
-        </div>
+         <div class="container">
+           <div class="navbar-header">
+             <a class="navbar-brand" href="#">Poppi Book</a>
+           </div>
         <div class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" action="edit.html">
+          <form class="navbar-form navbar-right form-inline">
             <button class="btn btn-success">CREATE YOUR BOOK!</button>
-          </form>
+			<button class="btn btn-success">DONE!</button>
+			<button class="btn btn-success">ORDER</button>
+			<button class="btn btn-warning">GO BACK</button>
+			<button class="btn btn-success">CONFIRM</button>
+		 </form>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
-    
-    
-    
 
-    <div class="container">
-      <div class="jumbotron">
-        <h1>Create a book for your child!</h1>
+	   
+    <div class="container container-fluid">
+      <!--intro view-->
+	  <div class="row" id="introView">
+		<div class="jumbotron">
+          <h1>Create a book for your child!</h1>
         </div>
-        
-        
-<div class="jumbotron">
+        <div class="jumbotron">
 
-<div class="row">
-        <div class="col-lg-4">
-        <img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
-          <h2>Step 1</h2>
-          <p>Description</p>
-        </div>
-        
-        <div class="col-lg-4">
-         <img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
-          <h2>Step 2</h2>
-          <p>Description</p>
-       </div>
-        <div class="col-lg-4">
-         <img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
-          <h2>Step 3</h2>
-          <p>Description</p>
-        </div>
+			<div class="row">
+			<div class="col-lg-4 col-md-5 col-sm-6">
+			<img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
+			  <h2>Step 1</h2>
+			  <p>Description</p>
+			</div>
+
+			<div class="col-lg-4 col-md-5 col-sm-6">
+			 <img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
+			  <h2>Step 2</h2>
+			  <p>Description</p>
+		   </div>
+			<div class="col-lg-4 col-md-5 col-sm-6">
+			 <img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
+			  <h2>Step 3</h2>
+			  <p>Description</p>
+			</div>
+		  </div>
+			
+	    </div>
+	  </div>
+     <!-- edit page -->
+	 
+      <div class="row" id="editView">
+		  <!-- left sidebar view --> 
+				<div class="col-sm-3 col-md-2 col-lg-2" id="leftSideBarView">
+				  <ul class="nav nav-sidebar">
+					  <li class="catgories" id="icon_bg">
+						  <a href="#cat_bgs">
+							  <img alt="select bg" class="img-responsive" src="images/icon_bg.png">	  
+						  </a>
+					  </li>
+					  <li class="catgories" id="icon_item">
+						  <a href="#cat_items">
+							  <img alt="select items" class="img-responsive" src="images/icon_item.png">		  
+						  </a>
+					  </li>
+					  <li class="catgories" id="icon_text">
+						  <a href="#cat_text">
+							  <img alt="write the stories" class="img-responsive" src="images/icon_text.png">		  
+						  </a>
+					  </li>
+				  </ul>
+					<!--container for bgs, items-->
+					<div id="cat_bgs"></div>
+					<div id="cat_items"></div>
+					<div id="cat_text"></div>
+				</div>
+		<!-- content view(story name, canvas)-->
+				<div class="col-sm-8 col-sm-offset-2 col-md-9 col-md-offset-2 col-lg-8 col-lg-offset-1">
+				  <!--<h1 class="page-header">Your story canvas</h1> -->
+					  <div class="row">
+						  <div class="col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-2 col-lg-5 col-lg-offset-2">
+							  <input type="text" class="form-control" placeholder="Input the name of your story book">
+						  </div>
+					  </div>
+
+					<div class="row placeholders">
+						<div class="row Canvas">
+						</div>          
+					</div>
+			   </div>
       </div>
-      </div>
+    <!-- preview page -->
+	 <div class="row" id="previewView">
+		 <div class="jumbotron">
+			 <h3>Preview of your book!</h3>
+			 <div class="row">
+			    <img data-src="holder.js/500x500" alt="">
+		     </div>
+			 <div class="row">
+				 <!--thumbnails of preview pages-->
+			 </div>
+		 </div>
+	 </div>
 
-
-
-
-      <!-- Site footer -->
-      <div class="footer">
-        <p>&copy; Poppi book 2014</p>
-      </div>
+	<!-- order form -->
+	  <div class="row" id="orderView">
+		  <div class="jumbotron">
+			 <h2> Please fill the order form</h2>
+		  </div>
+	  </div>
+	  
+      <!-- Site footer view -->
+		<div class="footer">
+			<p>&copy; Poppi book 2014</p>
+		</div>
 
     </div> <!-- /container -->
 
