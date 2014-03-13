@@ -41,6 +41,7 @@ and open the template in the editor.
     left:-350px;
     top:-100px;
     opacity: 0;
+    overflow-y: scroll;
     transition: left 0.2s ease-in-out, opacity 0.4s ease-in-out, background-color 0.2s ease-in-out; 
     -webkit-transition: left 0.2s ease-in-out, opacity 0.4s ease-in-out, background-color 0.2s ease-in-out;
     
@@ -56,6 +57,13 @@ and open the template in the editor.
         background-color: #7D88B0;
     }
     .nav-sidebar li:nth-child(2):hover div{
+        background-color: #FDE680;
+    }
+    
+    .nav-sidebar li:nth-child(1):active div{
+        background-color: #7D88B0;
+    }
+    .nav-sidebar li:nth-child(2):active div{
         background-color: #FDE680;
     }
 
