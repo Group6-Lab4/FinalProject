@@ -15,7 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/menu.css" rel="stylesheet">
+    <!--<link href="css/menu.css" rel="stylesheet">-->
     <link href="css/poppibook.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -57,25 +57,27 @@
         <div class="col-sm-3 col-md-2 col-lg-2 sidebar">
           <ul class="nav nav-sidebar">
 			  <li class="catgories" id="icon_bg">
-				  <a href="#cat_bgs">
+				  <a href="#">
 					  <img alt="select bg" class="img-responsive" src="images/icon_bg.png">	  
 				  </a>
+				  <!--container for bgs, items-->	
+				  <div id="cat_bgs"></div>
 			  </li>
 			  <li class="catgories" id="icon_item">
 				  <a href="#cat_items">
 					  <img alt="select items" class="img-responsive" src="images/icon_item.png">		  
 				  </a>
+				  <!--container for bgs, items-->	
+				  <div id="cat_items"></div>
 			  </li>
 			  <li class="catgories" id="icon_text">
 				  <a href="#cat_text">
 					  <img alt="write the stories" class="img-responsive" src="images/icon_text.png">		  
 				  </a>
+				   
 			  </li>
           </ul>
-			<!--container for bgs, items-->
-			<div id="cat_bgs"></div>
-			<div id="cat_items"></div>
-			<div id="cat_text"></div>
+			
         </div>
 		  <!-- content view(story name, canvas)-->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 col-lg-8 col-lg-offset-4 main">
@@ -87,7 +89,7 @@
 			  </div>
 
 			<div class="row placeholders">
-				<div class="row" id="Canvas" style="margin-left: -200px; margin-top: 20px;">
+				<div class="row" id="Canvas">
 					<div class="row">
 					<img data-src="holder.js/800x600" alt="canvas">
 					</div>
