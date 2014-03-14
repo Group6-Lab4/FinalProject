@@ -1,257 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="...">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="...">
 
-    <title>Poppi Book</title>
+		<title>Poppi Book</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+		<!-- Bootstrap core CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-     <link href="css/justified-nav.css" rel="stylesheet">
-     <!--<link href="css/menu.css" rel="stylesheet">-->
-	 <link href="css/poppibook.css" rel="stylesheet">
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+		<!-- Custom styles for this template -->
+		<link href="css/justified-nav.css" rel="stylesheet">
+		<!--<link href="css/menu.css" rel="stylesheet">-->
+		<link href="css/poppibook.css" rel="stylesheet">
+		<!-- Just for debugging purposes. Don't actually copy this line! -->
+		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
 
-  <body>
-       <!-- navigation view -->
-       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-         <div class="container">
-           <div class="navbar-header">
-             <a class="navbar-brand" href="#">Poppi Book</a>
-           </div>
-        <div class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right form-inline">
-            <!--<button class="btn btn-success" onclick="">CREATE YOUR BOOK </button>
-			<button class="btn btn-success" onclick="">PREVIEW</button>
-			<button class="btn btn-success" onclick="">ORDER</button>
-			<button class="btn btn-warning" onclick="">GO BACK</button>
-			<button class="btn btn-success" onclick="">CONFIRM</button>-->
-			<a class="btn btn-success" href="#editView">EDIT</a>
-			<a class="btn btn-success" href="#previewView">PREVIEW</a>
-			<a class="btn btn-success" href="#orderView">ORDER</a>
-			<button class="btn btn-success" onclick="">CONFIRM</button>
-			
-		 </form>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-	   
-    <div class="container container-fluid">
-      <!--intro view-->
-	  <div class="row" id="introView">
-		<div class="jumbotron">
-          <h1>Create a book for your child!</h1>
-        </div>
-        <div class="jumbotron">
+		<!-- custom js -->
+		<script src="js/utils.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/model/storyModel.js"></script>
+		<script src="js/view/homeView.js"></script>
+		<script src="js/view/editView.js"></script>
+		<script src="js/view/previewView.js"></script>
+		<script src="js/view/orderView.js"></script>
 
-			<div class="row">
-			<div class="col-lg-4 col-md-5 col-sm-6">
-			<img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
-			  <h2>Step 1</h2>
-			  <p>Description</p>
-			</div>
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
 
-			<div class="col-lg-4 col-md-5 col-sm-6">
-			 <img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
-			  <h2>Step 2</h2>
-			  <p>Description</p>
-		   </div>
-			<div class="col-lg-4 col-md-5 col-sm-6">
-			 <img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
-			  <h2>Step 3</h2>
-			  <p>Description</p>
-			</div>
-		  </div>
-			
-	    </div>
-	  </div>
-     <!-- edit page -->
-	 
-      <div class="row" id="editView">
-		  <!-- left sidebar view --> 
-				<div class="col-sm-3 col-md-2 col-lg-2" id="leftSideBarView">
-				  <ul class="nav nav-sidebar">
-					  <li class="catgories" id="icon_bg">
-						  <a href="#cat_bgs">
-							  <img alt="select bg" class="img-responsive" src="images/icon_bg.png">	  
-						  </a>
-						  <div id="cat_bgs"></div>
-					  </li>
-					  <li class="catgories" id="icon_item">
-						  <a href="#cat_items">
-							  <img alt="select items" class="img-responsive" src="images/icon_item.png">		  
-						  </a>
-						  <div id="cat_items"></div>
-					  </li>
-					  <li class="catgories" id="icon_text">
-						  <a href="#cat_text">
-							  <img alt="write the stories" class="img-responsive" src="images/icon_text.png">		  
-						  </a>
-					  </li>
-				  </ul>
-					<!--container for bgs, items-->
-					
-					
-					
+	<body>
+		<!-- navigation view -->
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Poppi Book</a>
 				</div>
-		<!-- content view(story name, canvas)-->
+				<div class="navbar-collapse collapse">
+					<form class="navbar-form navbar-right form-inline">
+						<!--<button class="btn btn-success" onclick="">CREATE YOUR BOOK </button>
+						<button class="btn btn-success" onclick="">PREVIEW</button>
+						<button class="btn btn-success" onclick="">ORDER</button>
+						<button class="btn btn-warning" onclick="">GO BACK</button>
+						<button class="btn btn-success" onclick="">CONFIRM</button>-->
+						<a class="btn btn-success" href="#editView">EDIT</a>
+						<a class="btn btn-success" href="#previewView">PREVIEW</a>
+						<a class="btn btn-success" href="#orderView">ORDER</a>
+						<button class="btn btn-success" onclick="">CONFIRM</button>
+
+					</form>
+				</div><!--/.navbar-collapse -->
+			</div>
+		</div>
+
+
+		<div class="container container-fluid">
+			<!--home view-->
+			<div class="row" id="homeView">
+				<div class="jumbotron">
+					<h1>Create a book for your child!</h1>
+				</div>
+				<div class="jumbotron">
+
+					<div class="row">
+						<div class="col-lg-4 col-md-5 col-sm-6">
+							<img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
+							<h2>Step 1</h2>
+							<p>Description</p>
+						</div>
+
+						<div class="col-lg-4 col-md-5 col-sm-6">
+							<img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
+							<h2>Step 2</h2>
+							<p>Description</p>
+						</div>
+						<div class="col-lg-4 col-md-5 col-sm-6">
+							<img class="img-circle" data-src="holder.js/240x240" alt="Generic placeholder image">
+							<h2>Step 3</h2>
+							<p>Description</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			
+			<!-- edit page -->
+			<div class="row" id="editView">
+				<!-- left sidebar view --> 
+				<div class="col-sm-3 col-md-2 col-lg-2" id="leftSideBarView">
+					<ul class="nav nav-sidebar">
+						<li class="catgories" id="icon_bg">
+							<a href="#cat_bgs">
+								<img alt="select bg" class="img-responsive" src="images/icon_bg.png">	  
+							</a>
+							<div id="cat_bgs"></div>
+						</li>
+						<li class="catgories" id="icon_item">
+							<a href="#cat_items">
+								<img alt="select items" class="img-responsive" src="images/icon_item.png">		  
+							</a>
+							<div id="cat_items"></div>
+						</li>
+						<li class="catgories" id="icon_text">
+							<a href="#cat_text">
+								<img alt="write the stories" class="img-responsive" src="images/icon_text.png">		  
+							</a>
+						</li>
+					</ul>
+					<!--container for bgs, items-->
+
+
+
+				</div>
+				<!-- content view(story name, canvas)-->
 				<div class="col-sm-8 col-sm-offset-2 col-md-9 col-md-offset-2 col-lg-8 col-lg-offset-1">
-				  <!--<h1 class="page-header">Your story canvas</h1> -->
-					  <div class="row jumbotron">
-						  <div class="col-sm-6 col-sm-offset-4 col-md-5 col-md-offset-4 col-lg-5 col-lg-offset-4">
-							  <input type="text" class="form-control" placeholder="Input the name of your story book">
-						  </div>
-					  </div>
+					<!--<h1 class="page-header">Your story canvas</h1> -->
+					<div class="row jumbotron">
+						<div class="col-sm-6 col-sm-offset-4 col-md-5 col-md-offset-4 col-lg-5 col-lg-offset-4">
+							<input type="text" class="form-control" placeholder="Input the name of your story book">
+						</div>
+					</div>
 
 					<div class="row placeholders">
 						<div class="row Canvas">
-							 <img data-src="holder.js/800x600" alt="">
+							<img data-src="holder.js/800x600" alt="">
 						</div>          
 					</div>
-			   </div>
-      </div>
-    <!-- preview page -->
-	 <div class="row" id="previewView">
-		 <div class="jumbotron">
-			 <h3>Preview of your book!</h3>
-			 <div class="row">
-			    <img data-src="holder.js/500x500" alt="">
-		     </div>
-			  <div class="jumbotron">
-      
-              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">
-              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">
-              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">
-             </div>
-		 </div>
-		 
-	 </div>
+				</div>
+			</div>
+			<!-- preview page -->
+			<div class="row" id="previewView">
+				<div class="jumbotron">
+					<h3>Preview of your book!</h3>
+					<div class="row">
+						<img data-src="holder.js/500x500" alt="">
+					</div>
+					<div class="jumbotron">
 
-	<!-- order form -->
-	  <div class="row" id="orderView">
-		  <div class="jumbotron">
-			 <h2> Please fill the order form</h2>
-			 <form class="form-horizontal" role="form">
-				 <div class="form-group">
-					 <label for="fullName" class="col-lg-2 control-label">
-						 Full name:
-					 </label>
-					 <div class="col-lg-3">
-						 <input type="text" id="fullName" class="form-control" placeholder="First Name, Family Name">
-					 </div>
-				 </div>
-				 <div class="form-group">
-					 <label for="email" class="col-lg-2 control-label">
-						 Email:
-					 </label>
-					 <div class="col-lg-3">
-						 <input type="email" id="email" class="form-control" placeholder="XXX@XXX.XX">
-					 </div> 
-				 </div>
-				 <div class="form-group">
-					 <label for="telephone" class="col-lg-2 control-label">
-						 Telephone :
-					 </label>
-					 <div class="col-lg-3">
-						 <input type="text" id="telephone" class="form-control" placeholder="telephone number">
-					 </div> 
-				 </div>
-				 
-				 <div class="row">
-					 <label class="col-lg-1 col-lg-offset-1"> <H4> Address</H4> </label>
-				 </div>
-				 <div class="form-group">
-					 
-					 <label for="street" class="col-lg-2 control-label">
-						 street:
-					 </label>
-					 <div class="col-lg-5">
-						 <input type="text" id="street" class="form-control" placeholder="street">
-					 </div> 
-					 
-				 </div>
-				 <div class="form-group">
-					
-					 <label for="Co" class="col-lg-2 control-label">
-						 C/o:
-					 </label>
-					 <div class="col-lg-5">
-						 <input type="text" id="Co" class="form-control" placeholder="Only if you rent in second hand or have some other name on your letterbox">
-					 </div> 
-					 
-				 </div>
-				 <div class="form-group">
-					 <label for="postalCode" class="col-lg-2 control-label">
-						 Postal Code:
-					 </label>
-					 <div class="col-lg-5">
-						 <input type="text" id="postalCode" class="form-control" placeholder="Input the postal code">
-					 </div> 
-				 </div>
-				   <div class="form-group">
-					 <label for="City" class="col-lg-2 control-label">
-						City:
-					 </label>
-					 <div class="col-lg-5">
-						 <input type="text" id="city" class="form-control" placeholder="City">
-					 </div> 
-					 
-				 </div>
-				 <div class="form-group">
-					 <label for="country" class="col-lg-2 control-label">
-						 Country:
-					 </label>
-					 <div class="col-lg-5">
-						 <input type="text" id="country" class="form-control" placeholder="Country">
-					 </div> 
-				 </div>
-				 <div class=" row">
-					 <label for="inlineRadiobox1" class="col-lg-2">
-						 Book type:  
-					 </label>
-					 <div class="col-lg-5 col-lg-offset-0">
-						 <label class="radio-inline">
-	                        <input type="radio" name="bookType" id="inlineRadiobox1" value="hardcover"> Hardcover
-	                     </label>
-					     <label class="radio-inline">
-	                        <input type="radio" name="bookType" id="inlineRadiobox2" value="standard"> Standard
-	                     </label>
-					    <label class="radio-inline">
-	                        <input type="radio" name="bookType" id="inlineRadiobox3" value="waterProof"> Water-proof
-	                     </label>
-					 </div>
-				 </div>
-			 </form>
-		  </div>
-	  </div>
-	  
-      <!-- Site footer view -->
-		<div class="footer">
-			<p>&copy; Poppi book 2014</p>
-		</div>
+						<img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="">
+						<img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="">
+						<img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="">
+					</div>
+				</div>
 
-    </div> <!-- /container -->
+			</div>
+
+			<!-- order form -->
+			<div class="row" id="orderView">
+				<div class="jumbotron">
+					<h2> Please fill the order form</h2>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="fullName" class="col-lg-2 control-label">
+								Full name:
+							</label>
+							<div class="col-lg-3">
+								<input type="text" id="fullName" class="form-control" placeholder="First Name, Family Name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="email" class="col-lg-2 control-label">
+								Email:
+							</label>
+							<div class="col-lg-3">
+								<input type="email" id="email" class="form-control" placeholder="XXX@XXX.XX">
+							</div> 
+						</div>
+						<div class="form-group">
+							<label for="telephone" class="col-lg-2 control-label">
+								Telephone :
+							</label>
+							<div class="col-lg-3">
+								<input type="text" id="telephone" class="form-control" placeholder="telephone number">
+							</div> 
+						</div>
+
+						<div class="row">
+							<label class="col-lg-1 col-lg-offset-1"> <H4> Address</H4> </label>
+						</div>
+						<div class="form-group">
+
+							<label for="street" class="col-lg-2 control-label">
+								street:
+							</label>
+							<div class="col-lg-5">
+								<input type="text" id="street" class="form-control" placeholder="street">
+							</div> 
+
+						</div>
+						<div class="form-group">
+
+							<label for="Co" class="col-lg-2 control-label">
+								C/o:
+							</label>
+							<div class="col-lg-5">
+								<input type="text" id="Co" class="form-control" placeholder="Only if you rent in second hand or have some other name on your letterbox">
+							</div> 
+
+						</div>
+						<div class="form-group">
+							<label for="postalCode" class="col-lg-2 control-label">
+								Postal Code:
+							</label>
+							<div class="col-lg-5">
+								<input type="text" id="postalCode" class="form-control" placeholder="Input the postal code">
+							</div> 
+						</div>
+						<div class="form-group">
+							<label for="City" class="col-lg-2 control-label">
+								City:
+							</label>
+							<div class="col-lg-5">
+								<input type="text" id="city" class="form-control" placeholder="City">
+							</div> 
+
+						</div>
+						<div class="form-group">
+							<label for="country" class="col-lg-2 control-label">
+								Country:
+							</label>
+							<div class="col-lg-5">
+								<input type="text" id="country" class="form-control" placeholder="Country">
+							</div> 
+						</div>
+						<div class=" row">
+							<label for="inlineRadiobox1" class="col-lg-2">
+								Book type:  
+							</label>
+							<div class="col-lg-5 col-lg-offset-0">
+								<label class="radio-inline">
+									<input type="radio" name="bookType" id="inlineRadiobox1" value="hardcover"> Hardcover
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="bookType" id="inlineRadiobox2" value="standard"> Standard
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="bookType" id="inlineRadiobox3" value="waterProof"> Water-proof
+								</label>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<!-- Site footer view -->
+			<div class="footer">
+				<p>&copy; Poppi book 2014</p>
+			</div>
+
+		</div> <!-- /container -->
 
 
-    <!-- Bootstrap core JavaScript placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/holder.js"></script>
-  </body>
+		<!-- Bootstrap core JavaScript placed at the end of the document so the pages load faster -->
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/holder.js"></script>
+	</body>
 </html>
