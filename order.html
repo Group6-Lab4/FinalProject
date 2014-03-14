@@ -16,6 +16,8 @@
     <!-- Custom styles for this template -->
     <link href="css/justified-nav.css" rel="stylesheet">
 
+    <link href="css/formvalid.css" rel="stylesheet">
+    
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -24,6 +26,8 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+
   </head>
 
   <body>
@@ -55,14 +59,16 @@
 
     <div class="container">
        <div class="jumbotron">
-			 <h2> Please fill the order form</h2>
+       
+    
+			 <h2>We just need some details from you</h2>
 			 <form class="form-horizontal" role="form">
 				 <div class="form-group">
 					 <label for="fullName" class="col-lg-2 control-label">
 						 Full name:
 					 </label>
 					 <div class="col-lg-3">
-						 <input type="text" id="fullName" class="form-control" placeholder="First Name, Family Name">
+						 <input type="text" id="fullName" class="form-control" placeholder="First Name, Family Name" required>
 					 </div>
 				 </div>
 				 <div class="form-group">
@@ -70,7 +76,7 @@
 						 Email:
 					 </label>
 					 <div class="col-lg-3">
-						 <input type="email" id="email" class="form-control" placeholder="XXX@XXX.XX">
+						 <input type="email" id="email" class="form-control" placeholder="XXX@XXX.XX" required>
 					 </div> 
 				 </div>
 				 <div class="form-group">
@@ -78,7 +84,7 @@
 						 Telephone :
 					 </label>
 					 <div class="col-lg-3">
-						 <input type="text" id="telephone" class="form-control" placeholder="telephone number">
+						 <input type="tel" id="telephone" class="form-control" placeholder="Telephone number" required>
 					 </div> 
 				 </div>
 				 
@@ -91,7 +97,7 @@
 						 street:
 					 </label>
 					 <div class="col-lg-5">
-						 <input type="text" id="street" class="form-control" placeholder="street">
+						 <input type="text" id="street" class="form-control" placeholder="Street" required>
 					 </div> 
 					 
 				 </div>
@@ -110,7 +116,7 @@
 						 Postal Code:
 					 </label>
 					 <div class="col-lg-5">
-						 <input type="text" id="postalCode" class="form-control" placeholder="Input the postal code">
+						 <input type="text" id="postalCode" class="form-control" placeholder="Input the postal code" required>
 					 </div> 
 				 </div>
 				   <div class="form-group">
@@ -118,7 +124,7 @@
 						City:
 					 </label>
 					 <div class="col-lg-5">
-						 <input type="text" id="city" class="form-control" placeholder="City">
+						 <input type="text" id="city" class="form-control" placeholder="City" required>
 					 </div> 
 					 
 				 </div>
@@ -127,7 +133,7 @@
 						 Country:
 					 </label>
 					 <div class="col-lg-5">
-						 <input type="text" id="country" class="form-control" placeholder="Country">
+						 <input type="text" id="country" class="form-control" placeholder="Country" required>
 					 </div> 
 				 </div>
 				 <div class=" row">
