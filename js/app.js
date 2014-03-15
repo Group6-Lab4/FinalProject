@@ -22,14 +22,24 @@ var App = {
 	},
 	gotoEditPage: function() {
 		App.resetPage();
+                $("#step1").addClass("active");
+                $("#step2").removeClass("active");
+                $("#step3").removeClass("active");
+                
 		App.editView.showView();
 	},
 	gotoPreviewPage: function() {
 		App.resetPage();
+                $("#step1").removeClass("active");
+                $("#step2").addClass("active");
+                $("#step3").removeClass("active");
 		App.previewView.showView();
 	},
 	gotoOrderPage: function() {
 		App.resetPage();
+                $("#step1").removeClass("active");
+                $("#step2").removeClass("active");
+                $("#step3").addClass("active");
 		App.orderView.showView();
 	}
 
