@@ -8,9 +8,14 @@ and open the template in the editor.
     Author     : weiwei
 */
 
+/*state of the navigation of the whole site*/
+
+ 
+
 /* style for the left sidebar in editpage*/
 .nav-sidebar{
     margin-left: -50px;
+    margin-top: 10px;
     position: fixed;
 }
 .nav-sidebar>ul{
@@ -111,11 +116,21 @@ and open the template in the editor.
   }
 }
 
-.main #Canvas{
-    z-index: -8;
-    margin-left: -120px;
+.main .Canvas{
+    z-index: -10;
+    margin-left: -100px;
     padding:20px;
 }
-.main .page-header {
-  margin-top: 0;
+.main .tittle {
+  font-size: large;
+  color: #7D88B0;
+  padding: 20px;
+  margin-left: -100px;
+  width: 360px;
+  height: 50px;
+}
+
+.pagination>.success{
+    background-color: #67b168;
+    color: #fff;
 }
