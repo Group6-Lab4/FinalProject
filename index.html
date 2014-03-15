@@ -45,20 +45,22 @@
 		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Poppi Book</a>
+					<a class="navbar-brand" href="?p=defult">Poppi Book</a>
 				</div>
 				<div class="navbar-collapse collapse">
-					<form class="navbar-form navbar-right form-inline">
+					<form class="navbar-right form-inline">
 						<!--<button class="btn btn-success" onclick="">CREATE YOUR BOOK </button>
 						<button class="btn btn-success" onclick="">PREVIEW</button>
 						<button class="btn btn-success" onclick="">ORDER</button>
 						<button class="btn btn-warning" onclick="">GO BACK</button>
 						<button class="btn btn-success" onclick="">CONFIRM</button>-->
-						<a class="btn btn-success" href="#editView">EDIT</a>
-						<a class="btn btn-success" href="#previewView">PREVIEW</a>
-						<a class="btn btn-success" href="#orderView">ORDER</a>
-						<button class="btn btn-success" onclick="">CONFIRM</button>
-
+						<ul class="pagination">
+							<li id="step1" class="success"><a href="?p=edit">1.CREATE</a></li>
+							<li id="step2" class=""><a href="?p=preview">2.PREVIEW</a></li>
+							<li id="step3" class=""><a href="?p=order">3.ORDER</a></li>
+							<!--<li class="btn btn-success" onclick="">CONFIRM</li>-->
+						</ul>
+					
 					</form>
 				</div><!--/.navbar-collapse -->
 			</div>
@@ -118,25 +120,24 @@
 							</a>
 						</li>
 					</ul>
-					<!--container for bgs, items-->
+					
 
 
 
 				</div>
 				<!-- content view(story name, canvas)-->
-				<div class="col-sm-8 col-sm-offset-2 col-md-9 col-md-offset-2 col-lg-8 col-lg-offset-1">
+				<div class="col-sm-8 col-sm-offset-2 col-md-9 col-md-offset-2 col-lg-8 col-lg-offset-1 main" >
 					<!--<h1 class="page-header">Your story canvas</h1> -->
-					<div class="row jumbotron">
+					<div class="row">
 						<div class="col-sm-6 col-sm-offset-4 col-md-5 col-md-offset-4 col-lg-5 col-lg-offset-4">
-							<input type="text" class="form-control" placeholder="Input the name of your story book">
+							<input type="text" class="form-control tittle" placeholder="Input the name of your story book">
 						</div>
 					</div>
 
-					<div class="row placeholders">
-						<div class="row Canvas">
-							<img data-src="holder.js/800x600" alt="">
-						</div>          
-					</div>
+					<div class="row Canvas">
+						<img data-src="holder.js/800x600" alt="">
+					</div>          
+					
 				</div>
 			</div>
 			<!-- preview page -->
