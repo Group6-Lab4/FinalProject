@@ -17,6 +17,7 @@
 		<link href="css/justified-nav.css" rel="stylesheet">
 		<!--<link href="css/menu.css" rel="stylesheet">-->
 		<link href="css/poppibook.css" rel="stylesheet">
+		<link href="css/formvalid.css" rel="stylesheet">
 		<!-- Just for debugging purposes. Don't actually copy this line! -->
 		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -54,12 +55,12 @@
 						<button class="btn btn-success" onclick="">ORDER</button>
 						<button class="btn btn-warning" onclick="">GO BACK</button>
 						<button class="btn btn-success" onclick="">CONFIRM</button>-->
-						<ul class="pagination">
+						<ol class="pagination">
 							<li id="step1" class=""><a href="#edit" class="loadPage">1.CREATE</a></li>
 							<li id="step2" class=""><a href="#preview" class="loadPage">2.PREVIEW</a></li>
 							<li id="step3" class=""><a href="#order" class="loadPage">3.ORDER</a></li>
 							 
-						</ul>
+						</ol>
 						<a id="start" href="#edit" class="loadPage btn btn-success">Start!</a>
 
 					</form>
@@ -105,19 +106,19 @@
 					<ul class="nav nav-sidebar">
 						<li class="catgories" id="icon_bg">
 							<a href="#cat_bgs">
-								<img alt="select bg" class="img-responsive" src="images/icon_bg.png">	  
+								<img alt="select bg" class="img-responsive" src="images/icon_bg_small.png">	  
 							</a>
 							<div id="cat_bgs"></div>
 						</li>
 						<li class="catgories" id="icon_item">
 							<a href="#cat_items">
-								<img alt="select items" class="img-responsive" src="images/icon_item.png">		  
+								<img alt="select items" class="img-responsive" src="images/icon_item_small.png">		  
 							</a>
 							<div id="cat_items"></div>
 						</li>
 						<li class="catgories" id="icon_text">
 							<a href="#cat_text">
-								<img alt="write the stories" class="img-responsive" src="images/icon_text.png">		  
+								<img alt="write the stories" class="img-responsive" src="images/icon_text_small.png">		  
 							</a>
 						</li>
 					</ul>
@@ -135,9 +136,18 @@
 
 						<div class="col-sm-12 col-md-12 col-lg-12 no_col_padding">
 							<div class="canvas_wrapper ratio_box ratio420_297">
+								<div>
+										<!-- delete button-->
+								</div>
+								<div>
+									<!-- add button-->
+								</div>
 								<div class="ratio_box_content canvas">
 									
 
+								</div>
+								<div>
+									<!--thumb nails-->
 								</div>
 							</div>
 						</div>
@@ -193,7 +203,7 @@
 						</div>
 
 						<div class="row">
-							<label class="col-lg-1 col-lg-offset-1"> <H4> Address</H4> </label>
+							<label class="col-lg-1 col-lg-offset-1"> <H4>Postal Address</H4> </label>
 						</div>
 						<div class="form-group">
 
@@ -256,6 +266,7 @@
 								</label>
 							</div>
 						</div>
+						<input class="btn-success row" type="submit">
 					</form>
 				</div>
 			</div>
