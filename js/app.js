@@ -88,7 +88,10 @@ $(document).ready(function() {
 	App.orderView = new OrderView($("#orderView"), model);
 
 	// Init all controllers
-
+	var homeViewController = new HomeViewController(App.homeView, model);
+	var editViewController = new EditViewController(App.editView, model);
+	var previewViewController = new PreviewViewController(App.previewView, model);
+	var orderViewController = new OrderViewController(App.orderView, model);
 
 
 	// Go to the first page according the url hash
