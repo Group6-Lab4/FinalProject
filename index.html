@@ -45,7 +45,7 @@
 		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="?p=defult">Poppi Book</a>
+					<a class="navbar-brand" href="">Poppi Book</a>
 				</div>
 				<div class="navbar-collapse collapse">
 					<form class="navbar-right form-inline">
@@ -55,12 +55,12 @@
 						<button class="btn btn-warning" onclick="">GO BACK</button>
 						<button class="btn btn-success" onclick="">CONFIRM</button>-->
 						<ul class="pagination">
-							<li id="step1" class="success"><a href="?p=edit">1.CREATE</a></li>
-							<li id="step2" class=""><a href="?p=preview">2.PREVIEW</a></li>
-							<li id="step3" class=""><a href="?p=order">3.ORDER</a></li>
+							<li id="step1" class="success"><a href="#edit" class="loadPage">1.CREATE</a></li>
+							<li id="step2" class=""><a href="#preview" class="loadPage">2.PREVIEW</a></li>
+							<li id="step3" class=""><a href="#order" class="loadPage">3.ORDER</a></li>
 							<!--<li class="btn btn-success" onclick="">CONFIRM</li>-->
 						</ul>
-					
+
 					</form>
 				</div><!--/.navbar-collapse -->
 			</div>
@@ -96,11 +96,11 @@
 
 				</div>
 			</div>
-			
+
 			<!-- edit page -->
 			<div class="row" id="editView">
 				<!-- left sidebar view --> 
-				<div class="col-sm-3 col-md-2 col-lg-2" id="leftSideBarView">
+				<div class="col-sm-3 col-md-3 col-lg-3" id="leftSideBarView">
 					<ul class="nav nav-sidebar">
 						<li class="catgories" id="icon_bg">
 							<a href="#cat_bgs">
@@ -120,24 +120,28 @@
 							</a>
 						</li>
 					</ul>
-					
-
-
-
 				</div>
 				<!-- content view(story name, canvas)-->
-				<div class="col-sm-8 col-sm-offset-2 col-md-9 col-md-offset-2 col-lg-8 col-lg-offset-1 main" >
+				<div class="col-sm-8 col-md-8 col-lg-8 main" >
 					<!--<h1 class="page-header">Your story canvas</h1> -->
 					<div class="row">
-						<div class="col-sm-6 col-sm-offset-4 col-md-5 col-md-offset-4 col-lg-5 col-lg-offset-4">
-							<input type="text" class="form-control tittle" placeholder="Input the name of your story book">
+						<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+							<input type="text" class="form-control title" placeholder="Input the name of your story book">
 						</div>
 					</div>
 
-					<div class="row Canvas">
-						<img data-src="holder.js/800x600" alt="">
+					<div class="row">
+
+						<div class="col-sm-12 col-md-12 col-lg-12 no_col_padding">
+							<div class="canvas_wrapper ratio_box ratio420_297">
+								<div class="ratio_box_content canvas">
+									
+
+								</div>
+							</div>
+						</div>
 					</div>          
-					
+
 				</div>
 			</div>
 			<!-- preview page -->

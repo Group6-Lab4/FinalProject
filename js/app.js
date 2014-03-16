@@ -16,34 +16,51 @@ var App = {
 		App.orderView.hideView();
 	},
 	// Page flow functions
+	gotoPage: function(targetPage) {
+		switch (targetPage) {
+			case "edit":
+				App.gotoEditPage();
+				break;
+			case "preview":
+				App.gotoPreviewPage();
+				break;
+			case "order":
+				App.gotoOrderPage();
+				break;
+			default:
+				App.gotoHomePage();
+				break;
+		}
+	},
 	gotoHomePage: function() {
 		App.resetPage();
 		App.homeView.showView();
 	},
 	gotoEditPage: function() {
 		App.resetPage();
-                $("#step1").addClass("active");
-                $("#step2").removeClass("active");
-                $("#step3").removeClass("active");
-                
+		$("#step1").addClass("active");
+		$("#step2").removeClass("active");
+		$("#step3").removeClass("active");
+
 		App.editView.showView();
 	},
 	gotoPreviewPage: function() {
 		App.resetPage();
-                $("#step1").removeClass("active");
-                $("#step2").addClass("active");
-                $("#step3").removeClass("active");
+		$("#step1").removeClass("active");
+		$("#step2").addClass("active");
+		$("#step3").removeClass("active");
 		App.previewView.showView();
 	},
 	gotoOrderPage: function() {
 		App.resetPage();
-                $("#step1").removeClass("active");
-                $("#step2").removeClass("active");
-                $("#step3").addClass("active");
+		$("#step1").removeClass("active");
+		$("#step2").removeClass("active");
+		$("#step3").addClass("active");
 		App.orderView.showView();
 	}
 
 };
+
 
 
 $(document).ready(function() {
@@ -60,27 +77,31 @@ $(document).ready(function() {
 	App.orderView = new OrderView($("#orderView"), model);
 
 	// Init all controllers
-	
-	
-
-	// Go to the first page according the url param 'p'
-	var targetPage = Utils.getURLParam("p");
-	switch (targetPage) {
-		case "edit":
-			App.gotoEditPage();
-			break;
-		case "preview":
-			App.gotoPreviewPage();
-			break;
-		case "order":
-			App.gotoOrderPage();
-			break;
-		default:
-			App.gotoHomePage();
-			break;
-	}
 
 
+
+	// Go to the first page according the url hash
+	var targetPage = Utils.getURLHash(); //Utils.getURLParam("p");
+	App.gotoPage(targetPage);
+
+
+	$(".loadPage").on("click", function() {
+		var targetPage = $(this).attr("href").substring(1); //Utils.getURLHash();
+		switch (targetPage) {
+			case "edit":
+				App.gotoEditPage();
+				break;
+			case "preview":
+				App.gotoPreviewPage();
+				break;
+			case "order":
+				App.gotoOrderPage();
+				break;
+			default:
+				App.gotoHomePage();
+				break;
+		}
+	});
 });
 
 

@@ -21,10 +21,12 @@ var StoryModel = function() {
 		notifyObservers("title");
 	};
 
+	//Return all story pages
 	this.getAllPages = function(){
 		return pages;
 	};
 	
+	//Return a story page by idx (idx is the array index, returned by addPage())
 	this.getPageByIdx = function(idx){
 		return pages[idx];
 	};
