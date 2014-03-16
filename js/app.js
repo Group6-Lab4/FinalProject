@@ -34,10 +34,19 @@ var App = {
 	},
 	gotoHomePage: function() {
 		App.resetPage();
+                $("#step1").hide(200);
+                $("#step2").hide(200);
+                $("#step3").hide(200);
+                $("#start").show(200);
+                
 		App.homeView.showView();
 	},
 	gotoEditPage: function() {
 		App.resetPage();
+                $("#start").hide();
+                $("#step1").show(200);
+                $("#step2").show(200);
+                $("#step3").show(200);
 		$("#step1").addClass("active");
 		$("#step2").removeClass("active");
 		$("#step3").removeClass("active");
@@ -46,6 +55,7 @@ var App = {
 	},
 	gotoPreviewPage: function() {
 		App.resetPage();
+                $("#start").hide();
 		$("#step1").removeClass("active");
 		$("#step2").addClass("active");
 		$("#step3").removeClass("active");
@@ -53,6 +63,7 @@ var App = {
 	},
 	gotoOrderPage: function() {
 		App.resetPage();
+                $("#start").hide();
 		$("#step1").removeClass("active");
 		$("#step2").removeClass("active");
 		$("#step3").addClass("active");
