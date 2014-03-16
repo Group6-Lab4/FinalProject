@@ -24,6 +24,9 @@
 
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<!-- jQuery UI -->
+        <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		
 
 		<!-- custom js -->
 		<script src="js/utils.js"></script>
@@ -39,6 +42,13 @@
 		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+		
+		<style>
+			.draggable_item{
+				cursor: move;
+			}
+			
+		</style>
 	</head>
 
 	<body>
@@ -114,7 +124,10 @@
 							<a href="#cat_items">
 								<img alt="select items" class="img-responsive" src="images/icon_item_small.png">		  
 							</a>
-							<div id="cat_items"></div>
+							<div id="cat_items">
+								<img class="draggable_item" src="images/items/temp_item.png" />
+								
+							</div>
 						</li>
 						<li class="catgories" id="icon_text">
 							<a href="#cat_text">
