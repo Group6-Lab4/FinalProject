@@ -49,12 +49,12 @@ and open the template in the editor.
     margin-left: 0px;
 
 }
-.nav-sidebar>li>a{
-    display:block;
-    padding:0px;
-    width: auto;
-    height: auto;
+
+/*rewrite the style of the hover of <a> in nav li*/
+.nav li a:hover{
+    background-color: transparent;
 }
+ 
 
 .nav-sidebar li div{
     position: absolute;
@@ -62,8 +62,8 @@ and open the template in the editor.
     width: 300px;
     height: 500%;
     border: none;
-    left:25%;
-    top:0px;
+    left:-300%;
+    top:-5%;
     opacity: 0;
     overflow-y: scroll;
     transition: left 0.2s ease-in-out, opacity 0.4s ease-in-out, background-color 0.2s ease-in-out; 
@@ -72,7 +72,7 @@ and open the template in the editor.
 }
 
 .nav-sidebar li:hover div, .nav-sidebar li:active div{
-    left:0px;
+    left:-5%;
     opacity: 1;
 
 }
@@ -98,10 +98,22 @@ and open the template in the editor.
 	z-index: 25;
 }
 
-.nav-sidebar li:hover img{
+#editDefultDiv{
+    background-color: #7D88B0;
+    left:-5%;
+    opacity: 1;
+   }
+   
+ #editDefultImg{
+       left: 225px;
+   }
+
+
+.nav-sidebar li img{
     position:absolute;
     left:0px;
     top:0px;
+    cursor:pointer;
     -webkit-transition: left 0.2s ease-in-out;
     transition: left 0.2s ease-in-out;
 }
