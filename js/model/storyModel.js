@@ -204,7 +204,7 @@ var Page = function Page(pageType, pageIdx) {
 
 	this.removeComponent = function(componentId) {
 		for (var idx in components) {
-			if (components[idx].getId() === componentId) {
+			if (components[idx].getId() === Number(componentId)) {
 				delete components[idx]; //use delete instead components[idx] = undefined; so for each loop wont loop
 				notifyObservers(this);
 				break;

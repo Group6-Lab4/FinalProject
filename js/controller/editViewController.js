@@ -4,6 +4,8 @@
  */
 
 var EditViewController = function(view, model) {
+	var curStoryPageModel = view.curStoryPage;
+	
 	/*remove the defulte streched out style of left menu when click or mouse over*/
 	$(".catgories").on("click mouseout", function() {
 		$("#icon_bg div").attr("id", "cat_bgs");
@@ -13,7 +15,7 @@ var EditViewController = function(view, model) {
 	// Handling original draggable
 	$(".draggable_item").draggable({
 		helper: 'clone',
-		containment: "document",
+		containment: "document"
 //		revert: true,
 //		delay: 0,
 //		grid: false
@@ -45,10 +47,8 @@ var EditViewController = function(view, model) {
 			}
 
 			// Update position of component in model
-			
-//				alert($(draggableObj).attr("class"));
 			if ($(draggableObj).hasClass("dropped_item")) {
-				var pageComponent = view.curStoryPage.getComponentById(draggableObj.attr("pb-id"));
+				var pageComponent = curStoryPageModel.getComponentById(draggableObj.attr("pb-id"));
 				if(!pageComponent){
 					return;
 				}
@@ -63,32 +63,40 @@ var EditViewController = function(view, model) {
 			switch (componentType) {
 				case PageComponent.TYPE_BACKGROUND:
 				case PageComponent.TYPE_ITEM:
-					componentId = view.curStoryPage.addComponent(componentType, $(draggableObj).find('img').attr('src'), relPosInPercent.left, relPosInPercent.top);
+					componentId = curStoryPageModel.addComponent(componentType, $(draggableObj).find('img').attr('src'), relPosInPercent.left, relPosInPercent.top);
 					break;
 				case PageComponent.TYPE_TEXT:
 					break;
 			}
 
 			// Clone element to the canvas for newly added item
-			var element = $(draggableObj).clone();
-			$(element).removeClass().addClass("dropped_item");
-			$(element).css({
+			var newItemObj = $(draggableObj).clone();
+			$(newItemObj).removeClass().addClass("dropped_item");
+			$(newItemObj).css({
 				"left": relPosInPercent.left + "%",
 				"top": relPosInPercent.top + "%"
 			});
 			// Keep component id in the element (for updating component later)
-			element.attr("pb-id", componentId);
+			newItemObj.attr("pb-id", componentId);
 			// Also add delete button
-			element.append($('<input type="button" class="btn btn-xs" name="delete" value="x" />'));
+			var itemDelBtn = $('<input type="button" class="btn btn-xs" name="delete" value="x" />');
+			newItemObj.append(itemDelBtn);
 
 
 			// Add to canvas
-			$(this).append(element);
+			$(this).append(newItemObj);
 
 			// Add other event hanlders to this new element
-			element.draggable({
+			newItemObj.draggable({
 				containment: "#droppable_canvas"
 			});
+			itemDelBtn.on("click", function(){
+				var componentId = $(this).parent().attr("pb-id");
+				curStoryPageModel.removeComponent(componentId);
+				$(this).parent().remove();
+				
+			});
+			
 		},
 		// Below is to hanle "draggable clone was covered by canvas when first dragged"
 		activate: function(event, ui) {

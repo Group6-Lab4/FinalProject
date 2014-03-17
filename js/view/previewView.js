@@ -15,7 +15,7 @@ var PreviewView = function(container, model) {
 		$(container).hide();
 	};
 
-	// Private functions
+	//--- Private functions ---
 	/**
 	 * @description this function will update the current story page being shown on canvas
 	 */
@@ -48,9 +48,6 @@ var PreviewView = function(container, model) {
 	};
 
 
-	var updateCanvasComponent = function() {
-
-	}
 
 	/**
 	 * @description this function will update a specific thumbnail by pageIdx or all thumnails
@@ -61,7 +58,7 @@ var PreviewView = function(container, model) {
 
 
 
-	// Constructor
+	//--- Constructor ---
 	// Load story title
 	if (model.getTitle() !== undefined) {
 //		this.titleInput.val(model.getTitle());
