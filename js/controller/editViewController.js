@@ -21,15 +21,15 @@ var EditViewController = function(view, model) {
 
 
 	// Handling cloned droppable
-	$(".dropped").draggable({
+	$(".dropped_item").draggable({
 		containment: "#droppable_canvas"
 	});
 
 
 	$("#droppable_canvas").droppable({
-		accept: ".draggable_item",
+//		accept: ".draggable_item",
 		drop: function(event, ui) {
-			if ($(ui.draggable).hasClass("dropped")) {
+			if ($(ui.draggable).hasClass("dropped_item")) {
 				alert("already dropped in canvas!");
 				return;
 			}
@@ -51,7 +51,7 @@ var EditViewController = function(view, model) {
 				return;
 			}
 
-			$(element).removeClass().addClass("dropped");
+			$(element).removeClass().addClass("dropped_item");
 			$(element).css({
 				"left": relPosInPercent.left + "%",
 				"top": relPosInPercent.top + "%"
@@ -78,7 +78,10 @@ var EditViewController = function(view, model) {
 			$(this).append(element);
 
 			element.draggable({
-				containment: "#droppable_canvas"
+				containment: "#droppable_canvas",
+				start: function(event, ui){
+					alert("drag start");
+				}
 
 			});
 			// App.resetPage();

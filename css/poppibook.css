@@ -164,7 +164,7 @@ and open the template in the editor.
 }
 
 /*styles for drag-n-drop*/
-.draggable_item, .dropped{
+.draggable_item, .dropped_item{
 	cursor: move;
 	position: absolute;
 	z-index: 10
