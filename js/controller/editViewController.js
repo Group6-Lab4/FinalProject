@@ -10,27 +10,26 @@ var EditViewController = function(view, model) {
 		$("#icon_bg img").attr("id", "");
 	});
 
-	// Handling draggable
+	// Handling original draggable
 	$(".draggable_item").draggable({
 		helper: 'clone',
 		containment: "document",
-		delay: 0,
-		grid: false
+//		revert: true,
+//		delay: 0,
+//		grid: false
 	});
 
-
-
-	// Handling cloned droppable
+	// Handling cloned draggable
 	$(".dropped_item").draggable({
 		containment: "#droppable_canvas"
 	});
 
-
+	// Handling droppable
 	$("#droppable_canvas").droppable({
-//		accept: ".draggable_item",
+		hoverClass: "canvas-hover",
 		drop: function(event, ui) {
+			$(this).css("zIndex", "");
 			if ($(ui.draggable).hasClass("dropped_item")) {
-				alert("already dropped in canvas!");
 				return;
 			}
 
@@ -78,13 +77,15 @@ var EditViewController = function(view, model) {
 			$(this).append(element);
 
 			element.draggable({
-				containment: "#droppable_canvas",
-				start: function(event, ui){
-					alert("drag start");
-				}
-
+				containment: "#droppable_canvas"
 			});
-			// App.resetPage();
+		},
+		// Below is to hanle "draggable clone was covered by canvas when first dragged"
+		activate: function(event, ui) {
+			$(this).css("zIndex", -10);
+		},
+		deactivate: function(event, ui) {
+			$(this).css("zIndex", "");
 		}
 	});
 

@@ -159,8 +159,11 @@ and open the template in the editor.
     margin:20px;
 }
 .canvas{
-    z-index: -10;
+    z-index: 0;
 	background-color: #EEEEEE; 
+}
+.canvas-hover{
+	background-color: #AAAAAA; 
 }
 
 /*styles for drag-n-drop*/
