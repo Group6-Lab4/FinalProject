@@ -77,7 +77,13 @@ var StoryModel = function StoryModel() {
 				'image': "temp_bg.png"
 			}, {
 				'id': 2,
-				'image': "xxx.png"
+				'image': "bg1.png"
+			}, {
+				'id': 3,
+				'image': "bg2.png"
+			}, {
+				'id': 4,
+				'image': "bg3.png"
 			}
 		],
 		'item': {
