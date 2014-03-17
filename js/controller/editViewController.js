@@ -13,16 +13,27 @@ var EditViewController = function(view, model) {
 	// Handling draggable
 	$(".draggable_item").draggable({
 		helper: 'clone',
-		containment: 'document',
+		containment: "#droppable_canvas",
 		delay: 0,
 		grid: false
 	});
+        
+        
 
-	// Handling droppable
-	$("#droppable_canvas").droppable({
+	// Handling cloned droppable
+    $(".dropped").draggable({
+          containment: "#droppable_canvas"
+      });
+        
+        
+     $("#droppable_canvas").droppable({
+                accept: ".draggable_item",
 		drop: function(event, ui) {
-			var element = $(ui.draggable).clone();
-
+                        
+			//var element = $(ui.draggable).clone();
+                        if($(ui.draggable).hasClass("dropped")){alert("dropped in canvas!");return;};
+                        
+                        var element = $(ui.helper).clone();
 			var draggablePos = $(ui.helper).offset();
 			var canvasPos = $(this).offset();
 
@@ -37,6 +48,14 @@ var EditViewController = function(view, model) {
 			if((relPosInPercent >= 0 && relPosInPercent <= 100)){
 				return;
 			}
+                        
+                        element.addClass("dropped");
+                        
+                        element.draggable({
+                            containment:"#droppable_canvas"
+                            
+                        });
+                        
 			
 			$(element).css({
 				"left": relPosInPercent.left + "%",
@@ -56,15 +75,21 @@ var EditViewController = function(view, model) {
 					break;
 			}
 //			console.log(view.curPage.getAllComponents());
-
+                        
 			// Keep component id in the element (for later use)
 			element.attr("pb-id", componentId);
+                       
+                       
+                        
 
 
 			// Add to canvas
 			$(this).append(element);
+                       // App.resetPage();
 
 		}
+                
+                
 	});
 
 
