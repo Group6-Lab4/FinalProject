@@ -23,8 +23,6 @@ var OrderView = function(container, model) {
 
 	//This function gets called when there is a change at the model
 	this.update = function(arg) {
-//        alert("Changed data: " + arg);
-		this.updateSelectedDishes();
 	};
 };
 

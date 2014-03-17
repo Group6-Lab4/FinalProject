@@ -120,11 +120,11 @@
 							<div id="cat_bgs" class="sidebar_bg"></div>
 						</li>
 						<li class="catgories" id="icon_item">
-							<a href="#cat_items">
+							<a>
 								<img alt="select items" class="img-responsive sidebar_icon" src="images/icon_item_small.png">		  
 							</a>
 							<div id="cat_items" class="sidebar_bg">
-								<div class="draggable_item">
+								<div class="draggable_item" pb-type="1">
 									<img  src="images/items/temp_item.png" />
 								</div>
 
@@ -173,9 +173,25 @@
 			<!-- preview page -->
 			<div class="row" id="previewView">
 				<div class="jumbotron">
-					<h3>Preview of your book!</h3>
 					<div class="row">
-						<img data-src="holder.js/500x500" alt="">
+					<h3>Preview of your book!</h3>
+					</div>
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 no_col_padding">
+							<div class="canvas_wrapper ratio_box ratio420_297">
+								<div class="ratio_box_content canvas">
+								</div>
+								
+								<div>
+									<!--thumb nails-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<label>Created by: </label>
+						<input type="text" placeholder="your name"/>
+						<input type="button" class="btn btn-success btn-lg" value="Set at Cover"/>
 					</div>
 					<div class="jumbotron">
 

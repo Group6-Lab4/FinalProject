@@ -144,11 +144,11 @@ and open the template in the editor.
 .no_col_padding{
 	padding: 0;
 }
-.main .canvas_wrapper{
+.canvas_wrapper{
 
     margin:20px;
 }
-.main .canvas{
+.canvas{
     z-index: -10;
 	background-color: #EEEEEE; 
 }

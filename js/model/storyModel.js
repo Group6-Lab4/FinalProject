@@ -3,12 +3,16 @@
  */
 
 // StoryModel constructor
-var StoryModel = function() {
+var StoryModel = function StoryModel() {
 
-	var title = "My first story";
+	var title; // = "My first story";
 	var pages = []; //consist of Page objects
-	pages[0] = new Page(Page.TYPE_COVER); //cover page
-	pages[1] = new Page(Page.TYPE_NORMAL); //first page
+	pages[0] = new Page(Page.TYPE_COVER, 0); //cover page
+	pages[1] = new Page(Page.TYPE_NORMAL, 1); //first page
+	
+	//Register this as observer to the page observable
+	pages[0].addObserver(this);
+	pages[1].addObserver(this);
 
 	//Return the title of the story
 	this.getTitle = function() {
@@ -18,7 +22,7 @@ var StoryModel = function() {
 	this.setTitle = function(newTitle) {
 		title = newTitle;
 
-		notifyObservers("title");
+		notifyObservers("setTtitle");
 	};
 
 	//Return all story pages
@@ -35,13 +39,14 @@ var StoryModel = function() {
 	this.addPage = function(pageIdx) {
 		var returnIdx;
 		if (pageIdx > 0 && pageIdx < pages.length) { //only allow adding after cover page
-			splice(pageIdx, 0, new Page(Page.TYPE_NORMAL));
+			splice(pageIdx, 0, new Page(Page.TYPE_NORMAL, pageIdx));
 			returnIdx = pageIdx;
 		} else {
 			returnIdx = pages.push(new Page(Page.TYPE_NORMAL));
+			pages[returnIdx].initIdx(returnIdx);
 		}
 
-		notifyObservers("page");
+		notifyObservers("addPage");
 		return returnIdx;
 	};
 
@@ -49,7 +54,7 @@ var StoryModel = function() {
 	this.removePage = function(pageIdx) {
 		splice(pageIdx, 1);
 
-		notifyObservers("page");
+		notifyObservers("removePage");
 	};
 
 	//Return all avaiable backgrounds in the story assets list
@@ -106,10 +111,21 @@ var StoryModel = function() {
 			observers[i].update(arg);
 		}
 	};
+	
+	/*****************************************  
+	 Observer implementation    
+	 *****************************************/
+	//This function gets called when there is a change at the observables
+	this.update = function(arg) {
+		//pass the changes to its oberserver
+		notifyObservers(arg);
+
+	};
 };
 
 // Page consturctor, each page object represents 1 page (1 spread page, i.e. left and right)
-var Page = function(pageType) {
+var Page = function Page(pageType, pageIdx) {
+	var pageIdx; //page num of this page
 	var type = Page.TYPE_NORMAL; //0 - cover; 1 - normal; 2 - bottom
 	var components = []; // PageComponents sorted by zorder asc
 	var maxComponentId = 0;
@@ -118,6 +134,18 @@ var Page = function(pageType) {
 	if (pageType === Page.TYPE_BOTTOM || pageType === Page.TYPE_COVER || pageType === Page.TYPE_NORMAL) {
 		type = pageType;
 	}
+
+	//Can only be called once
+	this.initIdx = function(idx) {
+		if (pageIdx !== undefined) {
+			throw("PageComponent.id already initialised.");
+		}
+		pageIdx = idx;
+	};
+	
+	this.getPageIdx = function(){
+		return pageIdx;
+	};
 
 	//Return all components according to zorder (from low to high)
 	this.getAllComponents = function() {
@@ -133,8 +161,26 @@ var Page = function(pageType) {
 		}
 	};
 
-	//Add a new page component to the Page, return the component Id
-	this.addComponent = function(newComponent, zorder) {
+	/*
+	 * @desc Add a new page component to the Page, return the component Id
+	 * @param {Number} componentType
+	 * @param {String} content, image src or text string
+	 * @param {Number} posX, relative position in percentage
+	 * @param {Number} posY, relative position in persontage
+	 * 
+	 */
+	this.addComponent = function(componentType, content, posX, posY){
+		var pageComponent = new PageComponent(componentType, content, posX, posY);
+		return this.addComponentObj(pageComponent);
+	};
+
+	/*
+	 * @desc Add a new page component to the Page, return the component Id
+	 * @param {PageComponent} newComponent
+	 * @param {Number} zorder
+	 * @returns {Number} componentId
+	 */
+	this.addComponentObj = function(newComponent, zorder) {
 		maxComponentId++;
 		newComponent.initId(maxComponentId);
 
@@ -145,7 +191,7 @@ var Page = function(pageType) {
 		components.push(newComponent);
 		sortComponents();
 
-		notifyObservers();
+		notifyObservers(this);
 		return maxComponentId;
 	};
 
@@ -153,7 +199,7 @@ var Page = function(pageType) {
 		for (var idx in components) {
 			if (components[idx].getId() === componentId) {
 				delete components[idx]; //use delete instead components[idx] = undefined; so for each loop wont loop
-				notifyObservers();
+				notifyObservers(this);
 				break;
 			}
 		}
@@ -200,13 +246,13 @@ Page.TYPE_BOTTOM = 2;
  * @param string content: if type = TEXT, text content; else image filename
  * 
  */
-var PageComponent = function(componentType, content, posX, posY) {
+var PageComponent = function PageComponent(componentType, content, posX, posY) {
 	var id; //unique id with a page
-	var type; //0 - background; 1- item; 2- text
+	this.type; //0 - background; 1- item; 2- text
 	var zorder;
-	var image;
+	this.image;
 	var text;
-	var pos; //[x,y] , where x, y  [0:100], relative position within the canvas (page)
+	this.pos; //[x,y] , where x, y  [0:100], relative position within the canvas (page)
 
 	//advanced vars: implement if time allows
 //	var size;
@@ -214,24 +260,24 @@ var PageComponent = function(componentType, content, posX, posY) {
 //	var isMirror;
 
 	//Check init vars
-	if (componentType !== PageComponent.TYPE_BACKGROUND && componentType !== PageComponent.TYPE_ITEM && componentType !== PageComponent.TYPE_TEXT) {
-		throw ("PageComponent: unknown componentType");
+	if (componentType != PageComponent.TYPE_BACKGROUND && componentType != PageComponent.TYPE_ITEM && componentType != PageComponent.TYPE_TEXT) {
+		throw ("PageComponent: unknown componentType : " + componentType);
 	}
 	if (!content) {
-		throw ("PageComponent: unknown componentContent");
+		throw ("PageComponent: unknown componentContent : " + content);
 	}
 	if (!(posX >= 0 && posX <= 100) || !(posY >= 0 && posY <= 100)) {
 		throw ("PageComponent: incorrect posX/ poxY");
 	}
 
-	type = componentType;
+	this.type = componentType;
 	zorder = componentType;
 	if (componentType === PageComponent.TYPE_TEXT) {
 		text = content;
 	} else {
-		image = content;
+		this.image = content;
 	}
-	pos = [posX, posY];
+	this.pos = [posX, posY];
 
 
 	//Can only be called once
@@ -265,7 +311,7 @@ var PageComponent = function(componentType, content, posX, posY) {
 		if (!(x >= 0 && x <= 100) || !(y >= 0 && y <= 100)) {
 			throw ("PageComponent: incorrect posX/ poxY");
 		}
-		pos = [x, y];
+		this.pos = [x, y];
 	};
 
 };
