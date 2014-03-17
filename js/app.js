@@ -80,10 +80,6 @@ var App = {
 $(document).ready(function() {
 	var model = new StoryModel();
 
-	//model method calls example
-	console.log("StoryModel.title:" + model.getTitle());
-	console.log("StoryModel.pages:" + model.getAllPages());
-
 	// Init all views
 	App.homeView = new HomeView($("#homeView"), model);
 	App.editView = new EditView($("#editView"), model);

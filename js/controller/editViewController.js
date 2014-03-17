@@ -32,6 +32,12 @@ var EditViewController = function(view, model) {
 				'top': (draggablePos.top - canvasPos.top) / $(this).height() * 100
 			};
 
+			// item is dropped outside the canvas, break.
+			//TOFIX: handled components dropped on the right edge of the canvas
+			if((relPosInPercent >= 0 && relPosInPercent <= 100)){
+				return;
+			}
+			
 			$(element).css({
 				"left": relPosInPercent.left + "%",
 				"top": relPosInPercent.top + "%"

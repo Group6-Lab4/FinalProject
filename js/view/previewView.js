@@ -23,7 +23,7 @@ var PreviewView = function(container, model) {
 		for (var key in pageComponents) {
 			var eachComponentData = pageComponents[key];
 			var componentDiv = $("<div>");
-			console.log(eachComponentData);
+//			console.log(eachComponentData);
 			
 			
 			if(eachComponentData.type === PageComponent.TYPE_BACKGROUND || eachComponentData.type === PageComponent.TYPE_ITEM){
@@ -67,7 +67,7 @@ var PreviewView = function(container, model) {
 	//This function gets called when there is a change at the model
 	this.update = function(data) {
 		var classname = data.constructor.name;
-		alert(classname);
+//		alert(classname);
 		if (classname == "Page") {
 			//page object is updated
 //			console.log(this.canvas);

@@ -267,7 +267,8 @@ var PageComponent = function PageComponent(componentType, content, posX, posY) {
 		throw ("PageComponent: unknown componentContent : " + content);
 	}
 	if (!(posX >= 0 && posX <= 100) || !(posY >= 0 && posY <= 100)) {
-		throw ("PageComponent: incorrect posX/ poxY");
+//		throw ("PageComponent: incorrect posX/ poxY");
+		console.log("[PageComponent]new component, posX:" + posX + "poxY:" + posY)
 	}
 
 	this.type = componentType;
