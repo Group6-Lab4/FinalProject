@@ -81,6 +81,10 @@ and open the template in the editor.
     top:-100px;
 }
 
+.nav-sidebar>li:nth-child(3)>div{
+    top:-200px;
+}
+
 .nav-sidebar>li:nth-child(1):hover>div{
 	background-color: #7D88B0;
 }
@@ -88,11 +92,19 @@ and open the template in the editor.
 	background-color: #FDE680;
 }
 
+.nav-sidebar>li:nth-child(3):hover>div{
+	background-color: #CDFCDC;
+}
+
 .nav-sidebar>li:nth-child(1):active>div{
 	background-color: #7D88B0;
 }
 .nav-sidebar>li:nth-child(2):active>div{
 	background-color: #FDE680;
+}
+
+.nav-sidebar>li:nth-child(3):active>div{
+	background-color: #CDFCDC;
 }
 
 #editDefultDiv{
@@ -122,12 +134,10 @@ and open the template in the editor.
 }
 
 .nav-sidebar li:hover img.sidebar_icon{
-    z-index: 25;
-    left:225px;
+    z-index: 55;
+    left:245px;
 }
-.nav-sidebar li:nth-child(3):hover img.sidebar_icon{
-    left:0px;
-}
+
 
 /* style for canvas*/
 .main {
@@ -154,7 +164,8 @@ and open the template in the editor.
 }
 
 /*styles for drag-n-drop*/
-.draggable_item{
+.draggable_item,.dropped{
+        
 	cursor: move;
 	position: absolute;
 }
