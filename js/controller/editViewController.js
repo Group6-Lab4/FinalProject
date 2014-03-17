@@ -28,13 +28,7 @@ var EditViewController = function(view, model) {
 	$("#droppable_canvas").droppable({
 		hoverClass: "canvas-hover",
 		drop: function(event, ui) {
-			$(this).css("zIndex", "");
-			if ($(ui.draggable).hasClass("dropped_item")) {
-				return;
-			}
-
-			//var element = $(ui.draggable).clone();
-			var element = $(ui.helper).clone();
+			var draggableObj = $(ui.draggable);
 			var draggablePos = $(ui.helper).offset();
 			var canvasPos = $(this).offset();
 
@@ -50,30 +44,43 @@ var EditViewController = function(view, model) {
 				return;
 			}
 
-			$(element).removeClass().addClass("dropped_item");
-			$(element).css({
-				"left": relPosInPercent.left + "%",
-				"top": relPosInPercent.top + "%"
-			});
-
+			// Update position of component in model
+			
+//				alert($(draggableObj).attr("class"));
+			if ($(draggableObj).hasClass("dropped_item")) {
+				var pageComponent = view.curStoryPage.getComponentById(draggableObj.attr("pb-id"));
+				if(!pageComponent){
+					return;
+				}
+				pageComponent.setPos(relPosInPercent.left, relPosInPercent.top);
+				
+				return;
+			}
 
 			// Save new component to model
-			var componentType = Number($(element).attr("pb-type"));
+			var componentType = Number($(draggableObj).attr("pb-type"));
 			var componentId;
 			switch (componentType) {
 				case PageComponent.TYPE_BACKGROUND:
 				case PageComponent.TYPE_ITEM:
-					componentId = view.curStoryPage.addComponent(componentType, $(element).find('img').attr('src'), relPosInPercent.left, relPosInPercent.top);
+					componentId = view.curStoryPage.addComponent(componentType, $(draggableObj).find('img').attr('src'), relPosInPercent.left, relPosInPercent.top);
 					break;
 				case PageComponent.TYPE_TEXT:
 					break;
 			}
 
-			// Keep component id in the element (for later use)
+			// Clone element to the canvas for newly added item
+			var element = $(draggableObj).clone();
+			$(element).removeClass().addClass("dropped_item");
+			$(element).css({
+				"left": relPosInPercent.left + "%",
+				"top": relPosInPercent.top + "%"
+			});
+			// Keep component id in the element (for updating component later)
 			element.attr("pb-id", componentId);
-			
+			// Also add delete button
 			element.append($('<input type="button" class="btn btn-xs" name="delete" value="x" />'));
-			
+
 
 			// Add to canvas
 			$(this).append(element);

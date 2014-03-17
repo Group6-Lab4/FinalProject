@@ -14,31 +14,52 @@ var PreviewView = function(container, model) {
 	this.hideView = function() {
 		$(container).hide();
 	};
-	
+
 	// Private functions
+	/**
+	 * @description this function will update the current story page being shown on canvas
+	 */
 	var updateCanvas = function() {
-//		console.log(this.curStoryPage);
+		//first reset the canvas
+		resetCanvas.call(this);
 		
 		var pageComponents = this.curStoryPage.getAllComponents();
 		for (var key in pageComponents) {
 			var eachComponentData = pageComponents[key];
 			var componentDiv = $("<div>");
 //			console.log(eachComponentData);
-			
-			
-			if(eachComponentData.type === PageComponent.TYPE_BACKGROUND || eachComponentData.type === PageComponent.TYPE_ITEM){
+
+			if (eachComponentData.type === PageComponent.TYPE_BACKGROUND || eachComponentData.type === PageComponent.TYPE_ITEM) {
 				componentDiv.append($("<img>").attr("src", eachComponentData.image));
 			}
-			
+
 			componentDiv.css({
 				"position": "absolute",
 				"left": eachComponentData.pos[0] + "%",
 				"top": eachComponentData.pos[1] + "%"
 			});
-			
+
 			this.canvas.append(componentDiv);
 		}
 	};
+
+	var resetCanvas = function() {
+		$(this.canvas).empty();
+	};
+
+
+	var updateCanvasComponent = function() {
+
+	}
+
+	/**
+	 * @description this function will update a specific thumbnail by pageIdx or all thumnails
+	 */
+	var updateThumbnail = function(pageIdx) {
+
+	};
+
+
 
 	// Constructor
 	// Load story title
@@ -50,7 +71,7 @@ var PreviewView = function(container, model) {
 	// Load story pages
 	var pages = model.getAllPages();
 	this.curStoryPage = pages[1]; // default the current page is page 0, i.e. cover page
-	
+
 
 	// Load canvas content 
 	updateCanvas.call(this);
@@ -71,7 +92,15 @@ var PreviewView = function(container, model) {
 		if (classname == "Page") {
 			//page object is updated
 //			console.log(this.canvas);
-			updateCanvas.call(this);
+//			if(data === curStoryPage){ 
+			if (data.getPageIdx() === this.curStoryPage.getPageIdx()) {
+
+				updateCanvas.call(this);
+			} else {
+				updateThumbnail.call(this, data.getPageIdx());
+			}
+
+		} else if (classname == "PageComponent") {
 
 		}
 

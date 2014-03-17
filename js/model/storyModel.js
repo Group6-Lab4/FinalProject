@@ -9,7 +9,7 @@ var StoryModel = function StoryModel() {
 	var pages = []; //consist of Page objects
 	pages[0] = new Page(Page.TYPE_COVER, 0); //cover page
 	pages[1] = new Page(Page.TYPE_NORMAL, 1); //first page
-	
+
 	//Register this as observer to the page observable
 	pages[0].addObserver(this);
 	pages[1].addObserver(this);
@@ -26,15 +26,15 @@ var StoryModel = function StoryModel() {
 	};
 
 	//Return all story pages
-	this.getAllPages = function(){
+	this.getAllPages = function() {
 		return pages;
 	};
-	
+
 	//Return a story page by idx (idx is the array index, returned by addPage())
-	this.getPageByIdx = function(idx){
+	this.getPageByIdx = function(idx) {
 		return pages[idx];
 	};
-	
+
 	//Add new page at the end by default, or at pageIdx, return newly-added page idx
 	this.addPage = function(pageIdx) {
 		var returnIdx;
@@ -111,11 +111,14 @@ var StoryModel = function StoryModel() {
 			observers[i].update(arg);
 		}
 	};
-	
+
 	/*****************************************  
 	 Observer implementation    
+	 - StoryModel is observing its pages; 
+	 - Pages are also observing their PagesComponents;
+	 - when there is changes in PagesComponents, the notification will bubble up to here.
 	 *****************************************/
-	//This function gets called when there is a change at the observables
+	//This function gets called when there is a change at the observables (Page)
 	this.update = function(arg) {
 		//pass the changes to its oberserver
 		notifyObservers(arg);
@@ -142,8 +145,8 @@ var Page = function Page(pageType, pageIdx) {
 		}
 		pageIdx = idx;
 	};
-	
-	this.getPageIdx = function(){
+
+	this.getPageIdx = function() {
 		return pageIdx;
 	};
 
@@ -155,7 +158,7 @@ var Page = function Page(pageType, pageIdx) {
 	this.getComponentById = function(componentId) {
 //		return components[componentId];
 		for (var i in components) {
-			if (components[i].getId() === componentId) {
+			if (components[i].getId() === Number(componentId)) {
 				return components[i];
 			}
 		}
@@ -169,7 +172,7 @@ var Page = function Page(pageType, pageIdx) {
 	 * @param {Number} posY, relative position in persontage
 	 * 
 	 */
-	this.addComponent = function(componentType, content, posX, posY){
+	this.addComponent = function(componentType, content, posX, posY) {
 		var pageComponent = new PageComponent(componentType, content, posX, posY);
 		return this.addComponentObj(pageComponent);
 	};
@@ -185,12 +188,16 @@ var Page = function Page(pageType, pageIdx) {
 		newComponent.initId(maxComponentId);
 
 		if (typeof zorder !== undefined) {
-			newComponent.setZorder(zorder);
+			newComponent.setZorder(zorder, true); //do not notify observer
 		}
 
 		components.push(newComponent);
 		sortComponents();
 
+		// Register the newly-created pageComponent owner as observer
+		newComponent.addObserver(this);
+
+		// Notify page's observers about newly added component
 		notifyObservers(this);
 		return maxComponentId;
 	};
@@ -205,11 +212,6 @@ var Page = function Page(pageType, pageIdx) {
 		}
 	};
 
-	//TODO:
-	this.draw = function() {
-
-	};
-
 	var sortComponents = function() {
 
 		components.sort(function(a, b) {
@@ -218,7 +220,7 @@ var Page = function Page(pageType, pageIdx) {
 	};
 
 	/*****************************************  
-	 Observable implementation    
+	 Observable implementation   
 	 *****************************************/
 	var observers = [];
 	this.addObserver = function(observer)
@@ -232,6 +234,20 @@ var Page = function Page(pageType, pageIdx) {
 		{
 			observers[i].update(arg);
 		}
+	};
+
+
+	/*****************************************  
+	 Observer implementation    
+		- Page is observing its PageComponents
+	 *****************************************/
+	//This function gets called when there is a change at the observables (PageComponents)
+	this.update = function(arg) {
+		//pass the changes to its oberserver
+		
+		//even though the change data is a PageComponent, this changes will be seen as by page, i.e. whole page will be updated by view
+		notifyObservers(this);
+
 	};
 };
 
@@ -268,7 +284,7 @@ var PageComponent = function PageComponent(componentType, content, posX, posY) {
 	}
 	if (!(posX >= 0 && posX <= 100) || !(posY >= 0 && posY <= 100)) {
 //		throw ("PageComponent: incorrect posX/ poxY");
-		console.log("[PageComponent]new component, posX:" + posX + "poxY:" + posY)
+		console.log("[PageComponent]new component dropped outside desired zone, posX:" + posX + "poxY:" + posY)
 	}
 
 	this.type = componentType;
@@ -296,16 +312,18 @@ var PageComponent = function PageComponent(componentType, content, posX, posY) {
 	this.getZorder = function() {
 		return zorder;
 	};
-	this.setZorder = function(componentZorder) {
+	this.setZorder = function(componentZorder, isSilent) {
 		zorder = componentZorder;
 
-		//TODO:also notify Page to sortComponents
+		if (!isSilent) {
+			notifyObservers(this);
+		}
 	};
 
 	this.setText = function(contentText) {
 		text = contentText;
 
-		//TODOL notify
+		notifyObservers(this);
 	};
 
 	this.setPos = function(x, y) {
@@ -313,8 +331,27 @@ var PageComponent = function PageComponent(componentType, content, posX, posY) {
 			throw ("PageComponent: incorrect posX/ poxY");
 		}
 		this.pos = [x, y];
+
+		notifyObservers(this);
 	};
 
+
+	/*****************************************  
+	 Observable implementation    
+	 *****************************************/
+	var observers = [];
+	this.addObserver = function(observer)
+	{
+		observers.push(observer);
+	};
+
+	var notifyObservers = function(arg)
+	{
+		for (var i = 0; i < observers.length; i++)
+		{
+			observers[i].update(arg);
+		}
+	};
 };
 
 // PageComponent constants:
