@@ -9,24 +9,24 @@ and open the template in the editor.
 */
 
 /*state of the navigation of the whole site*/
- 
+
 #start{
     margin:20px 0;
 }
-    .page_navi li{
-        background-color: #fff;
-        color:#357ebd;
-        border-radius: 15em;
-        
-    }
-    
-    .page_navi li>.active{
-        background-color: #357ebd;
-        color:#fff;
-        border-radius: 15em;
-    }
+.page_navi li{
+	background-color: #fff;
+	color:#357ebd;
+	border-radius: 15em;
 
- 
+}
+
+.page_navi li>.active{
+	background-color: #357ebd;
+	color:#fff;
+	border-radius: 15em;
+}
+
+
 
 
 /* style for the left sidebar in editpage*/
@@ -38,7 +38,7 @@ and open the template in the editor.
 .nav-sidebar>ul{
     margin-top: 0;
     list-style: none;
-    
+
 }
 .nav-sidebar>li{
     display: list-item;
@@ -54,11 +54,11 @@ and open the template in the editor.
 .nav li a:hover{
     background-color: transparent;
 }
- 
 
-.nav-sidebar li div{
+
+.nav-sidebar li div.sidebar_bg{
     position: absolute;
-    z-index: -5;
+    z-index: 1;  /*higher than normal icon so to cover them*/
     width: 300px;
     height: 500%;
     border: none;
@@ -72,72 +72,62 @@ and open the template in the editor.
 
 }
 
-.nav-sidebar li:hover div, .nav-sidebar li:active div{
+.nav-sidebar>li:hover>div, .nav-sidebar>li:active>div{
     left:-5%;
     opacity: 1;
 
 }
-.nav-sidebar li:nth-child(2) div{
+.nav-sidebar>li:nth-child(2)>div{
     top:-100px;
 }
 
-.nav-sidebar li:nth-child(1):hover div{
+.nav-sidebar>li:nth-child(1):hover>div{
 	background-color: #7D88B0;
 }
-.nav-sidebar li:nth-child(2):hover div{
+.nav-sidebar>li:nth-child(2):hover>div{
 	background-color: #FDE680;
 }
 
-.nav-sidebar li:nth-child(1):active div{
+.nav-sidebar>li:nth-child(1):active>div{
 	background-color: #7D88B0;
 }
-.nav-sidebar li:nth-child(2):active div{
+.nav-sidebar>li:nth-child(2):active>div{
 	background-color: #FDE680;
-}
-
-.nav-sidebar li img{
-	z-index: 25;
 }
 
 #editDefultDiv{
     background-color: #7D88B0;
     left:-5%;
     opacity: 1;
-   }
-   
- #editDefultImg{
-       left: 225px;
-   }
+}
+
+#editDefultImg{
+	left: 225px;
+}
 
 
-.nav-sidebar li img{
+.nav-sidebar li img.sidebar_icon{
     position:absolute;
     left:0px;
     top:0px;
     cursor:pointer;
     -webkit-transition: left 0.2s ease-in-out;
     transition: left 0.2s ease-in-out;
-}
 
-.nav-sidebar li:hover img{
-    z-index: 25;
-    left:225px;
-}
-.nav-sidebar li:nth-child(3):hover img{
-    left:0px;
-}
-
-
-/*change the scale of the icon*/
-.catgories>a>img{
-    display: block;
-    z-index: 25;
+	display: block;
+    /*z-index: 25;*/
     transform: scale(1);
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
 }
 
-
+.nav-sidebar li:hover img.sidebar_icon{
+    z-index: 25;
+    left:225px;
+}
+.nav-sidebar li:nth-child(3):hover img.sidebar_icon{
+    left:0px;
+}
 
 /* style for canvas*/
 .main {
@@ -155,13 +145,20 @@ and open the template in the editor.
 	padding: 0;
 }
 .main .canvas_wrapper{
-	
+
     margin:20px;
 }
 .main .canvas{
     z-index: -10;
 	background-color: #EEEEEE; 
 }
+
+/*styles for drag-n-drop*/
+.draggable_item{
+	cursor: move;
+	position: absolute;
+}
+
 
 /*universal settings for standard ratio box*/
 .ratio_box{
@@ -189,10 +186,10 @@ and open the template in the editor.
 
 .main .title {
 	font-size: large;
-        font:oblique;
+	font:oblique;
 	color: #7D88B0;
-        background-color: #EEEEEE;
-        border: dotted;
+	background-color: #EEEEEE;
+	border: dotted;
 	/*padding: 20px;*/
 	/*margin-left: -100px;*/
 	width: 100%;
