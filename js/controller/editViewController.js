@@ -68,14 +68,17 @@ var EditViewController = function(view, model) {
 				case PageComponent.TYPE_TEXT:
 					break;
 			}
-//			console.log(view.curPage.getAllComponents());
 
 			// Keep component id in the element (for later use)
 			element.attr("pb-id", componentId);
+			
+			element.append($('<input type="button" class="btn btn-xs" name="delete" value="x" />'));
+			
 
 			// Add to canvas
 			$(this).append(element);
 
+			// Add other event hanlders to this new element
 			element.draggable({
 				containment: "#droppable_canvas"
 			});

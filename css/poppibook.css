@@ -173,6 +173,17 @@ and open the template in the editor.
 	z-index: 10
 }
 
+.dropped_item>img{
+	float: left;
+}
+
+.dropped_item>input{
+	display: none;
+}
+
+.dropped_item:hover>input{
+	display: block;
+}
 
 /*universal settings for standard ratio box*/
 .ratio_box{
