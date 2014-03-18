@@ -22,8 +22,11 @@ var StoryModel = function StoryModel() {
 	//Set the title of the story as input
 	this.setTitle = function(newTitle) {
 		title = newTitle;
-               // alert("setTitle"+this.getTitle);
-                notifyObservers("setTtitle");
+               
+              // alert("setTitle before notify"+this.getTitle());
+                notifyObservers("setTitle");
+                console.log(observers);
+              //  alert("setTitle after notify "+this.getTitle());
 	};
 
 	//Return all story pages
@@ -164,6 +167,7 @@ var StoryModel = function StoryModel() {
 	//This function gets called when there is a change at the observables (Page)
 	this.update = function(arg) {
 		//pass the changes to its oberserver
+              //  alert("model update!");
 		notifyObservers(arg);
 
 	};

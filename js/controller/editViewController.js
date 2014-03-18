@@ -10,6 +10,7 @@ var EditViewController = function(view, model) {
         //detect change on title
         view.titleInput.change(function(){
           model.setTitle(view.titleInput.val());
+          model.update("setTitle");
             
         });
          

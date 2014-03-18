@@ -45,7 +45,7 @@ var EditView = function(container, model) {
 	this.update = function(arg) {
 //		alert(typeof arg);
 //		this.updateSelectedDishes();
-            notifyobserver(this);
+           this.titleInput.val(model.getTitle()); 
 	};
 };
 

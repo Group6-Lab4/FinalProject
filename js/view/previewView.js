@@ -6,7 +6,12 @@
 var PreviewView = function(container, model) {
 	this.canvas = container.find('.canvas');
 	this.curStoryPage; //current page being shown on big canvas
-
+        this.title = container.find('.title');
+        
+        if (model.getTitle() !== undefined) {
+		this.title.text(model.getTitle());  
+                
+               }
 	// Public functions
 	this.showView = function() {
 		$(container).show();
@@ -55,7 +60,10 @@ var PreviewView = function(container, model) {
 		$(this.canvas).empty();
 	};
 
-
+         this.updateTitle = function(){
+             this.title.text(model.getTitle());
+            // alert("update Title in preview! "+model.getTitle());
+     };
 
 	/**
 	 * @description this function will update a specific thumbnail by pageIdx or all thumnails
@@ -68,9 +76,10 @@ var PreviewView = function(container, model) {
 
 	//--- Constructor ---
 	// Load story title
-	if (model.getTitle() !== undefined) {
+	/*if (model.getTitle() !== undefined) {
 //		this.titleInput.val(model.getTitle());
-	}
+	}*/
+        this.updateTitle();
 
 
 	// Load story pages
@@ -88,7 +97,7 @@ var PreviewView = function(container, model) {
 	 Observer implementation    
 	 *****************************************/
 	//Register an observer to the model
-	model.addObserver(this);
+	 model.addObserver(this);
 
 	//This function gets called when there is a change at the model
 	this.update = function(data) {
@@ -108,7 +117,11 @@ var PreviewView = function(container, model) {
 		} else if (classname == "PageComponent") {
 
 		}
-
+             //update the title with model.   
+            
+            this.updateTitle();
+           // alert("in preview, update from model!");
+           
 
 	};
 };
