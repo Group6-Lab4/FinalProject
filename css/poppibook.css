@@ -211,6 +211,7 @@ a {
 	float: left;
 	/*margin-right: 6px;*/
 	position: relative;
+	cursor: pointer;
 }
 
 .page_thumbnail>label{

@@ -19,7 +19,8 @@ var EditViewController = function(view, model) {
 			containment: "#droppable_canvas"
 		});
 
-		//handler for textarea
+		//NOTE: can consier to chagne to delegate method
+		//handler for textarea 
 		componentObj.find("textarea").on("change", function() {
 			var componentId = $(this).parent().attr("pb-id");
 			var pageComponent = view.curStoryPage.getComponentById(componentId);
@@ -29,6 +30,7 @@ var EditViewController = function(view, model) {
 
 		});
 
+		//NOTE: can consier to chagne to delegate method
 		// and its handlers
 		componentObj.find("input[name=delete]").on("click", function() {
 			var componentId = $(this).parent().attr("pb-id");

@@ -7,8 +7,8 @@ var PreviewView = function(container, model) {
 	this.canvas = container.find('.canvas');
 	this.curStoryPage; //current page being shown on big canvas
 	this.title = container.find('.title');
-
-	var thumbnailContainer = container.find(".thumbnails_container");
+	this.thumbnailContainer = container.find(".thumbnails_container");
+	var thumbnailContainer = this.thumbnailContainer; //to be replace by this.thumbnailContainer later
 
 	if (model.getTitle() !== undefined) {
 		this.title.text(model.getTitle());
@@ -144,7 +144,7 @@ var PreviewView = function(container, model) {
 };
 
 PreviewView.createThumbnailDiv = function(pageIdx) {
-	var thumbnailWrapper = $("<div>").addClass("thumbnail page_thumbnail");
+	var thumbnailWrapper = $("<div>").addClass("thumbnail page_thumbnail").attr("pb-idx", pageIdx);
 	var thumbnailCanvas = $("<div>").addClass("canvas");
 	
 	pageIdx = (pageIdx == 0) ? "Cover" : pageIdx;

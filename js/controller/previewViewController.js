@@ -4,15 +4,16 @@
  */
 
 var PreviewViewController = function(view, model) {
+	
+	
     
-   // model.addObserver(this);
-    
-   // this.update = function(){
-        
-        
-        
-   // };
-    
+	$(view.thumbnailContainer).on("click", ".page_thumbnail", function(){
+//		alert("click thumbnail"+$(this).attr("pb-idx"));
+		
+		
+		view.loadStoryPage($(this).attr("pb-idx"));
+		
+	});
     
 	
 	
