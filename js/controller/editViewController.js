@@ -47,15 +47,16 @@ var EditViewController = function(view, model) {
 		model.update("setTitle");
 
 	});
+        /*interaction of the navigation dots */
+        
+         
 	/*go to prevPage or nextPage */
 	$(container).find("#toPrevious").on("click", function() {
 		curPageIdx = view.curStoryPage.getPageIdx();
 		if (curPageIdx < 2)
 			return;
 		else {
-			// var prevPage = model.getPageByIdx(curPageIdx-1);
-			// view.curStoryPage = prevPage;
-			//  alert("go to prev page!");
+			
 			view.loadStoryPage(curPageIdx - 1);
 
 		}
@@ -67,10 +68,7 @@ var EditViewController = function(view, model) {
 		if (curPageIdx === model.getAllPages().length - 1)
 			return;
 		else {
-			//  var nextPage = model.getPageByIdx(curPageIdx+1);
-			//   view.curStoryPage = nextPage;
-			// alert("go to next page!")
-			// console.log(view.curStoryPage);
+			 
 			view.loadStoryPage(curPageIdx + 1);
 		}
 	});

@@ -7,7 +7,15 @@ var EditView = function(containerObj, model) {
 	this.container = containerObj;
 	this.titleInput = this.container.find(".title");
 	this.canvas = containerObj.find("#droppable_canvas");
-
+        // create an array to store the status of the dots;
+        this.navDots = [];
+       
+    // clear all the class of the dots;
+        Array.prototype.clearClass = function(){
+            for(var i=0;i<this.navDots.length;i++){
+                this.navDots[i].attr("class","");
+            }
+        };
 
 	this.curStoryPage; //current page being shown on canvas
 
@@ -42,14 +50,45 @@ var EditView = function(containerObj, model) {
 	//  console.log(this.curStoryPage);
 	//--- Public functions ---
 	this.loadStoryPage = function(pageIdx) {
+                
+                var totalPageNum = model.getAllPages().length-1;
 		this.curStoryPage = model.getPageByIdx(pageIdx);
-		//exclude cover page
+		//update paging exclude cover page
 		this.container.find("#currentPageIdx").text(pageIdx);
 		this.container.find("#totalPageNum").text(model.getAllPages().length - 1);
+                /*generate naviDots*/
+                
+                //if num of dots is less than total page, add dots
+                if(this.navDots.length<totalPageNum){
+                    for(var i=this.navDots.length+1;i<=totalPageNum;i++){
+                        var dot = $("<li>");
+                        var a = $("<a>");
+                        dot.append(a);
+                        dot.attr("class","");
+                        this.navDots.push(dot);
+                       }
+                   }
+                // if num of dos is more than total page, delete dots
+                else if(this.navDots.length>totalPageNum){
+                    for(var i = totalPageNum; i>this.navDots.length; i--){
+                        this.navDots.pop();
+                    }
+                  }   
+                //update the state of all dots   
+                this.navDots.clearClass();
+                this.navDots[pageIdx-1].attr("class","current");
+                
+            //populate the dots into the canvas
+                
+                var dotHolder = this.container.find(".dotsyle>ul");
+                
+                for(var i=0; i<this.navDots.length; i++){
+                    dotHolder.append(this.navDots[i]);
+                }
 		//alert("loadstoryPage!");
 		updateCanvas.call(this);
 
-		//TODO:update paging
+	
 
 	};
 
