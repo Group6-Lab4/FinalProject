@@ -150,7 +150,7 @@
 				</div>
 				<!-- content view(story name, canvas)-->
 				<div class="col-sm-8 col-md-8 col-lg-8 main" >
-					<!--<h1 class="page-header">Your story canvas</h1> -->
+					<!--tittle -->
 					<div class="row">
 						<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 							<input type="text" class="form-control title" placeholder="Input the name of your story book">
@@ -171,27 +171,34 @@
 									<!-- add button-->
 								</div>
 								<div id="droppable_canvas" class="ratio_box_content canvas"></div>
-
-								<div class="dotstyle dotstyle-fillup dotNavi row">
-									<div id="toPrevious" class="col-lg-2 col-md-1">
-										<span class="glyphicon glyphicon-chevron-left"></span>
-									</div>
-
-									<ul class="col-lg-5 col-md-6">
-										<li class="current"><a href="#"></a></li>
-										<li><a href="#"></a></li>
-										<li><a href="#"></a></li>
-										<li><a href="#"></a></li>
-										<li><a href="#"></a></li>
-										<li><a href="#"></a></li>
-
-									</ul>
-
-									<div id="toNext" class="col-lg-1 col-md-1">
-										<span class="glyphicon glyphicon-chevron-right"></span>
+							</div>
+							
+							<!-- navi dots,-->
+	                           <div class="dotNavi row">
+										  <div id="toPrevious" class="col-lg-1 col-md-1 col-sm-2">
+											  <span class="glyphicon glyphicon-chevron-left"></span>
+										  </div>
+									      <div class="dotstyle dotstyle-fillup col-lg-4 col-md-5 col-sm-8">
+											<ul>
+												<li class="current"><a href="#"></a></li>
+												<li><a href="#"></a></li>
+												<li><a href="#"></a></li>
+												<li><a href="#"></a></li>
+												<li><a href="#"></a></li>
+												 
+												 
+											</ul>
+										  </div>
+									       <div id="toNext" class="col-lg-1 col-md-1 col-sm-2">
+										      <span class="glyphicon glyphicon-chevron-right"></span>
+										   </div>
+								</div>
+							<!--page information-->
+								<div class="row">
+									<div class="col-lg-3 col-lg-offset-5 col-md-3 col-md-offset-4 col-sm-3 col-sm-offset-5">
+									<h3><span id="editCurrentPage">2</span>/<span id="editTotalPage">8</span></h3>
 									</div>
 								</div>
-							</div>
 						</div>
 					</div>          
 

@@ -305,7 +305,7 @@ and open the template in the editor.
 	position: relative;
 	display: block;
 	float: left;
-	margin: 0 16px;
+	margin: 0 10px;
 	width: 16px;
 	height: 16px;
 	cursor: pointer;
@@ -349,6 +349,7 @@ and open the template in the editor.
 	left: 0;
 	width: 100%;
 	background-color: #777;
+        border-radius: 50%;
 	box-shadow: 0 0 1px #fff;
 	-webkit-transition: height 0.3s ease;
 	transition: height 0.3s ease;
@@ -364,14 +365,17 @@ and open the template in the editor.
 }
 /*adjust the position of dotNavi*/
 .dotNavi{
-    position: absolute;
-    width:700px;
-    left:20%;
-    top:105%;
+   position: relative;
+    //width:700px;
+    
+    left:25%;
     z-index: 2;
 }
 
-.dotstyle div{
-    height: 40px;
-    width: 40px;
+ 
+.paging{
+    left:40%;
+    top:105%;
+    z-index: 2;
+    position: absolute;
 }
