@@ -9,7 +9,7 @@ var EditViewController = function(view, model) {
 	var textItemDefaultText = "Your text goes here.";
 	var curPageIdx = view.curStoryPage.getPageIdx();
 
-	// Handling cloned draggable
+// Handling cloned draggable
 	var updateCanvasComponentHandlers = function() {
 		var componentObj = $(container).find(".dropped_item");
 		console.log("updateCanvasComponentHandlers, componentObj:");
@@ -35,9 +35,9 @@ var EditViewController = function(view, model) {
 			view.curStoryPage.removeComponent(componentId);
 			$(this).parent().remove();
 
-		});
+		});		
 	};
-
+		
 
 	// --- Constructor ---//
 
