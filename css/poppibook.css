@@ -8,6 +8,13 @@ and open the template in the editor.
     Author     : weiwei
 */
 
+/*Basic*/
+a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
 /*state of the navigation of the whole site*/
 
 #start{
@@ -139,7 +146,7 @@ and open the template in the editor.
 }
 
 
-/* style for canvas*/
+/* style for Edit page canvas*/
 .main {
 	padding: 20px;
 }
@@ -149,6 +156,32 @@ and open the template in the editor.
 		padding-left: 40px;
 		margin-top: 50px;
 	}
+}
+
+.main .title {
+	font-size: large;
+	font:oblique;
+	color: #7D88B0;
+	background-color: #EEEEEE;
+	border: dotted;
+	/*padding: 20px;*/
+	/*margin-left: -100px;*/
+	width: 100%;
+	height: 50px;
+}
+
+.main .btn_deletepage{
+    z-index: 2;
+    position: absolute;
+    top:0;
+    right:-5%;
+}
+
+.main .btn_addpage{
+    z-index: 2;
+    position: absolute;
+    top:30%;
+    right: -25%;
 }
 
 .no_col_padding{
@@ -257,31 +290,7 @@ and open the template in the editor.
 	padding-top: 70%;
 }
 
-.main .title {
-	font-size: large;
-	font:oblique;
-	color: #7D88B0;
-	background-color: #EEEEEE;
-	border: dotted;
-	/*padding: 20px;*/
-	/*margin-left: -100px;*/
-	width: 100%;
-	height: 50px;
-}
 
-.main #deleteButton{
-    z-index: 2;
-    position: absolute;
-    top:0;
-    right:-5%;
-}
-
-.main #addButton{
-    z-index: 2;
-    position: absolute;
-    top:30%;
-    right: -25%;
-}
 
 /*style for navi dots in edit page*/
 /* Common styles and resets */
@@ -349,7 +358,7 @@ and open the template in the editor.
 	left: 0;
 	width: 100%;
 	background-color: #777;
-        border-radius: 50%;
+	border-radius: 50%;
 	box-shadow: 0 0 1px #fff;
 	-webkit-transition: height 0.3s ease;
 	transition: height 0.3s ease;
@@ -365,14 +374,14 @@ and open the template in the editor.
 }
 /*adjust the position of dotNavi*/
 .dotNavi{
-   position: relative;
+	position: relative;
     //width:700px;
-    
+
     left:25%;
     z-index: 2;
 }
 
- 
+
 .paging{
     left:40%;
     top:105%;

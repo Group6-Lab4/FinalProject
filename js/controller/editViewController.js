@@ -4,7 +4,8 @@
  */
 
 var EditViewController = function(view, model) {
-	var curStoryPageModel = view.curStoryPage;
+	var container = view.container;
+//	var curStoryPageModel = view.curStoryPage; !! dont do this because curXX will change a lot
 	var textItemDefaultText = "Your text goes here.";
         
         //detect change on title
@@ -19,6 +20,20 @@ var EditViewController = function(view, model) {
 		$("#icon_bg div").attr("id", "cat_bgs");
 		$("#icon_bg img").attr("id", "");
 	});
+
+	//	Buttons handlers
+	$(container).find(".btn_addpage").on("click", function() {
+		var newPageIdx = model.addPage(view.curStoryPage.getPageIdx()+1);
+		//Goto new page
+		view.loadStoryPage(newPageIdx);
+	});
+
+	$(container).find(".btn_deletepage").on("click", function() {
+
+	});
+	
+	// Paging handlers
+
 
 	// Handling original draggable
 	$(".draggable_item").draggable({
@@ -35,10 +50,7 @@ var EditViewController = function(view, model) {
 		opacity: 0.7
 	});
 
-	// Handling cloned draggable
-	$(".dropped_item").draggable({
-		containment: "#droppable_canvas"
-	});
+
 
 	// Handling droppable
 	$("#droppable_canvas").droppable({
@@ -62,7 +74,7 @@ var EditViewController = function(view, model) {
 
 			// Update position of component in model
 			if ($(draggableObj).hasClass("dropped_item")) {
-				var pageComponent = curStoryPageModel.getComponentById(draggableObj.attr("pb-id"));
+				var pageComponent = view.curStoryPage.getComponentById(draggableObj.attr("pb-id"));
 				if (!pageComponent) {
 					return;
 				}
@@ -88,7 +100,7 @@ var EditViewController = function(view, model) {
 					});
 
 					// Save new component to model
-					componentId = curStoryPageModel.addComponent(componentType, $(draggableObj).find('img').attr('src'), relPosInPercent.left, relPosInPercent.top);
+					componentId = view.curStoryPage.addComponent(componentType, $(draggableObj).find('img').attr('src'), relPosInPercent.left, relPosInPercent.top);
 					break;
 				case PageComponent.TYPE_TEXT:
 					var width = newItemObj.attr("pb-width");
@@ -123,21 +135,23 @@ var EditViewController = function(view, model) {
 						"padding": PageComponent.TEXT_PADDING + "%"
 					});
 
+					//Textarea for item_text
 					var itemTextarea = $("<textarea>").text(textItemDefaultText);
 					newItemObj.append(itemTextarea);
 
+					//handler for textarea
 					itemTextarea.on("change", function() {
 						var componentId = $(this).parent().attr("pb-id");
-						var pageComponent = curStoryPageModel.getComponentById(componentId);
-						
-						console.log("onchange: "+ $(this).val());
+						var pageComponent = view.curStoryPage.getComponentById(componentId);
+
+//						console.log("onchange: " + $(this).val());
 						pageComponent.setText($(this).val());
-						
+
 					});
 
 
 					// Save new component to model
-					componentId = curStoryPageModel.addComponent(componentType, textItemDefaultText, left, top, width, height);
+					componentId = view.curStoryPage.addComponent(componentType, textItemDefaultText, left, top, width, height);
 
 					break;
 			}
@@ -153,7 +167,7 @@ var EditViewController = function(view, model) {
 			// and its handlers
 			itemDelBtn.on("click", function() {
 				var componentId = $(this).parent().attr("pb-id");
-				curStoryPageModel.removeComponent(componentId);
+				view.curStoryPage.removeComponent(componentId);
 				$(this).parent().remove();
 
 			});
@@ -179,5 +193,32 @@ var EditViewController = function(view, model) {
 	});
 
 
+
+	// Handling cloned draggable
+	this.updateCanvasHandlers = function() {
+		var componentObj = $(container).find(".dropped_item");
+
+		componentObj.draggable({
+			containment: "#droppable_canvas"
+		});
+
+		//handler for textarea
+		componentObj.find("textarea").on("change", function() {
+			var componentId = $(this).parent().attr("pb-id");
+			var pageComponent = view.curStoryPage.getComponentById(componentId);
+
+//						console.log("onchange: " + $(this).val());
+			pageComponent.setText($(this).val());
+
+		});
+
+		// and its handlers
+		componentObj.find("input[name=delete]").on("click", function() {
+			var componentId = $(this).parent().attr("pb-id");
+			view.curStoryPage.removeComponent(componentId);
+			$(this).parent().remove();
+
+		});
+	};
 };
 

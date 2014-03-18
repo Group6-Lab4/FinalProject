@@ -37,7 +37,7 @@ var PreviewView = function(container, model) {
 			if (eachComponentData.type === PageComponent.TYPE_BACKGROUND || eachComponentData.type === PageComponent.TYPE_ITEM) {
 				componentDiv.append($("<img>").attr("src", eachComponentData.image));
 			}else if(eachComponentData.type === PageComponent.TYPE_TEXT){
-				console.log(eachComponentData);
+//				console.log(eachComponentData);
 				componentDiv.css({
 					"width": eachComponentData.size[0] + "%",
 					"height": eachComponentData.size[1] + "%",
