@@ -41,7 +41,7 @@ var PreviewView = function(container, model) {
 	 * @description this function will update the current story page being shown on canvas
 	 */
 	var updateCanvas = function() {
-		PreviewView.drawPageOn(this.canvas, this.curStoryPage);
+		PreviewView.drawPageOnCanvas(this.canvas, this.curStoryPage);
 
 	};
 
@@ -50,7 +50,7 @@ var PreviewView = function(container, model) {
 
 
 	var addThumbnail = function(pageIdx) {
-		var thumbnailDiv = PreviewView.createThumbnailDiv();
+		var thumbnailDiv = PreviewView.createThumbnailDiv(pageIdx);
 		thumbnailContainer.find(".page_thumbnail").eq(pageIdx - 1).after(thumbnailDiv); //insert after 
 
 
@@ -65,7 +65,7 @@ var PreviewView = function(container, model) {
 		}
 		var page = model.getPageByIdx(pageIdx);
 		var thumbnailDiv = thumbnailContainer.find(".page_thumbnail").eq(pageIdx); //get the child at pageIdx
-		PreviewView.drawPageOn(thumbnailDiv, page);
+		PreviewView.drawPageOnCanvas(thumbnailDiv.find(".canvas"), page);
 
 
 	};
@@ -75,9 +75,9 @@ var PreviewView = function(container, model) {
 
 		var pages = model.getAllPages();
 		for (var i in pages) {
-			var thumbnailDiv = PreviewView.createThumbnailDiv();
+			var thumbnailDiv = PreviewView.createThumbnailDiv(i);
 			var eachPageModel = pages[i];
-			PreviewView.drawPageOn(thumbnailDiv, eachPageModel);
+			PreviewView.drawPageOnCanvas(thumbnailDiv.find(".canvas"),eachPageModel);
 
 			thumbnailContainer.append(thumbnailDiv);
 		}
@@ -143,13 +143,23 @@ var PreviewView = function(container, model) {
 	};
 };
 
-PreviewView.createThumbnailDiv = function() {
-	return $("<div>").addClass("thumbnail page_thumbnail");
+PreviewView.createThumbnailDiv = function(pageIdx) {
+	var thumbnailWrapper = $("<div>").addClass("thumbnail page_thumbnail");
+	var thumbnailCanvas = $("<div>").addClass("canvas");
+	
+	pageIdx = (pageIdx == 0) ? "Cover" : pageIdx;
+	var thumbnailCaption = $("<label>").text(pageIdx);
+
+	return thumbnailWrapper.append(thumbnailCanvas).append(thumbnailCaption);
 };
 
 //TODO: can be moved to a static method
-PreviewView.drawPageOn = function(element, storyPage) {
-	element.empty(); //first clear this div
+PreviewView.drawPageOnCanvas = function(canvasElement, storyPage) {
+	if (!$(canvasElement).hasClass("canvas")) {
+		throw("PreviewView.drawPageOnCanvas: this is not a canvas");
+	}
+
+	canvasElement.empty(); //first clear this div
 
 	var pageComponents = storyPage.getAllComponents();
 	for (var key in pageComponents) {
@@ -175,7 +185,7 @@ PreviewView.drawPageOn = function(element, storyPage) {
 		});
 		componentDiv.addClass("preview_item canvas_item_props");
 
-		$(element).append(componentDiv);
+		$(canvasElement).append(componentDiv);
 	}
 };
 

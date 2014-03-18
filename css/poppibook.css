@@ -194,6 +194,8 @@ a {
 .canvas{
     z-index: 0;
 	background-color: #EEEEEE; 
+	width: 100%;
+	height: 100%;
 }
 .canvas-hover{
 	background-color: #AAAAAA; 
@@ -202,15 +204,19 @@ a {
 
 /*Style for preview page*/ 
 .page_thumbnail{
-	
-	background-color: #EEEEEE; 
+
+	/*background-color: #EEEEEE;*/ 
 	height: 140px;
 	width: 200px;
 	float: left;
-	margin-right: 6px;
+	/*margin-right: 6px;*/
 	position: relative;
 }
 
+.page_thumbnail>label{
+	position: relative;
+	top: 5px;
+}
 
 /*styles for drag-n-drop*/
 .draggable_item, .draggable_item_text, .dropped_item{
@@ -235,7 +241,7 @@ a {
 }
 
 .canvas_item_bg{
-	
+
 }
 
 .canvas_item_props{
@@ -248,11 +254,11 @@ a {
 }
 
 .canvas_item_text{
-	
+
 }
 
 .item_text_container{
- 
+
 	width: 150px;
 	height: 105px;
 	border-style: solid;
@@ -275,7 +281,7 @@ a {
 	background-color: transparent;
 	resize: none;
 	text-align: center;
-	font-size: large;
+	font-size: 150%;
 	overflow: hidden;
 }
 
@@ -340,7 +346,7 @@ a {
 }
 
 .btn_addpage:hover, .btn_deletepage:hover{
-    
+
     opacity:1;
 }
 
