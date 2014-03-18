@@ -16,13 +16,14 @@ var StoryModel = function StoryModel() {
 
 	//Return the title of the story
 	this.getTitle = function() {
+               //alert("getTitle")
 		return title;
 	};
 	//Set the title of the story as input
 	this.setTitle = function(newTitle) {
 		title = newTitle;
-
-		notifyObservers("setTtitle");
+               // alert("setTitle"+this.getTitle);
+                notifyObservers("setTtitle");
 	};
 
 	//Return all story pages

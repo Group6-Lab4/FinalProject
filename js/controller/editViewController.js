@@ -6,7 +6,13 @@
 var EditViewController = function(view, model) {
 	var curStoryPageModel = view.curStoryPage;
 	var textItemDefaultText = "Your text goes here.";
-
+        
+        //detect change on title
+        view.titleInput.change(function(){
+          model.setTitle(view.titleInput.val());
+            
+        });
+         
 	/*remove the defulte streched out style of left menu when click or mouse over*/
 	$(".catgories").on("click mouseout", function() {
 		$("#icon_bg div").attr("id", "cat_bgs");

@@ -16,9 +16,11 @@ var EditView = function(container, model) {
 	};
 
 	// Load story title
+        
 	if (model.getTitle() !== undefined) {
-		this.titleInput.val(model.getTitle());
-	}
+		this.titleInput.val(model.getTitle());       
+               }
+         
 	
 	// Load story assets
 	
@@ -43,6 +45,7 @@ var EditView = function(container, model) {
 	this.update = function(arg) {
 //		alert(typeof arg);
 //		this.updateSelectedDishes();
+            notifyobserver(this);
 	};
 };
 
