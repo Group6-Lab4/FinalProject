@@ -9,13 +9,17 @@ var EditView = function(containerObj, model) {
 	this.canvas = containerObj.find("#droppable_canvas");
         // create an array to store the status of the dots;
         this.navDots = [];
+        
+       
        
     // clear all the class of the dots;
-        Array.prototype.clearClass = function(){
+    /*
+        navDotsFunc.prototype.clearClass = function(){
             for(var i=0;i<this.navDots.length;i++){
                 this.navDots[i].attr("class","");
             }
         };
+        */
 
 	this.curStoryPage; //current page being shown on canvas
 
@@ -85,6 +89,7 @@ var EditView = function(containerObj, model) {
                 /*generate naviDots*/
                 
                 //if num of dots is less than total page, add dots
+                /*
                 if(this.navDots.length<totalPageNum){
                     for(var i=this.navDots.length+1;i<=totalPageNum;i++){
                         var dot = $("<li>");
@@ -111,7 +116,7 @@ var EditView = function(containerObj, model) {
                 for(var i=0; i<this.navDots.length; i++){
                     dotHolder.append(this.navDots[i]);
                 }
-		//alert("loadstoryPage!");
+		//alert("loadstoryPage!");*/
 		updateCanvas.call(this);
 
 	};
