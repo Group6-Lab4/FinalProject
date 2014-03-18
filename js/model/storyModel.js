@@ -36,13 +36,13 @@ var StoryModel = function StoryModel() {
 	};
 
 	//Add new page at the end by default, or at pageIdx, return newly-added page idx
-	this.addPage = function(pageIdx) {
+	this.addPage = function(newPageIdx) {
 		var returnIdx;
-		if (pageIdx > 0 && pageIdx < pages.length) { //only allow adding after cover page
-			splice(pageIdx, 0, new Page(Page.TYPE_NORMAL, pageIdx));
-			returnIdx = pageIdx;
+		if (newPageIdx > 0 && newPageIdx < pages.length) { //only allow adding after cover page
+			pages.splice(newPageIdx, 0, new Page(Page.TYPE_NORMAL, newPageIdx));
+			returnIdx = newPageIdx;
 		} else {
-			returnIdx = pages.push(new Page(Page.TYPE_NORMAL));
+			returnIdx = pages.push(new Page(Page.TYPE_NORMAL)) - 1; //new length - 1 
 			pages[returnIdx].initIdx(returnIdx);
 		}
 
@@ -170,6 +170,7 @@ var StoryModel = function StoryModel() {
 
 // Page consturctor, each page object represents 1 page (1 spread page, i.e. left and right)
 var Page = function Page(pageType, pageIdx) {
+	this.pageIdx;
 	var pageIdx; //page num of this page
 	var type = Page.TYPE_NORMAL; //0 - cover; 1 - normal; 2 - bottom
 	var components = []; // PageComponents sorted by zorder asc
@@ -186,6 +187,7 @@ var Page = function Page(pageType, pageIdx) {
 			throw("PageComponent.id already initialised.");
 		}
 		pageIdx = idx;
+		this.pageIdx = idx;
 	};
 
 	this.getPageIdx = function() {
