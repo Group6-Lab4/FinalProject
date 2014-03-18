@@ -281,8 +281,13 @@ a {
 	background-color: transparent;
 	resize: none;
 	text-align: center;
-	font-size: 150%;
+	font-size: 200%;
 	overflow: hidden;
+}
+
+/*TOFIX: make font-size dynamic and responsive*/
+.page_thumbnail .preview_item>textarea{
+	font-size: 55%;
 }
 
 .preview_item>textarea{
