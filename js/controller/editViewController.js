@@ -7,6 +7,7 @@ var EditViewController = function(view, model) {
 	var container = view.container;
 //	var curStoryPageModel = view.curStoryPage; !! dont do this because curXX will change a lot
 	var textItemDefaultText = "Your text goes here.";
+	var curPageIdx = view.curStoryPage.getPageIdx();
 
 	// Handling cloned draggable
 	var updateCanvasComponentHandlers = function() {
@@ -39,6 +40,41 @@ var EditViewController = function(view, model) {
 
 
 	// --- Constructor ---//
+
+	//detect change on title
+	view.titleInput.change(function() {
+		model.setTitle(view.titleInput.val());
+		model.update("setTitle");
+
+	});
+	/*go to prevPage or nextPage */
+	$(container).find("#toPrevious").on("click", function() {
+		curPageIdx = view.curStoryPage.getPageIdx();
+		if (curPageIdx < 2)
+			return;
+		else {
+			// var prevPage = model.getPageByIdx(curPageIdx-1);
+			// view.curStoryPage = prevPage;
+			//  alert("go to prev page!");
+			view.loadStoryPage(curPageIdx - 1);
+
+		}
+		;
+	});
+
+	$(container).find("#toNext").on("click", function() {
+		curPageIdx = view.curStoryPage.getPageIdx();
+		if (curPageIdx === model.getAllPages().length - 1)
+			return;
+		else {
+			//  var nextPage = model.getPageByIdx(curPageIdx+1);
+			//   view.curStoryPage = nextPage;
+			// alert("go to next page!")
+			// console.log(view.curStoryPage);
+			view.loadStoryPage(curPageIdx + 1);
+		}
+	});
+
 	/*remove the defulte streched out style of left menu when click or mouse over*/
 	//detect change on title
 	view.titleInput.change(function() {

@@ -213,6 +213,7 @@ var Page = function Page(pageType, pageIdx) {
 	//Return all components according to zorder (from low to high)
 	this.getAllComponents = function() {
 		return components;
+               
 	};
 
 	this.getComponentById = function(componentId) {
