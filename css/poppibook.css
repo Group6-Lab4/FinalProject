@@ -290,7 +290,18 @@ a {
 	padding-top: 70%;
 }
 
+/*style for add and deletebutton*/
 
+.btn_addpage, .btn_deletepage{
+    opacity:0.6;
+    transition: opacity 0.4s ease-in-out;
+    -webkit-transition: opacity 0.4s ease-in-out;
+}
+
+.btn_addpage:hover, .btn_deletepage:hover{
+    
+    opacity:1;
+}
 
 /*style for navi dots in edit page*/
 /* Common styles and resets */
