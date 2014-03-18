@@ -93,7 +93,43 @@ var StoryModel = function StoryModel() {
 					'image': "temp_item.png"
 				}, {
 					'id': 2,
-					'image': "xxx.png"
+					'image': "image1.png"
+				}, {
+					'id': 3,
+					'image': "image2.png"
+				}, {
+					'id': 4,
+					'image': "image3.png"
+				}, {
+					'id': 5,
+					'image': "image4.png"
+				}, {
+					'id': 6,
+					'image': "image5.png"
+				}, {
+					'id': 7,
+					'image': "image6.png"
+				}, {
+					'id': 8,
+					'image': "image7.png"
+				}, {
+					'id': 9,
+					'image': "image8.png"
+				}, {
+					'id': 10,
+					'image': "image9.png"
+				}, {
+					'id': 11,
+					'image': "image10.png"
+				}, {
+					'id': 12,
+					'image': "image11.png"
+				}, {
+					'id': 13,
+					'image': "image12.png"
+				}, {
+					'id': 14,
+					'image': "image13.png"
 				}
 			],
 			//Sub-cat under items	
