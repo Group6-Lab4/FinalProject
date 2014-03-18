@@ -31,8 +31,32 @@ var EditView = function(containerObj, model) {
 
 	this.titleInput.val(model.getTitle());
 
-	// Load story assets
+	// Load story assets 
 
+	// 1- Background assets
+	var backgroundAssets = model.getAssetBackground();
+	console.log("EditView: backgroundAssets:");
+	console.log(backgroundAssets);
+
+
+
+
+	// 2- items assets
+	var itemAssets = model.getAssetItem(); //OR getAssetItemByCat()
+	console.log("EditView: itemAssets:");
+	console.log(itemAssets);
+	for (var i in itemAssets) {
+		var eachAsset = itemAssets[i];
+		// note: this is how an itemAsset look like, use jquery to form a obj and append it to the contatiner
+
+//								<div class="draggable_item" pb-type="2">
+//									<img  src="images/items/temp_item.png" />
+//								</div>
+		var itemDiv = $("<div>").addClass("draggable_item").attr("pb-type", PageComponent.TYPE_ITEM);
+		itemDiv.append($("<img>").attr("src", "images/items/" + eachAsset.image));
+
+		this.container.find("#cat_items").append(itemDiv);
+	}
 
 
 	// Load story pages
@@ -42,17 +66,19 @@ var EditView = function(containerObj, model) {
 	this.curStoryPage = pages[1]; // default the current page is page 1, not cover
 	this.container.find("#totalPageNum").text(pages.length - 1);
 	this.container.find("#currentPageIdx").text(this.curStoryPage.getPageIdx());
-	//alert(this.curStorypage.length) ;
+
 	// Load canvas content 
 	// console.log(pages);
 	var pageComponents = this.curStoryPage.getAllComponents();
 	// pages[1].getAllComponents();
 	//  console.log(this.curStoryPage);
-	//--- Public functions ---
+
+	/*--- Public functions ---*/
 	this.loadStoryPage = function(pageIdx) {
                 
                 var totalPageNum = model.getAllPages().length-1;
 		this.curStoryPage = model.getPageByIdx(pageIdx);
+
 		//update paging exclude cover page
 		this.container.find("#currentPageIdx").text(pageIdx);
 		this.container.find("#totalPageNum").text(model.getAllPages().length - 1);
@@ -88,8 +114,6 @@ var EditView = function(containerObj, model) {
 		//alert("loadstoryPage!");
 		updateCanvas.call(this);
 
-	
-
 	};
 
 	//--- Private functions ---
@@ -117,7 +141,11 @@ var EditView = function(containerObj, model) {
 			componentDiv.attr("pb-type", eachComponentData.type);
 
 			// Add main content
-			if (eachComponentData.type === PageComponent.TYPE_BACKGROUND || eachComponentData.type === PageComponent.TYPE_ITEM) {
+			if (eachComponentData.type === PageComponent.TYPE_BACKGROUND) {
+				componentDiv.addClass("canvas_item_bg");
+				componentDiv.append($("<img>").attr("src", eachComponentData.image));
+			} else if (eachComponentData.type === PageComponent.TYPE_ITEM) {
+				componentDiv.addClass("canvas_item_props");
 				componentDiv.append($("<img>").attr("src", eachComponentData.image));
 			} else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
 				console.log(eachComponentData);

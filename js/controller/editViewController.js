@@ -9,7 +9,7 @@ var EditViewController = function(view, model) {
 	var textItemDefaultText = "Your text goes here.";
 	var curPageIdx = view.curStoryPage.getPageIdx();
 
-	// Handling cloned draggable
+// Handling cloned draggable
 	var updateCanvasComponentHandlers = function() {
 		var componentObj = $(container).find(".dropped_item");
 		console.log("updateCanvasComponentHandlers, componentObj:");
@@ -19,7 +19,8 @@ var EditViewController = function(view, model) {
 			containment: "#droppable_canvas"
 		});
 
-		//handler for textarea
+		//NOTE: can consier to chagne to delegate method
+		//handler for textarea 
 		componentObj.find("textarea").on("change", function() {
 			var componentId = $(this).parent().attr("pb-id");
 			var pageComponent = view.curStoryPage.getComponentById(componentId);
@@ -29,15 +30,16 @@ var EditViewController = function(view, model) {
 
 		});
 
+		//NOTE: can consier to chagne to delegate method
 		// and its handlers
 		componentObj.find("input[name=delete]").on("click", function() {
 			var componentId = $(this).parent().attr("pb-id");
 			view.curStoryPage.removeComponent(componentId);
 			$(this).parent().remove();
 
-		});
+		});		
 	};
-
+		
 
 	// --- Constructor ---//
 
@@ -162,6 +164,11 @@ var EditViewController = function(view, model) {
 			switch (componentType) {
 				case PageComponent.TYPE_BACKGROUND:
 				case PageComponent.TYPE_ITEM:
+					if(componentType == PageComponent.TYPE_ITEM){
+						$(newItemObj).addClass("canvas_item_props");
+					}else{
+						$(newItemObj).addClass("canvas_item_bg");
+					}
 					$(newItemObj).css({
 						"left": relPosInPercent.left + "%",
 						"top": relPosInPercent.top + "%"
