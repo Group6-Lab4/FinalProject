@@ -199,6 +199,18 @@ a {
 	background-color: #AAAAAA; 
 }
 
+
+/*Style for preview page*/ 
+.page_thumbnail{
+	
+	background-color: #EEEEEE; 
+	height: 140px;
+	width: 200px;
+	float: left;
+	margin-right: 6px;
+}
+
+
 /*styles for drag-n-drop*/
 .draggable_item, .draggable_item_text, .dropped_item{
 	cursor: move;

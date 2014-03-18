@@ -79,6 +79,7 @@ var App = {
 
 $(document).ready(function() {
 	var model = new StoryModel();
+	App.model = model; //just to expose it to the world
 
 	// Init all views
 	App.homeView = new HomeView($("#homeView"), model);

@@ -14,6 +14,8 @@ var StoryModel = function StoryModel() {
 	pages[0].addObserver(this);
 	pages[1].addObserver(this);
 
+	var changedData = {"tag": "", "data": {}};
+
 	//Return the title of the story
 	this.getTitle = function() {
 		return title;
@@ -22,7 +24,7 @@ var StoryModel = function StoryModel() {
 	this.setTitle = function(newTitle) {
 		title = newTitle;
 
-		notifyObservers("setTtitle");
+		notifyObservers("setTitle");
 	};
 
 	//Return all story pages
@@ -32,21 +34,33 @@ var StoryModel = function StoryModel() {
 
 	//Return a story page by idx (idx is the array index, returned by addPage())
 	this.getPageByIdx = function(idx) {
+		if (!(idx >= 0)) {
+			throw("[PreviewView.updateThumnail] no specified pageIdx: " + idx);
+		}
 		return pages[idx];
 	};
 
 	//Add new page at the end by default, or at pageIdx, return newly-added page idx
 	this.addPage = function(newPageIdx) {
 		var returnIdx;
+		var newPage;
 		if (newPageIdx > 0 && newPageIdx < pages.length) { //only allow adding after cover page
-			pages.splice(newPageIdx, 0, new Page(Page.TYPE_NORMAL, newPageIdx));
+			newPage = new Page(Page.TYPE_NORMAL, newPageIdx);
+			pages.splice(newPageIdx, 0, newPage);
 			returnIdx = newPageIdx;
 		} else {
-			returnIdx = pages.push(new Page(Page.TYPE_NORMAL)) - 1; //new length - 1 
+			newPage = new Page(Page.TYPE_NORMAL);
+			returnIdx = pages.push(newPage) - 1; //new length - 1 
 			pages[returnIdx].initIdx(returnIdx);
 		}
 
-		notifyObservers("addPage");
+		//!important register new page to be observed
+		newPage.addObserver(this);
+
+		var changedData = {};
+		changedData.tag = "addPage";
+		changedData.data = {"pageIdx": returnIdx};
+		notifyObservers(changedData);
 		return returnIdx;
 	};
 
@@ -283,12 +297,12 @@ var Page = function Page(pageType, pageIdx) {
 
 	/*****************************************  
 	 Observer implementation    
-		- Page is observing its PageComponents
+	 - Page is observing its PageComponents
 	 *****************************************/
 	//This function gets called when there is a change at the observables (PageComponents)
 	this.update = function(arg) {
 		//pass the changes to its oberserver
-		
+
 		//even though the change data is a PageComponent, this changes will be seen as by page, i.e. whole page will be updated by view
 		notifyObservers(this);
 
@@ -335,7 +349,7 @@ var PageComponent = function PageComponent(componentType, content, posX, posY, w
 //		throw ("PageComponent: incorrect posX/ poxY");
 		console.log("[PageComponent]new component dropped outside desired zone, posX:" + posX + "poxY:" + posY)
 	}
-	
+
 
 	this.type = componentType;
 	zorder = componentType;

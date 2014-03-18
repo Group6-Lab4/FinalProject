@@ -8,6 +8,37 @@ var EditViewController = function(view, model) {
 //	var curStoryPageModel = view.curStoryPage; !! dont do this because curXX will change a lot
 	var textItemDefaultText = "Your text goes here.";
 
+	// Handling cloned draggable
+	var updateCanvasComponentHandlers = function() {
+		var componentObj = $(container).find(".dropped_item");
+		console.log("updateCanvasComponentHandlers, componentObj:");
+		console.log(componentObj);
+
+		componentObj.draggable({
+			containment: "#droppable_canvas"
+		});
+
+		//handler for textarea
+		componentObj.find("textarea").on("change", function() {
+			var componentId = $(this).parent().attr("pb-id");
+			var pageComponent = view.curStoryPage.getComponentById(componentId);
+
+//						console.log("onchange: " + $(this).val());
+			pageComponent.setText($(this).val());
+
+		});
+
+		// and its handlers
+		componentObj.find("input[name=delete]").on("click", function() {
+			var componentId = $(this).parent().attr("pb-id");
+			view.curStoryPage.removeComponent(componentId);
+			$(this).parent().remove();
+
+		});
+	};
+
+
+	// --- Constructor ---//
 	/*remove the defulte streched out style of left menu when click or mouse over*/
 	$(".catgories").on("click mouseout", function() {
 		$("#icon_bg div").attr("id", "cat_bgs");
@@ -17,8 +48,11 @@ var EditViewController = function(view, model) {
 	//	Buttons handlers
 	$(container).find(".btn_addpage").on("click", function() {
 		var newPageIdx = model.addPage(view.curStoryPage.getPageIdx()+1);
-		//Goto new page
+		//load new page
 		view.loadStoryPage(newPageIdx);
+		
+		//no need to do this because the canvas is new and empty.
+//		updateCanvasComponentHandlers();
 	});
 
 	$(container).find(".btn_deletepage").on("click", function() {
@@ -187,31 +221,6 @@ var EditViewController = function(view, model) {
 
 
 
-	// Handling cloned draggable
-	this.updateCanvasHandlers = function() {
-		var componentObj = $(container).find(".dropped_item");
 
-		componentObj.draggable({
-			containment: "#droppable_canvas"
-		});
-
-		//handler for textarea
-		componentObj.find("textarea").on("change", function() {
-			var componentId = $(this).parent().attr("pb-id");
-			var pageComponent = view.curStoryPage.getComponentById(componentId);
-
-//						console.log("onchange: " + $(this).val());
-			pageComponent.setText($(this).val());
-
-		});
-
-		// and its handlers
-		componentObj.find("input[name=delete]").on("click", function() {
-			var componentId = $(this).parent().attr("pb-id");
-			view.curStoryPage.removeComponent(componentId);
-			$(this).parent().remove();
-
-		});
-	};
 };
 
