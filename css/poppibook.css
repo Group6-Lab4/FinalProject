@@ -399,3 +399,8 @@ a {
     z-index: 2;
     position: absolute;
 }
+/* hover style of prev & next arrow in edit page*/
+
+.glyphicon:hover{
+    cursor: pointer;
+}

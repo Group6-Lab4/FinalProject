@@ -7,6 +7,7 @@ var EditView = function(containerObj, model) {
 	this.container = containerObj;
 	this.titleInput = this.container.find(".title");
 	this.canvas = containerObj.find("#droppable_canvas");
+        
 	
 
 	this.curStoryPage; //current page being shown on canvas
@@ -21,29 +22,32 @@ var EditView = function(containerObj, model) {
 	// Load story title
         
 	 
-         
-	
- 
 		this.titleInput.val(model.getTitle());
 	
-
- 
 	// Load story assets
 
 
 
 	// Load story pages
 	var pages = model.getAllPages();
+       
+        
 	this.curStoryPage = pages[1]; // default the current page is page 1, not cover
-
+        this.container.find("#totalPageNum").text(pages.length-1);
+        this.container.find("#currentPageIdx").text(this.curStoryPage.getPageIdx());
+        //alert(this.curStorypage.length) ;
 	// Load canvas content 
+       // console.log(pages);
 	var pageComponents = this.curStoryPage.getAllComponents();
-
-
+       // pages[1].getAllComponents();
+        //  console.log(this.curStoryPage);
 	//--- Public functions ---
 	this.loadStoryPage = function(pageIdx) {
 		this.curStoryPage = model.getPageByIdx(pageIdx);
-		
+                //exclude cover page
+                this.container.find("#currentPageIdx").text(pageIdx);
+                this.container.find("#totalPageNum").text(model.getAllPages().length-1);
+		//alert("loadstoryPage!");
 		updateCanvas.call(this);
 		
 		//TODO:update paging
@@ -113,6 +117,7 @@ var EditView = function(containerObj, model) {
 	this.update = function(arg) {
 //		alert(typeof arg);
 //		this.updateSelectedDishes();
+           updateCanvas.call(this);
            this.titleInput.val(model.getTitle()); 
 	};
 };
