@@ -172,8 +172,8 @@ var Page = function Page(pageType, pageIdx) {
 	 * @param {Number} posY, relative position in persontage
 	 * 
 	 */
-	this.addComponent = function(componentType, content, posX, posY) {
-		var pageComponent = new PageComponent(componentType, content, posX, posY);
+	this.addComponent = function(componentType, content, posX, posY, width, height) {
+		var pageComponent = new PageComponent(componentType, content, posX, posY, width, height);
 		return this.addComponentObj(pageComponent);
 	};
 
@@ -257,21 +257,26 @@ Page.TYPE_NORMAL = 1;
 Page.TYPE_BOTTOM = 2;
 
 // PageComponent Constructor
-/*
- * @param number componentType: TYPE_BACKGROUND, TYPE_ITEM, TYPE_TEXT
- * @param string content: if type = TEXT, text content; else image filename
+/**
  * 
+ * @param {Number} componentType, TYPE_BACKGROUND | TYPE_ITEM | TYPE_TEXT
+ * @param {String} content, text string for TYPE_TEXT, otherwise image url 
+ * @param {Number} posX, left position in %
+ * @param {Number} posY, top position in %
+ * @param {Number} width, width in %
+ * @param {Number} height, height in %
+ * @returns {PageComponent} 
  */
-var PageComponent = function PageComponent(componentType, content, posX, posY) {
+var PageComponent = function PageComponent(componentType, content, posX, posY, width, height) {
 	var id; //unique id with a page
 	this.type; //0 - background; 1- item; 2- text
 	var zorder;
 	this.image;
-	var text;
+	this.text;
 	this.pos; //[x,y] , where x, y  [0:100], relative position within the canvas (page)
 
 	//advanced vars: implement if time allows
-//	var size;
+	this.size; //[width,height] , where width, height  [0:100], relative size of the canvas (page)
 //	var rotation;
 //	var isMirror;
 
@@ -286,15 +291,17 @@ var PageComponent = function PageComponent(componentType, content, posX, posY) {
 //		throw ("PageComponent: incorrect posX/ poxY");
 		console.log("[PageComponent]new component dropped outside desired zone, posX:" + posX + "poxY:" + posY)
 	}
+	
 
 	this.type = componentType;
 	zorder = componentType;
 	if (componentType === PageComponent.TYPE_TEXT) {
-		text = content;
+		this.text = content;
 	} else {
 		this.image = content;
 	}
 	this.pos = [posX, posY];
+	this.size = [width, height];
 
 
 	//Can only be called once
@@ -321,7 +328,7 @@ var PageComponent = function PageComponent(componentType, content, posX, posY) {
 	};
 
 	this.setText = function(contentText) {
-		text = contentText;
+		this.text = contentText;
 
 		notifyObservers(this);
 	};
@@ -355,6 +362,8 @@ var PageComponent = function PageComponent(componentType, content, posX, posY) {
 };
 
 // PageComponent constants:
-PageComponent.TYPE_BACKGROUND = 0;
-PageComponent.TYPE_ITEM = 1;
-PageComponent.TYPE_TEXT = 2;
+PageComponent.TYPE_BACKGROUND = 1;
+PageComponent.TYPE_ITEM = 2;
+PageComponent.TYPE_TEXT = 3;
+
+PageComponent.TEXT_PADDING = 2; //2%

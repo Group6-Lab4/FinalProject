@@ -31,13 +31,21 @@ var PreviewView = function(container, model) {
 
 			if (eachComponentData.type === PageComponent.TYPE_BACKGROUND || eachComponentData.type === PageComponent.TYPE_ITEM) {
 				componentDiv.append($("<img>").attr("src", eachComponentData.image));
+			}else if(eachComponentData.type === PageComponent.TYPE_TEXT){
+				console.log(eachComponentData);
+				componentDiv.css({
+					"width": eachComponentData.size[0] + "%",
+					"height": eachComponentData.size[1] + "%",
+					"padding" : PageComponent.TEXT_PADDING + "%"
+				});
+				componentDiv.append($("<textarea>").attr("readonly", "readonly").text(eachComponentData.text));
 			}
 
 			componentDiv.css({
-				"position": "absolute",
 				"left": eachComponentData.pos[0] + "%",
 				"top": eachComponentData.pos[1] + "%"
 			});
+			componentDiv.addClass("preview_item");
 
 			this.canvas.append(componentDiv);
 		}
