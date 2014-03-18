@@ -19,10 +19,15 @@ var EditView = function(containerObj, model) {
 	};
 
 	// Load story title
-	if (model.getTitle() !== undefined) {
+        
+	 
+         
+	
+ 
 		this.titleInput.val(model.getTitle());
-	}
+	
 
+ 
 	// Load story assets
 
 
@@ -108,6 +113,7 @@ var EditView = function(containerObj, model) {
 	this.update = function(arg) {
 //		alert(typeof arg);
 //		this.updateSelectedDishes();
+           this.titleInput.val(model.getTitle()); 
 	};
 };
 

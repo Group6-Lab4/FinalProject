@@ -18,6 +18,7 @@ var StoryModel = function StoryModel() {
 
 	//Return the title of the story
 	this.getTitle = function() {
+               //alert("getTitle")
 		return title;
 	};
 	//Set the title of the story as input
@@ -177,6 +178,7 @@ var StoryModel = function StoryModel() {
 	//This function gets called when there is a change at the observables (Page)
 	this.update = function(arg) {
 		//pass the changes to its oberserver
+              //  alert("model update!");
 		notifyObservers(arg);
 
 	};

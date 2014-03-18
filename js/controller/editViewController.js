@@ -40,6 +40,13 @@ var EditViewController = function(view, model) {
 
 	// --- Constructor ---//
 	/*remove the defulte streched out style of left menu when click or mouse over*/
+	//detect change on title
+	view.titleInput.change(function() {
+		model.setTitle(view.titleInput.val());
+		model.update("setTitle");
+
+	});
+
 	$(".catgories").on("click mouseout", function() {
 		$("#icon_bg div").attr("id", "cat_bgs");
 		$("#icon_bg img").attr("id", "");
@@ -47,10 +54,10 @@ var EditViewController = function(view, model) {
 
 	//	Buttons handlers
 	$(container).find(".btn_addpage").on("click", function() {
-		var newPageIdx = model.addPage(view.curStoryPage.getPageIdx()+1);
+		var newPageIdx = model.addPage(view.curStoryPage.getPageIdx() + 1);
 		//load new page
 		view.loadStoryPage(newPageIdx);
-		
+
 		//no need to do this because the canvas is new and empty.
 //		updateCanvasComponentHandlers();
 	});
@@ -58,7 +65,7 @@ var EditViewController = function(view, model) {
 	$(container).find(".btn_deletepage").on("click", function() {
 
 	});
-	
+
 	// Paging handlers
 
 

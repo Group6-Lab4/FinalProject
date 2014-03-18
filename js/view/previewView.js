@@ -6,9 +6,14 @@
 var PreviewView = function(container, model) {
 	this.canvas = container.find('.canvas');
 	this.curStoryPage; //current page being shown on big canvas
+	this.title = container.find('.title');
 
 	var thumbnailContainer = container.find(".thumbnails_container");
 
+	if (model.getTitle() !== undefined) {
+		this.title.text(model.getTitle());
+
+	}
 	// Public functions
 	this.showView = function() {
 		$(container).show();
@@ -27,6 +32,11 @@ var PreviewView = function(container, model) {
 	};
 
 	//--- Private functions ---
+	this.updateTitle = function() {
+		this.title.text(model.getTitle());
+		// alert("update Title in preview! "+model.getTitle());
+	};
+
 	/**
 	 * @description this function will update the current story page being shown on canvas
 	 */
@@ -69,7 +79,7 @@ var PreviewView = function(container, model) {
 	//TODO: can be moved to a static method
 	var drawPageOn = function(element, storyPage) {
 		element.empty(); //first clear this div
-		
+
 		var pageComponents = storyPage.getAllComponents();
 		for (var key in pageComponents) {
 			var eachComponentData = pageComponents[key];
@@ -99,11 +109,11 @@ var PreviewView = function(container, model) {
 	};
 
 
-	var addThumbnail = function(pageIdx){
+	var addThumbnail = function(pageIdx) {
 		var thumbnailDiv = PreviewView.createThumbnailDiv();
-		thumbnailContainer.find(".page_thumbnail").eq(pageIdx-1).after(thumbnailDiv); //insert after 
-		
-		
+		thumbnailContainer.find(".page_thumbnail").eq(pageIdx - 1).after(thumbnailDiv); //insert after 
+
+
 	};
 
 	/**
@@ -141,9 +151,10 @@ var PreviewView = function(container, model) {
 
 	//--- Constructor ---
 	// Load story title
-	if (model.getTitle() !== undefined) {
-//		this.titleInput.val(model.getTitle());
-	}
+	/*if (model.getTitle() !== undefined) {
+	 //		this.titleInput.val(model.getTitle());
+	 }*/
+	this.updateTitle();
 
 
 	// Load story pages
@@ -185,14 +196,14 @@ var PreviewView = function(container, model) {
 			addThumbnail(arg.data.pageIdx);
 
 		} else if (arg == "setTitle") {
-			alert(model.getTitle());
 
+			this.updateTitle();
 		}
 
 	};
 };
 
-PreviewView.createThumbnailDiv = function(){
+PreviewView.createThumbnailDiv = function() {
 	return $("<div>").addClass("thumbnail page_thumbnail");
 };
 

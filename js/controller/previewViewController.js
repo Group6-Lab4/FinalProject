@@ -4,6 +4,16 @@
  */
 
 var PreviewViewController = function(view, model) {
+    
+   // model.addObserver(this);
+    
+   // this.update = function(){
+        
+        
+        
+   // };
+    
+    
 	
 	
 };
