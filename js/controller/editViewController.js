@@ -164,6 +164,11 @@ var EditViewController = function(view, model) {
 			switch (componentType) {
 				case PageComponent.TYPE_BACKGROUND:
 				case PageComponent.TYPE_ITEM:
+					if(componentType == PageComponent.TYPE_ITEM){
+						$(newItemObj).addClass("canvas_item_props");
+					}else{
+						$(newItemObj).addClass("canvas_item_bg");
+					}
 					$(newItemObj).css({
 						"left": relPosInPercent.left + "%",
 						"top": relPosInPercent.top + "%"

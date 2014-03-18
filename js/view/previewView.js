@@ -41,72 +41,12 @@ var PreviewView = function(container, model) {
 	 * @description this function will update the current story page being shown on canvas
 	 */
 	var updateCanvas = function() {
-		//first reset the canvas
-		resetCanvas.call(this);
+		PreviewView.drawPageOn(this.canvas, this.curStoryPage);
 
-		var pageComponents = this.curStoryPage.getAllComponents();
-		for (var key in pageComponents) {
-			var eachComponentData = pageComponents[key];
-			var componentDiv = $("<div>");
-//			console.log(eachComponentData);
-
-			if (eachComponentData.type === PageComponent.TYPE_BACKGROUND || eachComponentData.type === PageComponent.TYPE_ITEM) {
-				componentDiv.append($("<img>").attr("src", eachComponentData.image));
-			} else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
-//				console.log(eachComponentData);
-				componentDiv.css({
-					"width": eachComponentData.size[0] + "%",
-					"height": eachComponentData.size[1] + "%",
-					"padding": PageComponent.TEXT_PADDING + "%"
-				});
-				componentDiv.append($("<textarea>").attr("readonly", "readonly").text(eachComponentData.text));
-			}
-
-			componentDiv.css({
-				"left": eachComponentData.pos[0] + "%",
-				"top": eachComponentData.pos[1] + "%"
-			});
-			componentDiv.addClass("preview_item");
-
-			this.canvas.append(componentDiv);
-		}
 	};
 
-	var resetCanvas = function() {
-		$(this.canvas).empty();
-	};
 
-	//TODO: can be moved to a static method
-	var drawPageOn = function(element, storyPage) {
-		element.empty(); //first clear this div
 
-		var pageComponents = storyPage.getAllComponents();
-		for (var key in pageComponents) {
-			var eachComponentData = pageComponents[key];
-			var componentDiv = $("<div>");
-//			console.log(eachComponentData);
-
-			if (eachComponentData.type === PageComponent.TYPE_BACKGROUND || eachComponentData.type === PageComponent.TYPE_ITEM) {
-				componentDiv.append($("<img>").attr("src", eachComponentData.image));
-			} else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
-//				console.log(eachComponentData);
-				componentDiv.css({
-					"width": eachComponentData.size[0] + "%",
-					"height": eachComponentData.size[1] + "%",
-					"padding": PageComponent.TEXT_PADDING + "%"
-				});
-				componentDiv.append($("<textarea>").attr("readonly", "readonly").text(eachComponentData.text));
-			}
-
-			componentDiv.css({
-				"left": eachComponentData.pos[0] + "%",
-				"top": eachComponentData.pos[1] + "%"
-			});
-			componentDiv.addClass("preview_item");
-
-			$(element).append(componentDiv);
-		}
-	};
 
 
 	var addThumbnail = function(pageIdx) {
@@ -125,7 +65,7 @@ var PreviewView = function(container, model) {
 		}
 		var page = model.getPageByIdx(pageIdx);
 		var thumbnailDiv = thumbnailContainer.find(".page_thumbnail").eq(pageIdx); //get the child at pageIdx
-		drawPageOn(thumbnailDiv, page);
+		PreviewView.drawPageOn(thumbnailDiv, page);
 
 
 	};
@@ -137,7 +77,7 @@ var PreviewView = function(container, model) {
 		for (var i in pages) {
 			var thumbnailDiv = PreviewView.createThumbnailDiv();
 			var eachPageModel = pages[i];
-			drawPageOn(thumbnailDiv, eachPageModel);
+			PreviewView.drawPageOn(thumbnailDiv, eachPageModel);
 
 			thumbnailContainer.append(thumbnailDiv);
 		}
@@ -207,4 +147,35 @@ PreviewView.createThumbnailDiv = function() {
 	return $("<div>").addClass("thumbnail page_thumbnail");
 };
 
+//TODO: can be moved to a static method
+PreviewView.drawPageOn = function(element, storyPage) {
+	element.empty(); //first clear this div
+
+	var pageComponents = storyPage.getAllComponents();
+	for (var key in pageComponents) {
+		var eachComponentData = pageComponents[key];
+		var componentDiv = $("<div>");
+//			console.log(eachComponentData);
+
+		if (eachComponentData.type === PageComponent.TYPE_BACKGROUND || eachComponentData.type === PageComponent.TYPE_ITEM) {
+			componentDiv.append($("<img>").attr("src", eachComponentData.image));
+		} else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
+//				console.log(eachComponentData);
+			componentDiv.css({
+				"width": eachComponentData.size[0] + "%",
+				"height": eachComponentData.size[1] + "%",
+				"padding": PageComponent.TEXT_PADDING + "%"
+			});
+			componentDiv.append($("<textarea>").attr("readonly", "readonly").text(eachComponentData.text));
+		}
+
+		componentDiv.css({
+			"left": eachComponentData.pos[0] + "%",
+			"top": eachComponentData.pos[1] + "%"
+		});
+		componentDiv.addClass("preview_item canvas_item_props");
+
+		$(element).append(componentDiv);
+	}
+};
 

@@ -24,7 +24,7 @@ var EditView = function(containerObj, model) {
 	this.titleInput.val(model.getTitle());
 
 	// Load story assets 
-	
+
 	// 1- Background assets
 	var backgroundAssets = model.getAssetBackground();
 	console.log("EditView: backgroundAssets:");
@@ -103,7 +103,11 @@ var EditView = function(containerObj, model) {
 			componentDiv.attr("pb-type", eachComponentData.type);
 
 			// Add main content
-			if (eachComponentData.type === PageComponent.TYPE_BACKGROUND || eachComponentData.type === PageComponent.TYPE_ITEM) {
+			if (eachComponentData.type === PageComponent.TYPE_BACKGROUND) {
+				componentDiv.addClass("canvas_item_bg");
+				componentDiv.append($("<img>").attr("src", eachComponentData.image));
+			} else if (eachComponentData.type === PageComponent.TYPE_ITEM) {
+				componentDiv.addClass("canvas_item_props");
 				componentDiv.append($("<img>").attr("src", eachComponentData.image));
 			} else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
 				console.log(eachComponentData);

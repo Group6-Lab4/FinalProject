@@ -208,6 +208,7 @@ a {
 	width: 200px;
 	float: left;
 	margin-right: 6px;
+	position: relative;
 }
 
 
@@ -232,8 +233,26 @@ a {
 	position: absolute;
 
 }
-.item_text_container{
 
+.canvas_item_bg{
+	
+}
+
+.canvas_item_props{
+	width: 30%
+}
+
+
+.canvas_item_props>img{
+	width: 100%
+}
+
+.canvas_item_text{
+	
+}
+
+.item_text_container{
+ 
 	width: 150px;
 	height: 105px;
 	border-style: solid;
@@ -243,11 +262,11 @@ a {
 	background-color: #EEE;
 }
 
-.item_text{
+.item_text_container>div{
 	padding: 4%;
 }
 
-.dropped_item>textarea, .item_text>p, .preview_item>textarea{
+.dropped_item>textarea, .item_text_container p, .preview_item>textarea{
 	width: 100%;
 	height: 100%;
 	border-color: #555555;
