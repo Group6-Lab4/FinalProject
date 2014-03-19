@@ -5,7 +5,7 @@ and open the template in the editor.
 */
 /* 
     Created on : Mar 8, 2014, 3:35:35 PM
-    Author     : weiwei
+    Author     : weiwei, jenny
 */
 
 /*Basic*/
@@ -20,13 +20,12 @@ a {
 #start{
     margin:20px 0;
 }
+
 .page_navi li{
 	background-color: #fff;
 	color:#357ebd;
 	border-radius: 15em;
-
 }
-
 .page_navi li>.active{
 	background-color: #357ebd;
 	color:#fff;
@@ -38,7 +37,7 @@ a {
 
 /* style for the left sidebar in editpage*/
 .nav-sidebar{
-    margin-left: -50px;
+    margin-left: -100px;
     margin-top: 5%;
     position: fixed;
 }
@@ -67,7 +66,7 @@ a {
     position: absolute;
     z-index: 1;  /*higher than normal icon so to cover them*/
     width: 300px;
-    height: 500%;
+    height: 600px;
     border: none;
     left:-300%;
     top:-5%;
@@ -127,12 +126,9 @@ a {
 
 .nav-sidebar li img.sidebar_icon{
     position:absolute;
-    left:0px;
+    left:240px;
     top:0px;
     cursor:pointer;
-    -webkit-transition: left 0.2s ease-in-out;
-    transition: left 0.2s ease-in-out;
-
 	display: block;
     /*z-index: 25;*/
     transform: scale(1);
@@ -140,10 +136,7 @@ a {
     -moz-transform: scale(1);
 }
 
-.nav-sidebar li:hover img.sidebar_icon{
-    z-index: 55;
-    left:245px;
-}
+
 
 
 /* style for Edit page canvas*/
