@@ -37,9 +37,9 @@ var EditViewController = function(view, model) {
 			view.curStoryPage.removeComponent(componentId);
 			$(this).parent().remove();
 
-		});		
+		});
 	};
-		
+
 
 	// --- Constructor ---//
 
@@ -49,16 +49,16 @@ var EditViewController = function(view, model) {
 		model.update("setTitle");
 
 	});
-        /*interaction of the navigation dots */
-        
-         
+	/*interaction of the navigation dots */
+
+
 	/*go to prevPage or nextPage */
 	$(container).find("#toPrevious").on("click", function() {
 		curPageIdx = view.curStoryPage.getPageIdx();
 		if (curPageIdx < 2)
 			return;
 		else {
-			
+
 			view.loadStoryPage(curPageIdx - 1);
 
 		}
@@ -70,7 +70,7 @@ var EditViewController = function(view, model) {
 		if (curPageIdx === model.getAllPages().length - 1)
 			return;
 		else {
-			 
+
 			view.loadStoryPage(curPageIdx + 1);
 		}
 	});
@@ -91,30 +91,30 @@ var EditViewController = function(view, model) {
 	//	Buttons handlers
 	$(container).find(".btn_addpage").on("click", function() {
 		//Check if exceeding page limit
-		if(model.getAllPages().length >= StoryModel.PAGE_LIMIT){
+		if (model.getAllPages().length >= StoryModel.PAGE_LIMIT) {
 			alert("Oops! you can create only up to " + StoryModel.PAGE_LIMIT - 1 + " pages. :) "); //excl. cover
 			return;
 		}
-		
+
 		var newPageIdx = model.addPage(view.curStoryPage.getPageIdx() + 1);
 		//load new page
 		view.loadStoryPage(newPageIdx);
-		
+
 		//TODO: handling paging
 	});
 
 	$(container).find(".btn_deletepage").on("click", function() {
 		//Check if removing last page 
-		if(model.getAllPages().length <= 2){
+		if (model.getAllPages().length <= 2) {
 			alert("Oops! You cannot remove the last page. :(");
 			return;
 		}
-		
+
 		var pageIdx = view.curStoryPage.getPageIdx();
 		model.removePage(pageIdx);
-		
-		view.loadStoryPage(pageIdx-1);
-		
+
+		view.loadStoryPage(pageIdx - 1);
+
 		//TODO: handlle paging 
 
 	});
@@ -175,85 +175,149 @@ var EditViewController = function(view, model) {
 			var newItemObj = $(draggableObj).clone();
 			$(newItemObj).removeClass().addClass("dropped_item");
 
-			// Set new element and save to model by component type
+			// Prepare data to save to model , also value to be set to html element
 			var componentType = Number($(draggableObj).attr("pb-type"));
 			var componentId;
-			switch (componentType) {
-				case PageComponent.TYPE_BACKGROUND:
-				case PageComponent.TYPE_ITEM:
-					var left, top;
-					if(componentType == PageComponent.TYPE_ITEM){
-						$(newItemObj).addClass("canvas_item_props");
-						left = relPosInPercent.left;
-						top = relPosInPercent.top;
-					}else{
-						$(newItemObj).addClass("canvas_item_bg");
-						left = 0;
-						top = 0;
-					}
-					$(newItemObj).css({
-						"left": left + "%",
-						"top": top + "%"
-					});
+			var content, left, top;
+			var width = newItemObj.attr("pb-width");
+			var height = newItemObj.attr("pb-height");
 
-					// Save new component to model
-					componentId = view.curStoryPage.addComponent(componentType, $(draggableObj).find('img').attr('src'), left, top);
-					break;
-				case PageComponent.TYPE_TEXT:
-					var width = newItemObj.attr("pb-width");
-					var height = newItemObj.attr("pb-height");
-					var left, top;
+			if (componentType === PageComponent.TYPE_BACKGROUND) {
+				$(newItemObj).addClass("canvas_item_bg");
+				content = $(draggableObj).find('img').attr('src');
+				left = 0;
+				top = 0;
+			} else if (componentType === PageComponent.TYPE_ITEM) {
+				$(newItemObj).addClass("canvas_item_props");
+				content = $(draggableObj).find('img').attr('src');
+				left = relPosInPercent.left;
+				top = relPosInPercent.top;
+			} else if (componentType === PageComponent.TYPE_TEXT) {
+				$(newItemObj).addClass("canvas_item_text");
+				content = textItemDefaultText;
+				//horzontal layout
+				if (width == 100 || relPosInPercent.left < 50) { //align left
+					left = 0;
+				} else { //alight right
+					left = 100 - width;
+				}
 
-					//horzontal layout
-					if (width == 100) {
-						left = 0;
-					} else if (relPosInPercent.left < 50) { //align left
-						left = 0;
-					} else { //alight right
-						left = 100 - width;
-					}
+				//vertical layout
+				if (height == 100 || relPosInPercent.top < 50) { //align left
+					top = 0;
+				} else { //align bottom
+					top = 100 - height;
+				}
 
-					//vertical layout
-					if (height == 100) {
-						top = 0;
-					} else if (relPosInPercent.top < 50) { //align left
-						top = 0;
-					} else { //align bottom
-						top = 100 - height;
-					}
+				newItemObj.empty();
+				newItemObj.css({
+					"width": width + "%",
+					"height": height + "%",
+					"left": left + "%",
+					"top": top + "%",
+					"padding": PageComponent.TEXT_PADDING + "%"
+				});
 
+				//Textarea for item_text
+				var itemTextarea = $("<textarea>").text(textItemDefaultText);
+				newItemObj.append(itemTextarea);
 
-					newItemObj.empty();
-					newItemObj.css({
-						"width": width + "%",
-						"height": height + "%",
-						"left": left + "%",
-						"top": top + "%",
-						"padding": PageComponent.TEXT_PADDING + "%"
-					});
-
-					//Textarea for item_text
-					var itemTextarea = $("<textarea>").text(textItemDefaultText);
-					newItemObj.append(itemTextarea);
-
-					//handler for textarea
-					itemTextarea.on("change", function() {
-						var componentId = $(this).parent().attr("pb-id");
-						var pageComponent = view.curStoryPage.getComponentById(componentId);
+				//handler for textarea
+				itemTextarea.on("change", function() {
+					var componentId = $(this).parent().attr("pb-id");
+					var pageComponent = view.curStoryPage.getComponentById(componentId);
 
 //						console.log("onchange: " + $(this).val());
-						pageComponent.setText($(this).val());
+					pageComponent.setText($(this).val());
 
-					});
-
-
-					// Save new component to model
-					componentId = view.curStoryPage.addComponent(componentType, textItemDefaultText, left, top, width, height);
-
-					break;
+				});
 			}
 
+			// Save new component to model
+			componentId = view.curStoryPage.addComponent(componentType, content, left, top, width, height);
+
+
+//			switch (componentType) {
+//				case PageComponent.TYPE_BACKGROUND:
+//				case PageComponent.TYPE_ITEM:
+//					var left, top;
+//					if(componentType == PageComponent.TYPE_ITEM){
+//						$(newItemObj).addClass("canvas_item_props");
+//						left = relPosInPercent.left;
+//						top = relPosInPercent.top;
+//					}else{
+//						$(newItemObj).addClass("canvas_item_bg");
+//						left = 0;
+//						top = 0;
+//					}
+//					$(newItemObj).css({
+//						"left": left + "%",
+//						"top": top + "%"
+//					});
+//
+//					// Save new component to model
+//					componentId = view.curStoryPage.addComponent(componentType, $(draggableObj).find('img').attr('src'), left, top);
+//					break;
+//				case PageComponent.TYPE_TEXT:
+//					var width = newItemObj.attr("pb-width");
+//					var height = newItemObj.attr("pb-height");
+//					var left, top;
+//
+//					//horzontal layout
+//					if (width == 100) {
+//						left = 0;
+//					} else if (relPosInPercent.left < 50) { //align left
+//						left = 0;
+//					} else { //alight right
+//						left = 100 - width;
+//					}
+//
+//					//vertical layout
+//					if (height == 100) {
+//						top = 0;
+//					} else if (relPosInPercent.top < 50) { //align left
+//						top = 0;
+//					} else { //align bottom
+//						top = 100 - height;
+//					}
+//
+//
+//					newItemObj.empty();
+//					newItemObj.css({
+//						"width": width + "%",
+//						"height": height + "%",
+//						"left": left + "%",
+//						"top": top + "%",
+//						"padding": PageComponent.TEXT_PADDING + "%"
+//					});
+//
+//					//Textarea for item_text
+//					var itemTextarea = $("<textarea>").text(textItemDefaultText);
+//					newItemObj.append(itemTextarea);
+//
+//					//handler for textarea
+//					itemTextarea.on("change", function() {
+//						var componentId = $(this).parent().attr("pb-id");
+//						var pageComponent = view.curStoryPage.getComponentById(componentId);
+//
+////						console.log("onchange: " + $(this).val());
+//						pageComponent.setText($(this).val());
+//
+//					});
+//
+//
+//					// Save new component to model
+//					componentId = view.curStoryPage.addComponent(componentType, textItemDefaultText, left, top, width, height);
+//
+//					break;
+//			}
+
 			//Set other attribute for new element
+			$(newItemObj).css({
+				"left": left + "%",
+				"top": top + "%"
+			});
+			
 			// Keep component id in the element (for updating component later)
 			newItemObj.attr("pb-id", componentId);
 
@@ -277,8 +341,6 @@ var EditViewController = function(view, model) {
 			newItemObj.draggable({
 				containment: "#droppable_canvas"
 			});
-
-
 		},
 		// Below is to hanle "draggable clone was covered by canvas when first dragged"
 		activate: function(event, ui) {
