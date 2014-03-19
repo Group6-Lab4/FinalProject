@@ -473,3 +473,15 @@ a {
 .glyphicon:hover{
     cursor: pointer;
 }
+
+
+  input:required:invalid, input:focus:invalid {
+	background-image:url();
+    background-position: right top;
+    background-repeat: no-repeat;
+  }
+  input:required:valid {
+	background-image:url(http://www.data.com/system/shared/common/assets/img/signup/green_check.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+  }
