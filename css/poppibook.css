@@ -72,7 +72,7 @@ a {
     left:-300%;
     top:-5%;
     opacity: 0;
-    /*temp disable below to make draggable work
+    /*!important enable below will make draggable not working
 	overflow-y: scroll;*/
     transition: left 0.2s ease-in-out, opacity 0.4s ease-in-out, background-color 0.2s ease-in-out; 
     -webkit-transition: left 0.2s ease-in-out, opacity 0.4s ease-in-out, background-color 0.2s ease-in-out;
@@ -196,6 +196,7 @@ a {
 	background-color: #EEEEEE; 
 	width: 100%;
 	height: 100%;
+	position: relative;
 }
 .canvas-hover{
 	background-color: #AAAAAA; 
@@ -223,15 +224,20 @@ a {
 .draggable_item, .draggable_item_text, .dropped_item{
 	cursor: move;
 	position: relative;
-	z-index: 10
 }
 
+/*items on menu*/
 #cat_items .draggable_item{
-	width: 100px;
-	height: 100px;
+	width: 120px;
+	/*height: 100px;*/
+	float: left;
 }
 
-#cat_items .draggable_item>img{
+#cat_bgs .draggable_item{
+	width: 200px;
+}
+
+#cat_items .draggable_item>img, #cat_bgs .draggable_item>img{
 	width: 100%;
 	height: 100%;
 }
@@ -241,21 +247,27 @@ a {
 
 }
 
-.canvas_item_bg{
+/*items on canvas*/
 
+/*TOFIX: keep aspect ratio*/
+.canvas_item_bg{
+	width: 100%;
+	height: 100%;
+	z-index: 5;
 }
 
 .canvas_item_props{
-	width: 30%
+	width: 30%; 
+	z-index: 10;
 }
 
-
-.canvas_item_props>img{
-	width: 100%
+.canvas_item_props>img, .canvas_item_bg>img{
+	width: 100%;
+	height: 100%;
 }
 
 .canvas_item_text{
-
+	z-index: 10;
 }
 
 .item_text_container{
@@ -313,6 +325,10 @@ a {
 	top: 0px;
 	right: 0px;
 }
+.dropped_item.canvas_item_bg>input{
+	left:0px;
+}
+
 
 .dropped_item:hover>input{
 	display: block;

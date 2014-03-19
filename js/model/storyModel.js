@@ -18,7 +18,7 @@ var StoryModel = function StoryModel() {
 
 	//Return the title of the story
 	this.getTitle = function() {
-               //alert("getTitle")
+		//alert("getTitle")
 		return title;
 	};
 	//Set the title of the story as input
@@ -35,25 +35,34 @@ var StoryModel = function StoryModel() {
 
 	//Return a story page by idx (idx is the array index, returned by addPage())
 	this.getPageByIdx = function(idx) {
-		if (!(idx >= 0)) {
-			throw("[PreviewView.updateThumnail] no specified pageIdx: " + idx);
+		if (!(idx >= 0 && idx < pages.length)) {
+			throw("[StoryModel.getPageByIdx] pageIdx is out of scope(0:"+pages.length +"): " + idx);
 		}
 		return pages[idx];
 	};
 
 	//Add new page at the end by default, or at pageIdx, return newly-added page idx
 	this.addPage = function(newPageIdx) {
+		// Check if exceed page limit
+		if (pages.length >= StoryModel.PAGE_LIMIT) {
+			throw("StoryModel.addPage: exceeding page limit. Current page count: " + pages.length);
+		}
+
 		var returnIdx;
 		var newPage;
 		if (newPageIdx > 0 && newPageIdx < pages.length) { //only allow adding after cover page
 			newPage = new Page(Page.TYPE_NORMAL, newPageIdx);
 			pages.splice(newPageIdx, 0, newPage);
 			returnIdx = newPageIdx;
+			
 		} else {
 			newPage = new Page(Page.TYPE_NORMAL);
 			returnIdx = pages.push(newPage) - 1; //new length - 1 
-			pages[returnIdx].initIdx(returnIdx);
+			pages[returnIdx].setPageIdx(returnIdx);
 		}
+		
+		//update other following pageIdx
+		this.updateAllPageIdx();
 
 		//!important register new page to be observed
 		newPage.addObserver(this);
@@ -67,9 +76,25 @@ var StoryModel = function StoryModel() {
 
 	//Remove page at pageIdx
 	this.removePage = function(pageIdx) {
-		splice(pageIdx, 1);
+		// Check if removing the last single page
+		if (pages.length <= 2) {
+			throw("StoryModel.removePage: you can remove the only page. current page count (incl. cover): " + pages.length);
+		}
 
-		notifyObservers("removePage");
+		pages.splice(pageIdx, 1);
+		
+		this.updateAllPageIdx();
+
+		var changedData = {};
+		changedData.tag = "removePage";
+		changedData.data = {"pageIdx": pageIdx};
+		notifyObservers(changedData);
+	};
+	
+	this.updateAllPageIdx = function(){
+		for(var i in pages){
+			pages[i].setPageIdx(i);
+		}
 	};
 
 	//Return all avaiable backgrounds in the story assets list
@@ -88,9 +113,6 @@ var StoryModel = function StoryModel() {
 
 	var assets = {
 		'background': [{
-				'id': 1,
-				'image': "temp_bg.png"
-			}, {
 				'id': 2,
 				'image': "bg1.png"
 			}, {
@@ -104,9 +126,6 @@ var StoryModel = function StoryModel() {
 		'item': {
 			//Sub-cat under items
 			'character': [{
-					'id': 1,
-					'image': "temp_item.png"
-				}, {
 					'id': 2,
 					'image': "image1.png"
 				}, {
@@ -178,16 +197,17 @@ var StoryModel = function StoryModel() {
 	//This function gets called when there is a change at the observables (Page)
 	this.update = function(arg) {
 		//pass the changes to its oberserver
-              //  alert("model update!");
+		//  alert("model update!");
 		notifyObservers(arg);
 
 	};
 };
 
+StoryModel.PAGE_LIMIT = 11; //incl. cover page
+
 // Page consturctor, each page object represents 1 page (1 spread page, i.e. left and right)
-var Page = function Page(pageType, pageIdx) {
-	this.pageIdx;
-	var pageIdx; //page num of this page
+var Page = function Page(pageType, idx) {
+	this.pageIdx = idx; //page num of this page , always changing
 	var type = Page.TYPE_NORMAL; //0 - cover; 1 - normal; 2 - bottom
 	var components = []; // PageComponents sorted by zorder asc
 	var maxComponentId = 0;
@@ -198,22 +218,18 @@ var Page = function Page(pageType, pageIdx) {
 	}
 
 	//Can only be called once
-	this.initIdx = function(idx) {
-		if (pageIdx !== undefined) {
-			throw("PageComponent.id already initialised.");
-		}
-		pageIdx = idx;
+	this.setPageIdx = function(idx) {
 		this.pageIdx = idx;
 	};
 
 	this.getPageIdx = function() {
-		return pageIdx;
+		return Number(this.pageIdx);
 	};
 
 	//Return all components according to zorder (from low to high)
 	this.getAllComponents = function() {
 		return components;
-               
+
 	};
 
 	this.getComponentById = function(componentId) {

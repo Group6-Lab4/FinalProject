@@ -7,6 +7,7 @@ var EditView = function(containerObj, model) {
 	this.container = containerObj;
 	this.titleInput = this.container.find(".title");
 	this.canvas = containerObj.find("#droppable_canvas");
+
         // create an array to store the status of the dots;
         
         this.creatNavDot = function(pageIdx){
@@ -23,6 +24,7 @@ var EditView = function(containerObj, model) {
             }
         };
         */
+ 
 
 	this.curStoryPage; //current page being shown on canvas
 
@@ -34,33 +36,24 @@ var EditView = function(containerObj, model) {
 	};
 
 	// Load story title
-
-
-	this.titleInput.val(model.getTitle());
+ 	this.titleInput.val(model.getTitle());
 
 	// Load story assets 
 
 	// 1- Background assets
 	var backgroundAssets = model.getAssetBackground();
-	console.log("EditView: backgroundAssets:");
-	console.log(backgroundAssets);
+	for (var i in backgroundAssets) {
+		var eachAsset = backgroundAssets[i];
+		var itemDiv = EditView.createAssetItem(PageComponent.TYPE_BACKGROUND, eachAsset);
 
-
-
+		this.container.find("#cat_bgs").append(itemDiv);
+	}
 
 	// 2- items assets
 	var itemAssets = model.getAssetItem(); //OR getAssetItemByCat()
-	console.log("EditView: itemAssets:");
-	console.log(itemAssets);
 	for (var i in itemAssets) {
 		var eachAsset = itemAssets[i];
-		// note: this is how an itemAsset look like, use jquery to form a obj and append it to the contatiner
-
-//								<div class="draggable_item" pb-type="2">
-//									<img  src="images/items/temp_item.png" />
-//								</div>
-		var itemDiv = $("<div>").addClass("draggable_item").attr("pb-type", PageComponent.TYPE_ITEM);
-		itemDiv.append($("<img>").attr("src", "images/items/" + eachAsset.image));
+		var itemDiv = EditView.createAssetItem(PageComponent.TYPE_ITEM, eachAsset);
 
 		this.container.find("#cat_items").append(itemDiv);
 	}
@@ -82,13 +75,17 @@ var EditView = function(containerObj, model) {
 
 	/*--- Public functions ---*/
 	this.loadStoryPage = function(pageIdx) {
-                
-                var totalPageNum = model.getAllPages().length-1;
+		if(pageIdx >= model.getAllPages().length){
+			throw("EditView.loadStoryPage(): pageIdx is out of scope: " + pageIdx);
+		}
+
+		var totalPageNum = model.getAllPages().length - 1;
 		this.curStoryPage = model.getPageByIdx(pageIdx);
 
 		//update paging exclude cover page
 		this.container.find("#currentPageIdx").text(pageIdx);
 		this.container.find("#totalPageNum").text(model.getAllPages().length - 1);
+
                 /*generate naviDots*/
                  
                     
@@ -96,48 +93,16 @@ var EditView = function(containerObj, model) {
                     $(".dot_container").find("li").removeClass("current");
                     
                     $(".dot_container").find("li[pb-idx='pageIdx']").addClass("current");
-                    console.log($(".dot_container").find("li[pb-idx='pageIdx']"));
-                    if($(".dot_container").find("li").hasClass("current")==false){
+                    //console.log($(".dot_container").find("li[pb-idx='pageIdx']"));
+                     
                         var newNavDot = this.creatNavDot(pageIdx);
                         newNavDot.addClass("current");
                         alert("new Dots!")
-                       $(".dot_container").append(newNavDot);
-                    }
-                 /*
-                    alert("didn't creat Nav Dot!");
-                    $(".dot_container").find("li").removeClass("current");    
-                    */
-                
-             
-                //if num of dots is less than total page, add dots
-                /*
-                if(this.navDots.length<totalPageNum){
-                    for(var i=this.navDots.length+1;i<=totalPageNum;i++){
-                        var dot = $("<li>");
-                        var a = $("<a>");
-                        dot.append(a);
-                        dot.attr("class","");
-                        this.navDots.push(dot);
-                       }
-                   }
-                // if num of dos is more than total page, delete dots
-                else if(this.navDots.length>totalPageNum){
-                    for(var i = totalPageNum; i>this.navDots.length; i--){
-                        this.navDots.pop();
-                    }
-                  }   
-                //update the state of all dots   
-                this.navDots.clearClass();
-                this.navDots[pageIdx-1].attr("class","current");
-                
-            //populate the dots into the canvas
-                
-                var dotHolder = this.container.find(".dotsyle>ul");
-                
-                for(var i=0; i<this.navDots.length; i++){
-                    dotHolder.append(this.navDots[i]);
-                }
-		//alert("loadstoryPage!");*/
+                       $(".dot_container").in;
+                    
+                 
+                    
+
 		updateCanvas.call(this);
 
 	};
@@ -174,7 +139,7 @@ var EditView = function(containerObj, model) {
 				componentDiv.addClass("canvas_item_props");
 				componentDiv.append($("<img>").attr("src", eachComponentData.image));
 			} else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
-				console.log(eachComponentData);
+//				console.log(eachComponentData);
 				componentDiv.css({
 					"width": eachComponentData.size[0] + "%",
 					"height": eachComponentData.size[1] + "%",
@@ -217,4 +182,30 @@ var EditView = function(containerObj, model) {
 	};
 };
 
+/**
+ * 
+ * @param {Number} assetType
+ * @param {Object} assetData
+ * @returns {Object} jquery object of created element
+ */
+EditView.createAssetItem = function(assetType, assetData) {
+	var imageFolder = (assetType === PageComponent.TYPE_BACKGROUND) ? "backgrounds/" : "items/";
+	var itemDiv;
+	switch (assetType) {
+		case PageComponent.TYPE_BACKGROUND:
+		case PageComponent.TYPE_ITEM:
+			itemDiv = $("<div>").addClass("draggable_item").attr("pb-type", assetType);
+			itemDiv.append($("<img>").attr("src", "images/" + imageFolder + assetData.image));
+			break;
 
+		case PageComponent.TYPE_TEXT:
+			
+//			<div class="draggable_item_text" pb-type="3" pb-width="100" pb-height="30">
+//									<div class="item_text_container"><div class="item_text" style="width:100%; height: 40%;"><p>Text</p></div></div>
+//								</div>
+			break;
+		default:
+			break;
+	}
+	return itemDiv;
+};
