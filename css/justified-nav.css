@@ -2,7 +2,10 @@ body {
   padding-top: 20px;
 }
 
-
+.navbar {
+	background:#EFEFEF;
+	height: 5.5em;
+}
 
 .footer {
   padding-top: 40px;
