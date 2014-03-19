@@ -18,7 +18,7 @@ var StoryModel = function StoryModel() {
 
 	//Return the title of the story
 	this.getTitle = function() {
-               //alert("getTitle")
+		//alert("getTitle")
 		return title;
 	};
 	//Set the title of the story as input
@@ -43,6 +43,11 @@ var StoryModel = function StoryModel() {
 
 	//Add new page at the end by default, or at pageIdx, return newly-added page idx
 	this.addPage = function(newPageIdx) {
+		// Check if exceed page limit
+		if (pages.length >= StoryModel.PAGE_LIMIT) {
+			throw("StoryModel.addPage: exceeding page limit. Current page count: " + pages.length);
+		}
+
 		var returnIdx;
 		var newPage;
 		if (newPageIdx > 0 && newPageIdx < pages.length) { //only allow adding after cover page
@@ -67,9 +72,17 @@ var StoryModel = function StoryModel() {
 
 	//Remove page at pageIdx
 	this.removePage = function(pageIdx) {
-		splice(pageIdx, 1);
+		// Check if removing the last single page
+		if (pages.length <= 2) {
+			throw("StoryModel.removePage: you can remove the only page. current page count (incl. cover): " + pages.length);
+		}
 
-		notifyObservers("removePage");
+		pages.splice(pageIdx, 1);
+
+		var changedData = {};
+		changedData.tag = "removePage";
+		changedData.data = {"pageIdx": pageIdx};
+		notifyObservers(changedData);
 	};
 
 	//Return all avaiable backgrounds in the story assets list
@@ -178,11 +191,13 @@ var StoryModel = function StoryModel() {
 	//This function gets called when there is a change at the observables (Page)
 	this.update = function(arg) {
 		//pass the changes to its oberserver
-              //  alert("model update!");
+		//  alert("model update!");
 		notifyObservers(arg);
 
 	};
 };
+
+StoryModel.PAGE_LIMIT = 11; //incl. cover page
 
 // Page consturctor, each page object represents 1 page (1 spread page, i.e. left and right)
 var Page = function Page(pageType, pageIdx) {
@@ -213,7 +228,7 @@ var Page = function Page(pageType, pageIdx) {
 	//Return all components according to zorder (from low to high)
 	this.getAllComponents = function() {
 		return components;
-               
+
 	};
 
 	this.getComponentById = function(componentId) {

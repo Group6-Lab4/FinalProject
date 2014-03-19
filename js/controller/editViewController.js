@@ -90,15 +90,32 @@ var EditViewController = function(view, model) {
 
 	//	Buttons handlers
 	$(container).find(".btn_addpage").on("click", function() {
+		//Check if exceeding page limit
+		if(model.getAllPages().length >= StoryModel.PAGE_LIMIT){
+			alert("Oops! you can create only up to " + StoryModel.PAGE_LIMIT - 1 + " pages. :) "); //excl. cover
+			return;
+		}
+		
 		var newPageIdx = model.addPage(view.curStoryPage.getPageIdx() + 1);
 		//load new page
 		view.loadStoryPage(newPageIdx);
-
-		//no need to do this because the canvas is new and empty.
-//		updateCanvasComponentHandlers();
+		
+		//TODO: handling paging
 	});
 
 	$(container).find(".btn_deletepage").on("click", function() {
+		//Check if removing last page 
+		if(model.getAllPages().length <= 2){
+			alert("Oops! You cannot remove the last page. :(");
+			return;
+		}
+		
+		var pageIdx = view.curStoryPage.getPageIdx();
+		model.removePage(pageIdx);
+		
+		view.loadStoryPage(pageIdx-1);
+		
+		//TODO: handlle paging 
 
 	});
 

@@ -5,15 +5,12 @@
 
 var PreviewView = function(container, model) {
 	this.canvas = container.find('.canvas');
-	this.curStoryPage; //current page being shown on big canvas
 	this.title = container.find('.title');
 	this.thumbnailContainer = container.find(".thumbnails_container");
-	var thumbnailContainer = this.thumbnailContainer; //to be replace by this.thumbnailContainer later
 
-	if (model.getTitle() !== undefined) {
-		this.title.text(model.getTitle());
 
-	}
+	this.curStoryPage = model.getPageByIdx(1); //current page being shown on big canvas. default is page 1.
+
 	// Public functions
 	this.showView = function() {
 		$(container).show();
@@ -25,13 +22,12 @@ var PreviewView = function(container, model) {
 	this.loadStoryPage = function(pageIdx) {
 		this.curStoryPage = model.getPageByIdx(pageIdx);
 
-		updateCanvas.call(this);
+		this.updateCanvas();
 
 		//TODO:update paging
 
 	};
 
-	//--- Private functions ---
 	this.updateTitle = function() {
 		this.title.text(model.getTitle());
 		// alert("update Title in preview! "+model.getTitle());
@@ -40,71 +36,62 @@ var PreviewView = function(container, model) {
 	/**
 	 * @description this function will update the current story page being shown on canvas
 	 */
-	var updateCanvas = function() {
+	this.updateCanvas = function() {
 		PreviewView.drawPageOnCanvas(this.canvas, this.curStoryPage);
 
 	};
 
 
-
-
-
-	var addThumbnail = function(pageIdx) {
+	// Thumbnails related
+	this.addThumbnail = function(pageIdx) {
 		var thumbnailDiv = PreviewView.createThumbnailDiv(pageIdx);
-		thumbnailContainer.find(".page_thumbnail").eq(pageIdx - 1).after(thumbnailDiv); //insert after 
+		this.thumbnailContainer.find(".page_thumbnail").eq(pageIdx - 1).after(thumbnailDiv); //insert after 
+	};
 
-
+	this.removeThumbnail = function(pageIdx) {
+		alert("removing thumbnail" + pageIdx);
+		this.thumbnailContainer.find(".page_thumbnail").eq(pageIdx).remove(); //insert after 
 	};
 
 	/**
 	 * @description this function will update a specific thumbnail by pageIdx or all thumnails
 	 */
-	var updateThumbnail = function(pageIdx) {
+	this.updateThumbnail = function(pageIdx) {
 		if (!(pageIdx >= 0)) {
 			throw("[PreviewView.updateThumnail] no specified pageIdx: " + pageIdx);
 		}
 		var page = model.getPageByIdx(pageIdx);
-		var thumbnailDiv = thumbnailContainer.find(".page_thumbnail").eq(pageIdx); //get the child at pageIdx
+		var thumbnailDiv = this.thumbnailContainer.find(".page_thumbnail").eq(pageIdx); //get the child at pageIdx
 		PreviewView.drawPageOnCanvas(thumbnailDiv.find(".canvas"), page);
-
-
 	};
 
-	var updateAllThumbnails = function() {
-		resetThumbnailContainer();
+	this.updateAllThumbnails = function() {
+		this.resetThumbnailContainer();
 
 		var pages = model.getAllPages();
 		for (var i in pages) {
 			var thumbnailDiv = PreviewView.createThumbnailDiv(i);
 			var eachPageModel = pages[i];
-			PreviewView.drawPageOnCanvas(thumbnailDiv.find(".canvas"),eachPageModel);
+			PreviewView.drawPageOnCanvas(thumbnailDiv.find(".canvas"), eachPageModel);
 
-			thumbnailContainer.append(thumbnailDiv);
+			this.thumbnailContainer.append(thumbnailDiv);
 		}
 	};
 
-	var resetThumbnailContainer = function() {
-		thumbnailContainer.empty();
+	this.resetThumbnailContainer = function() {
+		this.thumbnailContainer.empty();
 	};
 
 
 
 	//--- Constructor ---
 	// Load story title
-	/*if (model.getTitle() !== undefined) {
-	 //		this.titleInput.val(model.getTitle());
-	 }*/
 	this.updateTitle();
 
 
-	// Load story pages
-	var pages = model.getAllPages();
-	this.curStoryPage = pages[1]; // default the current page is page 0, i.e. cover page
-
-
 	// Load canvas content 
-	updateCanvas.call(this);
-	updateAllThumbnails();
+	this.updateCanvas();
+	this.updateAllThumbnails();
 
 
 
@@ -118,35 +105,34 @@ var PreviewView = function(container, model) {
 	//This function gets called when there is a change at the model
 	this.update = function(arg) {
 		var classname = arg.constructor.name;
-//		alert("classname:" + classname);
 		if (classname == "Page") {
 			//page object is updated
-//			console.log(this.canvas);
-//			if(data === curStoryPage){ 
 			if (arg.getPageIdx() === this.curStoryPage.getPageIdx()) {
-				updateCanvas.call(this);
+				this.updateCanvas();
 			}
-
-			updateThumbnail.call(this, arg.getPageIdx());
+			this.updateThumbnail(arg.getPageIdx());
 
 		} else if (classname == "PageComponent") {
 
 		} else if (arg.tag == "addPage") {
-//			alert("newpage: " + arg.data.pageIdx);
-			addThumbnail(arg.data.pageIdx);
-
+			this.addThumbnail(arg.data.pageIdx);
+		} else if (arg.tag == "removePage") {
+			if (arg.data.pageIdx === this.curStoryPage.getPageIdx()) {
+				this.loadStoryPage(arg.data.pageIdx - 1);
+			}
+			this.removeThumbnail(arg.data.pageIdx);
 		} else if (arg == "setTitle") {
-
 			this.updateTitle();
 		}
 
 	};
 };
 
+/*--- Static functions ---*/
 PreviewView.createThumbnailDiv = function(pageIdx) {
 	var thumbnailWrapper = $("<div>").addClass("thumbnail page_thumbnail").attr("pb-idx", pageIdx);
 	var thumbnailCanvas = $("<div>").addClass("canvas");
-	
+
 	pageIdx = (pageIdx == 0) ? "Cover" : pageIdx;
 	var thumbnailCaption = $("<label>").text(pageIdx);
 

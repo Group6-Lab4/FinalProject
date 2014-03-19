@@ -153,7 +153,7 @@ var EditView = function(containerObj, model) {
 				componentDiv.addClass("canvas_item_props");
 				componentDiv.append($("<img>").attr("src", eachComponentData.image));
 			} else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
-				console.log(eachComponentData);
+//				console.log(eachComponentData);
 				componentDiv.css({
 					"width": eachComponentData.size[0] + "%",
 					"height": eachComponentData.size[1] + "%",
@@ -195,5 +195,3 @@ var EditView = function(containerObj, model) {
 //		this.titleInput.val(model.getTitle());
 	};
 };
-
-
