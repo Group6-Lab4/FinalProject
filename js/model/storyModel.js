@@ -54,11 +54,15 @@ var StoryModel = function StoryModel() {
 			newPage = new Page(Page.TYPE_NORMAL, newPageIdx);
 			pages.splice(newPageIdx, 0, newPage);
 			returnIdx = newPageIdx;
+			
 		} else {
 			newPage = new Page(Page.TYPE_NORMAL);
 			returnIdx = pages.push(newPage) - 1; //new length - 1 
-			pages[returnIdx].initIdx(returnIdx);
+			pages[returnIdx].setPageIdx(returnIdx);
 		}
+		
+		//update other following pageIdx
+		this.updateAllPageIdx();
 
 		//!important register new page to be observed
 		newPage.addObserver(this);
@@ -78,11 +82,19 @@ var StoryModel = function StoryModel() {
 		}
 
 		pages.splice(pageIdx, 1);
+		
+		this.updateAllPageIdx();
 
 		var changedData = {};
 		changedData.tag = "removePage";
 		changedData.data = {"pageIdx": pageIdx};
 		notifyObservers(changedData);
+	};
+	
+	this.updateAllPageIdx = function(){
+		for(var i in pages){
+			pages[i].setPageIdx(i);
+		}
 	};
 
 	//Return all avaiable backgrounds in the story assets list
@@ -194,9 +206,8 @@ var StoryModel = function StoryModel() {
 StoryModel.PAGE_LIMIT = 11; //incl. cover page
 
 // Page consturctor, each page object represents 1 page (1 spread page, i.e. left and right)
-var Page = function Page(pageType, pageIdx) {
-	this.pageIdx;
-	var pageIdx; //page num of this page
+var Page = function Page(pageType, idx) {
+	this.pageIdx = idx; //page num of this page , always changing
 	var type = Page.TYPE_NORMAL; //0 - cover; 1 - normal; 2 - bottom
 	var components = []; // PageComponents sorted by zorder asc
 	var maxComponentId = 0;
@@ -207,16 +218,12 @@ var Page = function Page(pageType, pageIdx) {
 	}
 
 	//Can only be called once
-	this.initIdx = function(idx) {
-		if (pageIdx !== undefined) {
-			throw("PageComponent.id already initialised.");
-		}
-		pageIdx = idx;
+	this.setPageIdx = function(idx) {
 		this.pageIdx = idx;
 	};
 
 	this.getPageIdx = function() {
-		return pageIdx;
+		return Number(this.pageIdx);
 	};
 
 	//Return all components according to zorder (from low to high)

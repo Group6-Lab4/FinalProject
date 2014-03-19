@@ -54,23 +54,21 @@ var EditViewController = function(view, model) {
 
 	/*go to prevPage or nextPage */
 	$(container).find("#toPrevious").on("click", function() {
-		curPageIdx = view.curStoryPage.getPageIdx();
-		if (curPageIdx < 2)
+		curPageIdx = Number(view.curStoryPage.getPageIdx()); //!important to use Number(), otherwise  4+1 -> 41!
+		if (curPageIdx <= 1)
 			return;
 		else {
-
+			console.log("EditViewController: toPrevious: from p." + curPageIdx + " to p." + (curPageIdx-1));
 			view.loadStoryPage(curPageIdx - 1);
-
 		}
-		;
 	});
 
 	$(container).find("#toNext").on("click", function() {
-		curPageIdx = view.curStoryPage.getPageIdx();
-		if (curPageIdx === model.getAllPages().length - 1)
+		curPageIdx = Number(view.curStoryPage.getPageIdx());
+		if (view.curStoryPage.getPageIdx() >= model.getAllPages().length - 1)
 			return;
 		else {
-
+			console.log("EditViewController: toNext: from p." + curPageIdx + " to p." + (curPageIdx+1));
 			view.loadStoryPage(curPageIdx + 1);
 		}
 	});
