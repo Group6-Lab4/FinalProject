@@ -139,6 +139,10 @@ var PreviewView = function(container, model) {
 			this.removeThumbnail(arg.data.pageIdx);
 		} else if (arg == "setTitle") {
 			this.updateTitle();
+			
+			//Also update cover page
+			
+			this.updateThumbnail(0);
 		}
 
 	};

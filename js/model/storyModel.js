@@ -25,6 +25,22 @@ var StoryModel = function StoryModel() {
 	this.setTitle = function(newTitle) {
 		title = newTitle;
 
+		//also set in cover page
+		var pageComponents = pages[0].getAllComponents();
+		var isFound = false;
+		for (var i in pageComponents) {
+			var eachComponent = pageComponents[i];
+			if (eachComponent.type == PageComponent.TYPE_TEXT) {
+				//this is the cover title
+				eachComponent.text = title;
+				isFound = true;
+				break;
+			}
+		}
+		if (!isFound) {
+			pages[0].addComponent(PageComponent.TYPE_TEXT, title, 0, 40, 100, 30);
+		}
+
 		notifyObservers("setTitle");
 	};
 
@@ -36,7 +52,7 @@ var StoryModel = function StoryModel() {
 	//Return a story page by idx (idx is the array index, returned by addPage())
 	this.getPageByIdx = function(idx) {
 		if (!(idx >= 0 && idx < pages.length)) {
-			throw("[StoryModel.getPageByIdx] pageIdx is out of scope(0:"+pages.length +"): " + idx);
+			throw("[StoryModel.getPageByIdx] pageIdx is out of scope(0:" + pages.length + "): " + idx);
 		}
 		return pages[idx];
 	};
@@ -54,13 +70,13 @@ var StoryModel = function StoryModel() {
 			newPage = new Page(Page.TYPE_NORMAL, newPageIdx);
 			pages.splice(newPageIdx, 0, newPage);
 			returnIdx = newPageIdx;
-			
+
 		} else {
 			newPage = new Page(Page.TYPE_NORMAL);
 			returnIdx = pages.push(newPage) - 1; //new length - 1 
 			pages[returnIdx].setPageIdx(returnIdx);
 		}
-		
+
 		//update other following pageIdx
 		this.updateAllPageIdx();
 
@@ -82,7 +98,7 @@ var StoryModel = function StoryModel() {
 		}
 
 		pages.splice(pageIdx, 1);
-		
+
 		this.updateAllPageIdx();
 
 		var changedData = {};
@@ -90,9 +106,9 @@ var StoryModel = function StoryModel() {
 		changedData.data = {"pageIdx": pageIdx};
 		notifyObservers(changedData);
 	};
-	
-	this.updateAllPageIdx = function(){
-		for(var i in pages){
+
+	this.updateAllPageIdx = function() {
+		for (var i in pages) {
 			pages[i].setPageIdx(i);
 		}
 	};
