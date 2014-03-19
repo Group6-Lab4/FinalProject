@@ -181,18 +181,23 @@ var EditViewController = function(view, model) {
 			switch (componentType) {
 				case PageComponent.TYPE_BACKGROUND:
 				case PageComponent.TYPE_ITEM:
+					var left, top;
 					if(componentType == PageComponent.TYPE_ITEM){
 						$(newItemObj).addClass("canvas_item_props");
+						left = relPosInPercent.left;
+						top = relPosInPercent.top;
 					}else{
 						$(newItemObj).addClass("canvas_item_bg");
+						left = 0;
+						top = 0;
 					}
 					$(newItemObj).css({
-						"left": relPosInPercent.left + "%",
-						"top": relPosInPercent.top + "%"
+						"left": left + "%",
+						"top": top + "%"
 					});
 
 					// Save new component to model
-					componentId = view.curStoryPage.addComponent(componentType, $(draggableObj).find('img').attr('src'), relPosInPercent.left, relPosInPercent.top);
+					componentId = view.curStoryPage.addComponent(componentType, $(draggableObj).find('img').attr('src'), left, top);
 					break;
 				case PageComponent.TYPE_TEXT:
 					var width = newItemObj.attr("pb-width");

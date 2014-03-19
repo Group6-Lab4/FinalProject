@@ -196,6 +196,7 @@ a {
 	background-color: #EEEEEE; 
 	width: 100%;
 	height: 100%;
+	position: relative;
 }
 .canvas-hover{
 	background-color: #AAAAAA; 
@@ -226,12 +227,17 @@ a {
 	z-index: 10
 }
 
+/*items on menu*/
 #cat_items .draggable_item{
 	width: 100px;
-	height: 100px;
+	/*height: 100px;*/
 }
 
-#cat_items .draggable_item>img{
+#cat_bgs .draggable_item{
+	width: 200px;
+}
+
+#cat_items .draggable_item>img, #cat_bgs .draggable_item>img{
 	width: 100%;
 	height: 100%;
 }
@@ -241,17 +247,21 @@ a {
 
 }
 
-.canvas_item_bg{
+/*items on canvas*/
 
+/*TOFIX: keep aspect ratio*/
+.canvas_item_bg{
+	width: 100%;
+	height: 100%;
 }
 
 .canvas_item_props{
-	width: 30%
+	width: 30%; 
 }
 
-
-.canvas_item_props>img{
-	width: 100%
+.canvas_item_props>img, .canvas_item_bg>img{
+	width: 100%;
+	height: 100%;
 }
 
 .canvas_item_text{
@@ -313,6 +323,10 @@ a {
 	top: 0px;
 	right: 0px;
 }
+.dropped_item.canvas_item_bg>input{
+	left:0px;
+}
+
 
 .dropped_item:hover>input{
 	display: block;

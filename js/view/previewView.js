@@ -153,23 +153,31 @@ PreviewView.drawPageOnCanvas = function(canvasElement, storyPage) {
 		var componentDiv = $("<div>");
 //			console.log(eachComponentData);
 
-		if (eachComponentData.type === PageComponent.TYPE_BACKGROUND || eachComponentData.type === PageComponent.TYPE_ITEM) {
+		// Set common styles
+		componentDiv.css({
+			"left": eachComponentData.pos[0] + "%",
+			"top": eachComponentData.pos[1] + "%"
+		});
+		componentDiv.addClass("preview_item");
+
+		//Set type-specific style
+		if (eachComponentData.type === PageComponent.TYPE_BACKGROUND) {
 			componentDiv.append($("<img>").attr("src", eachComponentData.image));
-		} else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
+			componentDiv.addClass("canvas_item_bg");
+		} else if (eachComponentData.type === PageComponent.TYPE_ITEM){
+			componentDiv.append($("<img>").attr("src", eachComponentData.image));
+			componentDiv.addClass("canvas_item_props");
+		}else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
 //				console.log(eachComponentData);
 			componentDiv.css({
 				"width": eachComponentData.size[0] + "%",
 				"height": eachComponentData.size[1] + "%",
 				"padding": PageComponent.TEXT_PADDING + "%"
 			});
+			componentDiv.addClass("canvas_item_text");
 			componentDiv.append($("<textarea>").attr("readonly", "readonly").text(eachComponentData.text));
 		}
 
-		componentDiv.css({
-			"left": eachComponentData.pos[0] + "%",
-			"top": eachComponentData.pos[1] + "%"
-		});
-		componentDiv.addClass("preview_item canvas_item_props");
 
 		$(canvasElement).append(componentDiv);
 	}

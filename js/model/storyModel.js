@@ -101,9 +101,6 @@ var StoryModel = function StoryModel() {
 
 	var assets = {
 		'background': [{
-				'id': 1,
-				'image': "temp_bg.png"
-			}, {
 				'id': 2,
 				'image': "bg1.png"
 			}, {
@@ -117,9 +114,6 @@ var StoryModel = function StoryModel() {
 		'item': {
 			//Sub-cat under items
 			'character': [{
-					'id': 1,
-					'image': "temp_item.png"
-				}, {
 					'id': 2,
 					'image': "image1.png"
 				}, {
