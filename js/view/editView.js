@@ -7,36 +7,16 @@ var EditView = function(containerObj, model) {
 	this.container = containerObj;
 	this.titleInput = this.container.find(".title");
 	this.canvas = containerObj.find("#droppable_canvas");
+	this.pagingContainer = containerObj.find(".dot_container");
+	this.curStoryPage = model.getPageByIdx(1); //current page being shown on canvas, default is page 1, not cover
 
-        // create an array to store the status of the dots;
-        
-        this.creatNavDot = function(pageIdx){
-            return $("<li>").attr("pb-idx",pageIdx).append("<a>");
-        };
-        
-       
-       
-    // clear all the class of the dots;
-    /*
-        navDotsFunc.prototype.clearClass = function(){
-            for(var i=0;i<this.navDots.length;i++){
-                this.navDots[i].attr("class","");
-            }
-        };
-        */
- 
-
-	this.curStoryPage; //current page being shown on canvas
-
-	this.showView = function() {
-		$(this.container).show();
+	this.createNavDot = function(pageIdx) {
+		return $("<li>").attr("pb-idx", pageIdx).append("<a>");
 	};
-	this.hideView = function() {
-		$(this.container).hide();
-	};
+
 
 	// Load story title
- 	this.titleInput.val(model.getTitle());
+	this.titleInput.val(model.getTitle());
 
 	// Load story assets 
 
@@ -58,24 +38,14 @@ var EditView = function(containerObj, model) {
 		this.container.find("#cat_items").append(itemDiv);
 	}
 
-
-	// Load story pages
-	var pages = model.getAllPages();
-
-
-	this.curStoryPage = pages[1]; // default the current page is page 1, not cover
-	this.container.find("#totalPageNum").text(pages.length - 1);
+	// Handle Paging
+	this.container.find("#totalPageNum").text(model.getAllPages().length - 1);
 	this.container.find("#currentPageIdx").text(this.curStoryPage.getPageIdx());
 
-	// Load canvas content 
-	// console.log(pages);
-	var pageComponents = this.curStoryPage.getAllComponents();
-	// pages[1].getAllComponents();
-	//  console.log(this.curStoryPage);
 
 	/*--- Public functions ---*/
 	this.loadStoryPage = function(pageIdx) {
-		if(pageIdx >= model.getAllPages().length){
+		if (pageIdx >= model.getAllPages().length) {
 			throw("EditView.loadStoryPage(): pageIdx is out of scope: " + pageIdx);
 		}
 
@@ -86,25 +56,17 @@ var EditView = function(containerObj, model) {
 		this.container.find("#currentPageIdx").text(pageIdx);
 		this.container.find("#totalPageNum").text(model.getAllPages().length - 1);
 
-                /*generate naviDots*/
-                //clear dot container
-                   $(".dot_container").html("");
-                    for(var i=1;i<=totalPageNum;i++){
-                        
-                      var newNavDot = this.creatNavDot(i);
-                         $(".dot_container").append(newNavDot);
-                    }
-                   
-                   var currentDot = $(".dot_container").find("li[pb-idx='pageIdx']")
-                      console.log(currentDot);
-                           currentDot.addClass("current");
-                      console.log(currentDot);     
-                    //console.log($(".dot_container").find("li[pb-idx='pageIdx']"));
-                     
-                        
-                    
-                 
-                    
+		/*generate naviDots*/
+		//clear dot container
+		this.pagingContainer.empty();
+		for (var i = 1; i <= totalPageNum; i++) {
+			// Append dots
+			var newNavDot = this.createNavDot(i);
+			this.pagingContainer.append(newNavDot);
+		}
+
+		// Highlight current dot
+		this.pagingContainer.find("li[pb-idx=" + pageIdx + "]").addClass("current");
 
 		updateCanvas.call(this);
 
@@ -168,6 +130,13 @@ var EditView = function(containerObj, model) {
 	};
 
 
+	this.showView = function() {
+		$(this.container).show();
+	};
+	this.hideView = function() {
+		$(this.container).hide();
+	};
+
 	/*****************************************  
 	 Observer implementation    
 	 *****************************************/
@@ -202,7 +171,7 @@ EditView.createAssetItem = function(assetType, assetData) {
 			break;
 
 		case PageComponent.TYPE_TEXT:
-			
+
 //			<div class="draggable_item_text" pb-type="3" pb-width="100" pb-height="30">
 //									<div class="item_text_container"><div class="item_text" style="width:100%; height: 40%;"><p>Text</p></div></div>
 //								</div>

@@ -12,8 +12,8 @@ var EditViewController = function(view, model) {
 // Handling cloned draggable
 	var updateCanvasComponentHandlers = function() {
 		var componentObj = $(container).find(".dropped_item");
-		console.log("updateCanvasComponentHandlers, componentObj:");
-		console.log(componentObj);
+//		console.log("updateCanvasComponentHandlers, componentObj:");
+//		console.log(componentObj);
 
 		componentObj.draggable({
 			containment: "#droppable_canvas"
@@ -49,7 +49,12 @@ var EditViewController = function(view, model) {
 		model.update("setTitle");
 
 	});
+	
 	/*interaction of the navigation dots */
+	view.pagingContainer.on("click", "li", function(){
+		view.loadStoryPage($(this).attr("pb-idx"));
+		
+	});
 
 
 	/*go to prevPage or nextPage */
@@ -58,7 +63,7 @@ var EditViewController = function(view, model) {
 		if (curPageIdx <= 1)
 			return;
 		else {
-			console.log("EditViewController: toPrevious: from p." + curPageIdx + " to p." + (curPageIdx-1));
+//			console.log("EditViewController: toPrevious: from p." + curPageIdx + " to p." + (curPageIdx-1));
 			view.loadStoryPage(curPageIdx - 1);
 		}
 	});
@@ -90,7 +95,7 @@ var EditViewController = function(view, model) {
 	$(container).find(".btn_addpage").on("click", function() {
 		//Check if exceeding page limit
 		if (model.getAllPages().length >= StoryModel.PAGE_LIMIT) {
-			alert("Oops! you can create only up to " + StoryModel.PAGE_LIMIT - 1 + " pages. :) "); //excl. cover
+			alert("Oops! you can create only up to " + Number(StoryModel.PAGE_LIMIT - 1) + " pages. :) "); //excl. cover
 			return;
 		}
 
@@ -239,82 +244,6 @@ var EditViewController = function(view, model) {
 			// Save new component to model
 			componentId = view.curStoryPage.addComponent(componentType, content, left, top, width, height);
 
-
-//			switch (componentType) {
-//				case PageComponent.TYPE_BACKGROUND:
-//				case PageComponent.TYPE_ITEM:
-//					var left, top;
-//					if(componentType == PageComponent.TYPE_ITEM){
-//						$(newItemObj).addClass("canvas_item_props");
-//						left = relPosInPercent.left;
-//						top = relPosInPercent.top;
-//					}else{
-//						$(newItemObj).addClass("canvas_item_bg");
-//						left = 0;
-//						top = 0;
-//					}
-//					$(newItemObj).css({
-//						"left": left + "%",
-//						"top": top + "%"
-//					});
-//
-//					// Save new component to model
-//					componentId = view.curStoryPage.addComponent(componentType, $(draggableObj).find('img').attr('src'), left, top);
-//					break;
-//				case PageComponent.TYPE_TEXT:
-//					var width = newItemObj.attr("pb-width");
-//					var height = newItemObj.attr("pb-height");
-//					var left, top;
-//
-//					//horzontal layout
-//					if (width == 100) {
-//						left = 0;
-//					} else if (relPosInPercent.left < 50) { //align left
-//						left = 0;
-//					} else { //alight right
-//						left = 100 - width;
-//					}
-//
-//					//vertical layout
-//					if (height == 100) {
-//						top = 0;
-//					} else if (relPosInPercent.top < 50) { //align left
-//						top = 0;
-//					} else { //align bottom
-//						top = 100 - height;
-//					}
-//
-//
-//					newItemObj.empty();
-//					newItemObj.css({
-//						"width": width + "%",
-//						"height": height + "%",
-//						"left": left + "%",
-//						"top": top + "%",
-//						"padding": PageComponent.TEXT_PADDING + "%"
-//					});
-//
-//					//Textarea for item_text
-//					var itemTextarea = $("<textarea>").text(textItemDefaultText);
-//					newItemObj.append(itemTextarea);
-//
-//					//handler for textarea
-//					itemTextarea.on("change", function() {
-//						var componentId = $(this).parent().attr("pb-id");
-//						var pageComponent = view.curStoryPage.getComponentById(componentId);
-//
-////						console.log("onchange: " + $(this).val());
-//						pageComponent.setText($(this).val());
-//
-//					});
-//
-//
-//					// Save new component to model
-//					componentId = view.curStoryPage.addComponent(componentType, textItemDefaultText, left, top, width, height);
-//
-//					break;
-//			}
-
 			//Set other attribute for new element
 			$(newItemObj).css({
 				"left": left + "%",
@@ -330,6 +259,7 @@ var EditViewController = function(view, model) {
 
 			// and its handlers
 			itemDelBtn.on("click", function() {
+				
 				var componentId = $(this).parent().attr("pb-id");
 				view.curStoryPage.removeComponent(componentId);
 				$(this).parent().remove();
