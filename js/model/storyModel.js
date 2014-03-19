@@ -35,8 +35,8 @@ var StoryModel = function StoryModel() {
 
 	//Return a story page by idx (idx is the array index, returned by addPage())
 	this.getPageByIdx = function(idx) {
-		if (!(idx >= 0)) {
-			throw("[PreviewView.updateThumnail] no specified pageIdx: " + idx);
+		if (!(idx >= 0 && idx < pages.length)) {
+			throw("[StoryModel.getPageByIdx] pageIdx is out of scope(0:"+pages.length +"): " + idx);
 		}
 		return pages[idx];
 	};

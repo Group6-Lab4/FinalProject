@@ -70,6 +70,9 @@ var EditView = function(containerObj, model) {
 
 	/*--- Public functions ---*/
 	this.loadStoryPage = function(pageIdx) {
+		if(pageIdx >= model.getAllPages().length){
+			throw("EditView.loadStoryPage(): pageIdx is out of scope: " + pageIdx);
+		}
 
 		var totalPageNum = model.getAllPages().length - 1;
 		this.curStoryPage = model.getPageByIdx(pageIdx);

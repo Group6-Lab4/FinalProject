@@ -113,7 +113,11 @@ var EditViewController = function(view, model) {
 		var pageIdx = view.curStoryPage.getPageIdx();
 		model.removePage(pageIdx);
 
-		view.loadStoryPage(pageIdx - 1);
+		if (pageIdx == 1) {
+			view.loadStoryPage(pageIdx);
+		} else {
+			view.loadStoryPage(pageIdx - 1);
+		}
 
 		//TODO: handlle paging 
 
@@ -125,8 +129,8 @@ var EditViewController = function(view, model) {
 	// Handling original draggable
 	$(".draggable_item").draggable({
 		helper: 'clone',
-		containment: "document"
-//		revert: true,
+		containment: "document",
+		revert: true
 //		delay: 0,
 //		grid: false
 	});
@@ -134,7 +138,8 @@ var EditViewController = function(view, model) {
 	$(".draggable_item_text").draggable({
 		helper: 'clone',
 		containment: "document",
-		opacity: 0.7
+		opacity: 0.7,
+		revert: true
 	});
 
 
@@ -317,7 +322,7 @@ var EditViewController = function(view, model) {
 				"left": left + "%",
 				"top": top + "%"
 			});
-			
+
 			// Keep component id in the element (for updating component later)
 			newItemObj.attr("pb-id", componentId);
 

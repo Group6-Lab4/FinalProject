@@ -46,11 +46,26 @@ var PreviewView = function(container, model) {
 	this.addThumbnail = function(pageIdx) {
 		var thumbnailDiv = PreviewView.createThumbnailDiv(pageIdx);
 		this.thumbnailContainer.find(".page_thumbnail").eq(pageIdx - 1).after(thumbnailDiv); //insert after 
+
+		//Also update following thumbnails page num
+		this.updateAllThumbnailPageNum();
 	};
 
 	this.removeThumbnail = function(pageIdx) {
-		alert("removing thumbnail" + pageIdx);
 		this.thumbnailContainer.find(".page_thumbnail").eq(pageIdx).remove(); //insert after 
+
+		//Also update following thumbnails page num
+		this.updateAllThumbnailPageNum();
+	};
+
+	this.updateAllThumbnailPageNum = function() {
+		this.thumbnailContainer.find(".page_thumbnail").each(function(idx, element) {
+			if (idx === 0) {
+				$(element).find("label").text("Cover");
+			} else {
+				$(element).find("label").text(idx);
+			}
+		});
 	};
 
 	/**
@@ -77,6 +92,7 @@ var PreviewView = function(container, model) {
 			this.thumbnailContainer.append(thumbnailDiv);
 		}
 	};
+
 
 	this.resetThumbnailContainer = function() {
 		this.thumbnailContainer.empty();
@@ -164,10 +180,10 @@ PreviewView.drawPageOnCanvas = function(canvasElement, storyPage) {
 		if (eachComponentData.type === PageComponent.TYPE_BACKGROUND) {
 			componentDiv.append($("<img>").attr("src", eachComponentData.image));
 			componentDiv.addClass("canvas_item_bg");
-		} else if (eachComponentData.type === PageComponent.TYPE_ITEM){
+		} else if (eachComponentData.type === PageComponent.TYPE_ITEM) {
 			componentDiv.append($("<img>").attr("src", eachComponentData.image));
 			componentDiv.addClass("canvas_item_props");
-		}else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
+		} else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
 //				console.log(eachComponentData);
 			componentDiv.css({
 				"width": eachComponentData.size[0] + "%",
