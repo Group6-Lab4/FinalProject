@@ -8,7 +8,10 @@ var EditView = function(containerObj, model) {
 	this.titleInput = this.container.find(".title");
 	this.canvas = containerObj.find("#droppable_canvas");
         // create an array to store the status of the dots;
-        this.navDots = [];
+        
+        this.creatNavDot = function(pageIdx){
+            return $("<li>").attr("pb-Idx",pageIdx).append("<a>");
+        };
         
        
        
@@ -87,7 +90,25 @@ var EditView = function(containerObj, model) {
 		this.container.find("#currentPageIdx").text(pageIdx);
 		this.container.find("#totalPageNum").text(model.getAllPages().length - 1);
                 /*generate naviDots*/
+                 
+                    
+                    //reset all the dots
+                    $(".dot_container").find("li").removeClass("current");
+                    
+                    $(".dot_container").find("li[pb-idx='pageIdx']").addClass("current");
+                    console.log($(".dot_container").find("li[pb-idx='pageIdx']"));
+                    if($(".dot_container").find("li").hasClass("current")==false){
+                        var newNavDot = this.creatNavDot(pageIdx);
+                        newNavDot.addClass("current");
+                        alert("new Dots!")
+                       $(".dot_container").append(newNavDot);
+                    }
+                 /*
+                    alert("didn't creat Nav Dot!");
+                    $(".dot_container").find("li").removeClass("current");    
+                    */
                 
+             
                 //if num of dots is less than total page, add dots
                 /*
                 if(this.navDots.length<totalPageNum){
