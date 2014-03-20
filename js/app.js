@@ -51,7 +51,7 @@ var App = {
 		$("#step2").removeClass("active");
 		$("#step3").removeClass("active");
 		/*show the bg menu by defult first*/
-		$("#icon_bg div").attr("id", "editDefultDiv");
+		//$("#icon_bg div").attr("id", "editDefultDiv");
 		$("#icon_bg img").attr("id", "editDefultImg");
 
 		App.editView.showView();
