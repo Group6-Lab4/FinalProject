@@ -5,7 +5,7 @@ and open the template in the editor.
 */
 /* 
     Created on : Mar 8, 2014, 3:35:35 PM
-    Author     : weiwei, jenny
+    Author     : weiwei, jenny, svana
 */
 
 /*Basic*/
@@ -93,7 +93,6 @@ a {
     width: 200px;
     height: 480px;
     border: none;
-    left:-300%;
     top:-5%;
     opacity: 0;
 >>>>>>> FETCH_HEAD
