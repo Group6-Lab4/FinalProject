@@ -92,14 +92,12 @@ h2 {
     position: fixed;
     background-color: #eee;
 	width: 300px;
-    height: 600px;
-	
+    height: 600px;	
 }
 
 .nav-sidebar>ul{
     margin-top: 0;
     list-style: none;
-
 }
 
 .nav-sidebar>li{
@@ -107,13 +105,11 @@ h2 {
     list-style-type: none;
     width: 200px;
     height: 100px;
-    padding: 0px;
-    margin-left: 0px;
+
 
 }
 
 /*rewrite the style of the hover of <a> in nav li*/
-
 
 .sidebar_bg{
     position: absolute;
@@ -123,11 +119,15 @@ h2 {
     border: none;
     left:-300%;
     top:-5%;
-    opacity: 0;
+    opacity: 1;
     /*!important enable below will make draggable not working
 	overflow-y: scroll;*/
-    transition: left 0.2s ease-in-out, opacity 0.4s ease-in-out, background-color 0.2s ease-in-out; 
-    -webkit-transition: left 0.2s ease-in-out, opacity 0.4s ease-in-out, background-color 0.2s ease-in-out;
+ 
+  
+     transition: 1s ease-in-out, background-color 1s ease-in-out;
+	 -webkit-transition:  1s ease-in-out, background-color 1s ease-in-out;
+	
+ 
 }
 
 .nav li a:hover{
