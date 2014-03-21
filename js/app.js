@@ -120,7 +120,10 @@ $(document).ready(function() {
 	$("#orderForm").submit(function(ev){
 			
 			ev.preventDefault();
-			alert("Thanks alot! You will soon recieve your book ;)");
+		
+			
+			alert("Hello " + document.forms["orderForm"]["fullName"].value + ", thank you for ordering! I think you'd really enjoy your book  but sadly you wont get one just yet since we are still developing our service :)" 
+			 );
 	});
 
 });
