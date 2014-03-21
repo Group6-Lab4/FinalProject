@@ -6,6 +6,8 @@
 var StoryModel = function StoryModel() {
 
 	var title; // = "My first story";
+	var coverPage = 1;
+	var authorName = "";
 	var pages = []; //consist of Page objects
 	pages[0] = new Page(Page.TYPE_COVER, 0); //cover page
 	pages[1] = new Page(Page.TYPE_NORMAL, 1); //first page
@@ -43,6 +45,34 @@ var StoryModel = function StoryModel() {
 
 		notifyObservers("setTitle");
 	};
+	
+	this.getAuthorName = function(){
+		return authorName;
+	};
+	
+	this.setAuthorName = function(newName){
+		authorName = newName;
+		
+		notifyObservers("setAuthorName");
+	};
+
+	this.setCoverPage = function(pageIdx) {
+		if (!(pageIdx > 0 && pageIdx < pages.length)) {
+			throw("[StoryModel] Set cover page, idx is out of range. " + pageIdx);
+		}
+		var pageComponents = pages[pageIdx].getAllComponents();
+		for (var i in pageComponents) {
+			var eachComponent = pageComponents[i];
+			if (eachComponent.type == PageComponent.TYPE_BACKGROUND || eachComponent.type == PageComponent.TYPE_ITEM) {
+				pages[0].addComponentObj(eachComponent, true);
+			}
+		}
+
+		//Set to model
+		coverPage = pageIdx;
+	};
+
+
 
 	//Return all story pages
 	this.getAllPages = function() {
@@ -291,7 +321,7 @@ var Page = function Page(pageType, idx) {
 	 * @param {Number} zorder
 	 * @returns {Number} componentId
 	 */
-	this.addComponentObj = function(newComponent, zorder) {
+	this.addComponentObj = function(newComponent, isSilent, zorder) {
 		maxComponentId++;
 		newComponent.initId(maxComponentId);
 
@@ -306,7 +336,9 @@ var Page = function Page(pageType, idx) {
 		newComponent.addObserver(this);
 
 		// Notify page's observers about newly added component
-		notifyObservers(this);
+		if (!isSilent) {
+			notifyObservers(this);
+		}
 		return maxComponentId;
 	};
 
@@ -415,7 +447,8 @@ var PageComponent = function PageComponent(componentType, content, posX, posY, w
 	//Can only be called once
 	this.initId = function(componentId) {
 		if (id !== undefined) {
-			throw("PageComponent.id already initialised.");
+			//FIXIT: temporarily disabled for Set as cover function
+//			throw("PageComponent.id already initialised.");
 		}
 		id = componentId;
 	};

@@ -121,6 +121,7 @@ var PreviewView = function(container, model) {
 	//This function gets called when there is a change at the model
 	this.update = function(arg) {
 		var classname = arg.constructor.name;
+//		alert(classname);
 		if (classname == "Page") {
 			//page object is updated
 			if (arg.getPageIdx() === this.curStoryPage.getPageIdx()) {
@@ -153,10 +154,13 @@ PreviewView.createThumbnailDiv = function(pageIdx) {
 	var thumbnailWrapper = $("<div>").addClass("thumbnail page_thumbnail").attr("pb-idx", pageIdx);
 	var thumbnailCanvas = $("<div>").addClass("canvas");
 
+        var setCoverBtn = $("<input>").addClass("btn btn-xs").attr("type", "button").val("Set as Cover");
 	pageIdx = (pageIdx == 0) ? "Cover" : pageIdx;
 	var thumbnailCaption = $("<label>").text(pageIdx);
+        
+        
 
-	return thumbnailWrapper.append(thumbnailCanvas).append(thumbnailCaption);
+	return thumbnailWrapper.append(thumbnailCanvas).append(setCoverBtn).append(thumbnailCaption);
 };
 
 //TODO: can be moved to a static method
