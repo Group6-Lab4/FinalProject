@@ -116,6 +116,13 @@ $(document).ready(function() {
 				break;
 		}
 	});
+	
+	$("#orderForm").submit(function(ev){
+			
+			ev.preventDefault();
+			alert("Thanks alot! You will soon recieve your book ;)");
+	});
+
 });
 
 
