@@ -149,6 +149,9 @@ var StoryModel = function StoryModel() {
 			}, {
 				'id': 8,
 				'image': "bg7.png"
+			}, {
+				'id': 9,
+				'image': "bg8.png"
 			}
 		],
 		'item': {
