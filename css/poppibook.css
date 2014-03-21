@@ -259,9 +259,10 @@ h2 {
 }
 
 #cat_bgs .draggable_item{
-	width: 200px;
-		margin-left:50px;
-		margin-top:10px;
+	width: 120px;
+		float: left;
+		margin-left:20px;
+		margin-top:20px;
 }
 
 #cat_items .draggable_item>img, #cat_bgs .draggable_item>img{
@@ -284,7 +285,7 @@ h2 {
 }
 
 .canvas_item_props{
-	width: 30%; 
+	width: 20%; 
 	z-index: 10;
 }
 
