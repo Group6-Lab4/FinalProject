@@ -241,7 +241,8 @@ h2 {
 	background-color: #AAAAAA;
 }
 #previewView .canvas{
-	background-image: none;
+	background-image:url(../images/preview_canvas.png);
+	background-size:cover;
 }
 
 
