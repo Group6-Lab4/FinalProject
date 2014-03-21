@@ -40,7 +40,7 @@ var StoryModel = function StoryModel() {
 			}
 		}
 		if (!isFound) {
-			pages[0].addComponent(PageComponent.TYPE_TEXT, title, 0, 40, 100, 30);
+			pages[0].addComponent(PageComponent.TYPE_TEXT, title, 60, 40, 40, 30);
 		}
 
 		notifyObservers("setTitle");
