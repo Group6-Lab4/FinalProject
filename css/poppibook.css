@@ -227,7 +227,8 @@ h2 {
 }
 .canvas_wrapper{
 
-    margin:20px;
+    margin-top:10px;
+	margin-bottom:10px;
 }
 .canvas{
     z-index: 0;
@@ -316,7 +317,7 @@ h2 {
 	border-width: thin;
 	border-color: #555555;
 	background-color: #EEE;
-		margin-left:60px;
+		margin-left:80px;
 		margin-top:10px;
 }
 
@@ -614,4 +615,11 @@ h2 {
     padding-right: 0;
     padding-left: 0;
   }
+}
+
+.form-horizontal {
+	font-size:16px;
+	font-family: sans-serif;
+
+
 }
