@@ -79,13 +79,6 @@ var EditViewController = function(view, model) {
 	});
 
 	/*remove the defulte streched out style of left menu when click or mouse over*/
-	//detect change on title
-	view.titleInput.change(function() {
-		model.setTitle(view.titleInput.val());
-		model.update("setTitle");
-
-	});
-
 	$(".catgories").on("click mouseout", function() {
 		$("#icon_bg div").attr("id", "cat_bgs");
 		$("#icon_bg img").attr("id", "");
