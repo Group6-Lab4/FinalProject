@@ -180,7 +180,7 @@ h2 {
     left:250px;
     top:0px;
     cursor:pointer;
-    /*z-index: 25;*/
+  //  z-index: 20;
     transform: scale(1);
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
@@ -275,7 +275,16 @@ h2 {
 
 }
 
-/*items on canvas*/
+/* make the icon in leftside bar above the item container when hover*/
+/*
+.catgories{
+	
+	transition: z-index 0.2s ease-in-out;
+}
+
+.catgories:hover{
+	z-index: 50;
+}*/
 
 /*TOFIX: keep aspect ratio*/
 .canvas_item_bg{
@@ -527,7 +536,16 @@ h2 {
   font-size: 21px;
 }
 
+/*scrollable preview container for thumbnails*/
 
+.thumbnail_container_wrapper{
+	
+	white-space: nowrap;
+	overflow: auto;
+}
+
+
+ 
 
 /*Style for preview page*/ 
 .page_thumbnail{
@@ -535,10 +553,14 @@ h2 {
 	/*background-color: #EEEEEE;*/ 
 	height: 140px;
 	width: 200px;
-	float: left;
+	//float: left;
 	/*margin-right: 6px;*/
 	position: relative;
 	cursor: pointer;
+	/*make them in oneline*/
+	display: inline-block;
+	vertical-align:top;
+	list-style: none;
 }
 
 .page_thumbnail>label{
@@ -554,6 +576,7 @@ h2 {
     right: 4px;
     /*background-color: rgba()*/
     display: none;
+	white-space: normal;
 
 }
 
@@ -561,9 +584,9 @@ h2 {
     display: block;
 }
 
+ 
 
-
-/* Customize the nav-justified links to be fill the entire space of the .navbar */
+/* Customize the nav-justified links to be fill the entire space of the .navbar 
 
 .nav-justified {
   background-color: #eee;
@@ -577,14 +600,14 @@ h2 {
   font-weight: bold;
   color: #777;
   text-align: center;
-  background-color: #e5e5e5; /* Old browsers */
-  background-image:    -moz-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%); /* FF3.6+ */
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
-  background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#e5e5e5 100%); /* Chrome 10+,Safari 5.1+ */
-  background-image:      -o-linear-gradient(top, #f5f5f5 0%,#e5e5e5 100%); /* Opera 11.10+ */
-  background-image:         linear-gradient(top, #f5f5f5 0%,#e5e5e5 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
-  background-repeat: repeat-x; /* Repeat the gradient */
+  background-color: #e5e5e5; /* Old browsers 
+  background-image:    -moz-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%); /* FF3.6+ 
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ 
+  background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#e5e5e5 100%); /* Chrome 10+,Safari 5.1+ 
+  background-image:      -o-linear-gradient(top, #f5f5f5 0%,#e5e5e5 100%); /* Opera 11.10+ 
+  background-image:         linear-gradient(top, #f5f5f5 0%,#e5e5e5 100%); /* W3C 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 
+  background-repeat: repeat-x; /* Repeat the gradient 
   border-bottom: 1px solid #d5d5d5;
 }
 .nav-justified > .active > a,
@@ -601,6 +624,7 @@ h2 {
   border-bottom: 0;
   border-radius: 0 0 5px 5px;
 }
+*/
 
 @media (min-width: 768px) {
   .nav-justified {

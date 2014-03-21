@@ -151,7 +151,7 @@ var PreviewView = function(container, model) {
 
 /*--- Static functions ---*/
 PreviewView.createThumbnailDiv = function(pageIdx) {
-	var thumbnailWrapper = $("<div>").addClass("thumbnail page_thumbnail").attr("pb-idx", pageIdx);
+	var thumbnailWrapper = $("<li>").addClass("thumbnail page_thumbnail").attr("pb-idx", pageIdx);
 	var thumbnailCanvas = $("<div>").addClass("canvas");
 
         var setCoverBtn = $("<input>").addClass("btn btn-xs").attr("type", "button").val("Set as Cover");
