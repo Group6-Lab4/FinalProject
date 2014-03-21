@@ -173,14 +173,14 @@ h2 {
     display:none;
 }
 
-
+ 
 
 .nav-sidebar li img.sidebar_icon{
     position:absolute;
     left:250px;
     top:0px;
     cursor:pointer;
-  //  z-index: 20;
+    z-index: 20;
     transform: scale(1);
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
@@ -276,7 +276,7 @@ h2 {
 }
 
 /* make the icon in leftside bar above the item container when hover*/
-/*
+
 .catgories{
 	
 	transition: z-index 0.2s ease-in-out;
@@ -284,7 +284,7 @@ h2 {
 
 .catgories:hover{
 	z-index: 50;
-}*/
+}
 
 /*TOFIX: keep aspect ratio*/
 .canvas_item_bg{
@@ -335,6 +335,7 @@ h2 {
 	text-align: center;
 	font-size: 200%;
 	overflow: hidden;
+	text-shadow: 1px 1px 8px #fff;
 	
 }
 
