@@ -9,17 +9,18 @@ var EditViewController = function(view, model) {
 	var textItemDefaultText = "Your text goes here.";
 	var curPageIdx = view.curStoryPage.getPageIdx();
 
-// Handling cloned draggable
+	// @depercated.
+	// Handling cloned draggable
 	var updateCanvasComponentHandlers = function() {
 		var componentObj = $(container).find(".dropped_item");
-//		console.log("updateCanvasComponentHandlers, componentObj:");
-//		console.log(componentObj);
+		console.log("updateCanvasComponentHandlers, componentObj:");
+		console.log(componentObj);
 
 		componentObj.draggable({
 			containment: "#droppable_canvas"
 		});
 
-		//NOTE: can consier to chagne to delegate method
+		//NOTE: can consier to chagne to delegate method -> DONE!
 		//handler for textarea 
 		componentObj.find("textarea").on("change", function() {
 			var componentId = $(this).parent().attr("pb-id");
@@ -30,7 +31,7 @@ var EditViewController = function(view, model) {
 
 		});
 
-		//NOTE: can consier to chagne to delegate method
+		//NOTE: can consier to chagne to delegate method -> DONE!
 		// and its handlers
 		componentObj.find("input[name=delete]").on("click", function() {
 			var componentId = $(this).parent().attr("pb-id");
@@ -49,11 +50,11 @@ var EditViewController = function(view, model) {
 		model.update("setTitle");
 
 	});
-	
+
 	/*interaction of the navigation dots */
-	view.pagingContainer.on("click", "li", function(){
+	view.pagingContainer.on("click", "li", function() {
 		view.loadStoryPage($(this).attr("pb-idx"));
-		
+//		updateCanvasComponentHandlers();
 	});
 
 
@@ -73,7 +74,7 @@ var EditViewController = function(view, model) {
 		if (view.curStoryPage.getPageIdx() >= model.getAllPages().length - 1)
 			return;
 		else {
-			console.log("EditViewController: toNext: from p." + curPageIdx + " to p." + (curPageIdx+1));
+//			console.log("EditViewController: toNext: from p." + curPageIdx + " to p." + (curPageIdx + 1));
 			view.loadStoryPage(curPageIdx + 1);
 		}
 	});
@@ -121,6 +122,23 @@ var EditViewController = function(view, model) {
 
 	// Paging handlers
 
+	// Other handlers for draggable items
+	// delete btn handler
+	$("#droppable_canvas").on("click", "input[name=delete]", function() {
+		var componentId = $(this).parent().attr("pb-id");
+		//update ui
+		$(this).parent().remove();
+		//update model
+		view.curStoryPage.removeComponent(componentId);
+		
+	}).on("change", "textarea", function() {
+		var componentId = $(this).parent().attr("pb-id");
+		var pageComponent = view.curStoryPage.getComponentById(componentId);
+
+		//update model
+		pageComponent.setText($(this).val());
+
+	});
 
 	// Handling original draggable
 	$(".draggable_item").draggable({
@@ -223,15 +241,16 @@ var EditViewController = function(view, model) {
 				var itemTextarea = $("<textarea>").text(textItemDefaultText);
 				newItemObj.append(itemTextarea);
 
+				//already handled by its delegate canvas
 				//handler for textarea
-				itemTextarea.on("change", function() {
-					var componentId = $(this).parent().attr("pb-id");
-					var pageComponent = view.curStoryPage.getComponentById(componentId);
-
-//						console.log("onchange: " + $(this).val());
-					pageComponent.setText($(this).val());
-
-				});
+//				itemTextarea.on("change", function() {
+//					var componentId = $(this).parent().attr("pb-id");
+//					var pageComponent = view.curStoryPage.getComponentById(componentId);
+//
+////						console.log("onchange: " + $(this).val());
+//					pageComponent.setText($(this).val());
+//
+//				});
 			}
 
 			// Save new component to model
@@ -250,14 +269,15 @@ var EditViewController = function(view, model) {
 			var itemDelBtn = $('<input type="button" class="btn btn-xs" name="delete" value="x" />');
 			newItemObj.append(itemDelBtn);
 
+			//@note: already handled by its delegated parent canvas
 			// and its handlers
-			itemDelBtn.on("click", function() {
-				
-				var componentId = $(this).parent().attr("pb-id");
-				view.curStoryPage.removeComponent(componentId);
-				$(this).parent().remove();
-
-			});
+//			itemDelBtn.on("click", function() {
+//
+//				var componentId = $(this).parent().attr("pb-id");
+//				view.curStoryPage.removeComponent(componentId);
+//				$(this).parent().remove();
+//
+//			});
 
 
 			// Add to canvas
