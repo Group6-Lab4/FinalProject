@@ -48,22 +48,24 @@ var PreviewView = function(container, model) {
 		this.thumbnailContainer.find(".page_thumbnail").eq(pageIdx - 1).after(thumbnailDiv); //insert after 
 
 		//Also update following thumbnails page num
-		this.updateAllThumbnailPageNum();
+		this.updateAllThumbnailPageIdx();
 	};
 
 	this.removeThumbnail = function(pageIdx) {
 		this.thumbnailContainer.find(".page_thumbnail").eq(pageIdx).remove(); //insert after 
 
 		//Also update following thumbnails page num
-		this.updateAllThumbnailPageNum();
+		this.updateAllThumbnailPageIdx();
 	};
 
-	this.updateAllThumbnailPageNum = function() {
+	this.updateAllThumbnailPageIdx = function() {
 		this.thumbnailContainer.find(".page_thumbnail").each(function(idx, element) {
 			if (idx === 0) {
 				$(element).find("label").text("Cover");
+				$(element).attr("pb-idx", idx);
 			} else {
 				$(element).find("label").text(idx);
+				$(element).attr("pb-idx", idx);
 			}
 		});
 	};
@@ -154,7 +156,7 @@ PreviewView.createThumbnailDiv = function(pageIdx) {
 	var thumbnailWrapper = $("<li>").addClass("thumbnail page_thumbnail").attr("pb-idx", pageIdx);
 	var thumbnailCanvas = $("<div>").addClass("canvas");
 
-        var setCoverBtn = $("<input>").addClass("btn btn-xs").attr("type", "button").val("Set as Cover");
+        var setCoverBtn = $("<input>").addClass("btn btn-xs btn_set_cover").attr("type", "button").val("Set as Cover");
 	pageIdx = (pageIdx == 0) ? "Cover" : pageIdx;
 	var thumbnailCaption = $("<label>").text(pageIdx);
         

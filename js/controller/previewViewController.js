@@ -7,10 +7,10 @@ var PreviewViewController = function(view, model) {
 
 
 
-    $(view.thumbnailContainer).on("click", ".page_thumbnail, .btn-xs", function() {
+    $(view.thumbnailContainer).on("click", ".page_thumbnail, .btn_set_cover", function() {
 //		alert("click thumbnail"+$(this).attr("pb-idx"));
         var pageIdx;
-        if ($(this).hasClass("btn-xs")) {
+        if ($(this).hasClass("btn_set_cover")) {
             pageIdx = $(this).parent().attr("pb-idx");
             
             //click on Set cover button
