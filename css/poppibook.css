@@ -25,9 +25,10 @@ body {
 	font-size:12px;
 	}
 	#linkToLand>a{
-		background: #4cae4c;
+		background: #e4b9b9;
 		color: #fff;
-		margin-right: 10px;
+		margin-left: 40px;
+		border-radius: 8px;
 	}
 
 .navbar {
