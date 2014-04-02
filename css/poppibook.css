@@ -91,12 +91,12 @@ h2 {
 /* style for the left sidebar in editpage*/
 .nav-sidebar {
     //margin-left: -75px;
-	margin-left: -7%;
+	margin-left: -7.5%;
     margin-top: 5%;
     position: fixed;
     background-color: #eee;
 	background-image:url(../images/menu_bg.png);
-	width: 25%;
+	width: 26%;
     height: 100%;	
 }
 
@@ -140,7 +140,7 @@ h2 {
 		transition:none;
 	}
 .nav-sidebar>li:hover>div, .nav-sidebar>li:active>div{
-    left:7%;
+    left:0;
     opacity: 1;
 
 }
