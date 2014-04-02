@@ -59,12 +59,9 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<form class="navbar-right form-inline">
-						<!--<button class="btn btn-success" onclick="">CREATE YOUR BOOK </button>
-						<button class="btn btn-success" onclick="">PREVIEW</button>
-						<button class="btn btn-success" onclick="">ORDER</button>
-						<button class="btn btn-warning" onclick="">GO BACK</button>
-						<button class="btn btn-success" onclick="">CONFIRM</button>-->
+						
 						<ol class="pagination">
+							<li id="linkToLand"><a href="http://www.redchamber.eu/poppi/">Go back to Landing page </a></li>
 							<li id="step1" class=""><a href="#edit" class="loadPage">1.CREATE</a></li>
 							<li id="step2" class=""><a href="#preview" class="loadPage">2.PREVIEW</a></li>
 							<li id="step3" class=""><a href="#order" class="loadPage">3.ORDER</a></li>
@@ -241,16 +238,17 @@
 
 			<!-- order form -->
 			<div class="row" id="orderView">
-				<div class="jumbotron">
-					<h2 style="text-align:left; margin-left:170px; margin-top:40px; margin-bottom:30px">We just need these details from you</h2>
-												
-
+				<div class="row">
+				 <div class="col-lg-8 col-md-8 col-sm-8" id="form">
+					
+					<h2>Simply fill the necessary information to get the book delivered</h2>
+					 
 					<form class="form-horizontal" id="orderForm" role="form">
 						<div class="form-group">
 							<label for="fullName" class="col-lg-2 control-label">
 								Full name:
 							</label>
-							<div class="col-lg-3">
+							<div class="col-lg-5">
 								<input type="text" id="fullName" class="form-control" placeholder="First Name, Last Name" required>
 							</div>
 						</div>
@@ -258,7 +256,7 @@
 							<label for="email" class="col-lg-2 control-label">
 								Email:
 							</label>
-							<div class="col-lg-3">
+							<div class="col-lg-5">
 								<input type="email" id="email" class="form-control" placeholder="example@example.xom" required>
 							</div> 
 						</div>
@@ -266,7 +264,7 @@
 							<label for="telephone" class="col-lg-2 control-label">
 								Telephone:
 							</label>
-							<div class="col-lg-3">
+							<div class="col-lg-5">
 								<input type="tel" id="telephone" class="form-control" placeholder="Telephone Number" required>
 							</div> 
 						</div>
@@ -276,7 +274,7 @@
 							<label for="street" class="col-lg-2 control-label">
 								Address:
 							</label>
-							<div class="col-lg-5">
+							<div class="col-lg-8">
 								<input type="text" id="street" class="form-control" placeholder="Street" required>
 							</div> 
 
@@ -286,7 +284,7 @@
 							<label for="Co" class="col-lg-2 control-label">
 								C/o (if any):
 							</label>
-							<div class="col-lg-5">
+							<div class="col-lg-8">
 								<input type="text" id="Co" class="form-control" placeholder="Optional">
 							</div> 
 
@@ -317,28 +315,41 @@
 							</div> 
 						</div>
 						<div class=" row">
-							<label for="inlineRadiobox1" class="col-lg-2" style="text-align:right">
-								Book type:  
-							</label>
-							<div class="col-lg-5 col-lg-offset-0">
-								<label class="radio-inline">
-									<input type="radio" name="bookType" id="inlineRadiobox1" value="standard">Standard (paper)
+							<div class="col-lg-2">
+								<label for="inlineRadiobox1" style="text-align:right">
+									Book type:  
 								</label>
-								<label class="radio-inline">
-									<input type="radio" name="bookType" id="inlineRadiobox2" value="waterProof">Waterproof (plastic)
-								</label>
-                               <br><br><input class="btn btn-success" type="submit" value="SUBMIT">		</div>					
-					<div class="col-lg-4 col-md-5 col-sm-6"><img alt="step1" class="img-responsive" src="images/step2.png" width="40%"></div>	
-</form>
-                    			
-                    
+							</div>
+							<div class="col-lg-10 col-lg-offset-1">
+								<div class="row">
+									<div class="col-lg-8">
+										<label class="radio-inline">
+											<input type="radio" name="bookType" id="inlineRadiobox1" value="standard">Standard (paper)
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="bookType" id="inlineRadiobox2" value="waterProof">Waterproof (plastic)
+										</label>
+									</div>
+									<div class="col-lg-4 col-md-5 col-sm-6">
+									  <img alt="deliver" class="img-responsive" src="images/step2.png" width="40%">
+									</div>
+								</div>		
+					        </div>
 						</div>
-							
-				</div>
-                			<!-- Site footer view -->
-			<div class="footer">&copy; Poppi book 2014</div>
+						<div class="row">
+							 
+                              <input class="btn btn-success" type="submit" value="SUBMIT">
+							</div>
+                  </form>
+            		
+			    </div>
+					<div class="col-lg-4 col-md-4 col-sm-4" id="linkToSurvey">
+						<p class="row">We appreciate it if you help us improve our service by <br> <a target="_blank" href="https://docs.google.com/forms/d/13fDD_Gql1O9DPcMiMwM2FNe4I92f37a3RZEhdojtaSA/viewform"> filling this form</a>, <br> which takes you less than 5 minutes.</p>
+					</div>
+               </div>			<!-- Site footer view -->
+			  <div class="row footer">&copy; Poppi book 2014</div>
 			</div>
-
+          
 
 		</div> <!-- /container -->
 
