@@ -641,11 +641,12 @@ h2 {
 
 /*style for order page*/
 
-#form{
+#formWrapper{
 	margin-top: 5%; 
 }
 
 #orderForm textarea{
+	 
 	height: 150px;
 }
 
