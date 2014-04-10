@@ -125,14 +125,14 @@ $(document).ready(function(){
 		ev.preventDefault();
 		$("#orderForm input[type=submit]").val("Submitting... Please wait");
 		
-		alert($(this).find("input[name=tel]").val());
+		//alert($(this).find("input[name=tel]").val());
 		var data2send = { 
 			name: $(this).find("input[name=fullName]").val(), 
 			exp_mail: $(this).find("input[name=email]").val(), 
 			telephone: $(this).find("input[name=tel]").val(), 
 			street: $(this).find("input[name=street]").val(), 
-			Co: $(this).find("input[name=Co]").val(), 
-			postal_code: $$(this).find("input[name=postalCode]").val(), 
+			co: $(this).find("input[name=co]").val(), 
+			postal_code: $(this).find("input[name=postalCode]").val(), 
 			city: $(this).find("input[name=city]").val(), 
 			country: $(this).find("input[name=country]").val() 
 		};

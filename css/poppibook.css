@@ -645,6 +645,10 @@ h2 {
 	margin-top: 5%; 
 }
 
+#orderForm textarea{
+	height: 150px;
+}
+
 #linkToSurvey{
 	margin-top:15%;
 	border: dotted;
