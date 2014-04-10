@@ -79,9 +79,8 @@ var App = {
 
 };
 
-
-
-$(document).ready(function() {
+$(document).ready(function(){
+	
 	var model = new StoryModel();
 	App.model = model; //just to expose it to the world
 
@@ -123,11 +122,64 @@ $(document).ready(function() {
 	
 	$("#orderForm").submit(function(ev){
 			
-			ev.preventDefault();
+		ev.preventDefault();
+		$("#orderForm input[type=submit]").val("Submitting... Please wait");
 		
+		alert($(this).find("input[name=tel]").val());
+		var data2send = { 
+			name: $(this).find("input[name=fullName]").val(), 
+			exp_mail: $(this).find("input[name=email]").val(), 
+			telephone: $(this).find("input[name=tel]").val(), 
+			street: $(this).find("input[name=street]").val(), 
+			Co: $(this).find("input[name=Co]").val(), 
+			postal_code: $$(this).find("input[name=postalCode]").val(), 
+			city: $(this).find("input[name=city]").val(), 
+			country: $(this).find("input[name=country]").val() 
+		};
+		$.ajax({
+			type: 'POST',
+			url: 'http://poppibook.com:8080/NewsAppServer/rest/json/poppimail',
+			contentType: "application/json; charset=utf-8",
+			dataType: 'json',
+			data : JSON.stringify(data2send),
+			success: function(data) {
+				var status = data.mail_info;
+				if(status === "ERR_EMPTY"){
+					$("#orderForm input[type=submit]").val("Not sent - Please check every field");
+					$("#orderForm input[type=submit]").removeClass( "btn-success" ).addClass( "btn-warning" );
+					setTimeout(function() 
+							{
+						$("#orderForm input[type=submit]").val("Submit");
+						$("#orderForm input[type=submit]").removeClass( "btn-warning").addClass( "btn-success" );
+							}, 3000);	
+				}
+				else if(status === "ERR_MAIL"){
+					$("#orderForm input[type=submit]").val("Not sent - Incorrect email address");
+					$("#orderForm input[type=submit]").removeClass( "btn-success" ).addClass( "btn-warning" );
+					setTimeout(function() 
+							{
+						$("#orderForm input[type=submit]").val("Submit");
+						$("#orderForm input[type=submit]").removeClass( "btn-warning").addClass( "btn-success" );
+							}, 3000);	
+				}
+				else if(status === "ALL_OK"){
+					$("#orderForm input[type=submit]").val("Message received, thank you!");
+					$("#orderForm input[type=submit]").attr('disabled', 'disabled');
+					$("#orderForm input[type=submit]").removeClass( "btn-warning").addClass( "btn-success" );
+				}
+			},
+			error: function (header, status, error) {
+				$("#orderForm input[type=submit]").val("Not sent - Connection error");
+				$("#orderForm input[type=submit]").removeClass( "btn-success" ).addClass( "btn-warning" );
+				setTimeout(function() 
+						{
+					$("#orderForm input[type=submit]").val("Submit");
+					$("#orderForm input[type=submit]").removeClass( "btn-warning").addClass( "btn-success" );
+						}, 7000);	
+			},
+			timeout: 20000});
 			
-			alert("Hello " + document.forms["orderForm"]["fullName"].value + ", thank you for ordering! I think you'd really enjoy your book  but sadly you wont get one just yet since we are still developing our service :)" 
-			 );
+			//alert("Hello " + document.forms["orderForm"]["fullName"].value + ", thank you for ordering! I think you'd really enjoy your book  but sadly you wont get one just yet since we are still developing our service :)" );
 	});
 
 });
