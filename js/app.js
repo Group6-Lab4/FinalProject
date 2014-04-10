@@ -129,12 +129,13 @@ $(document).ready(function(){
 		var data2send = { 
 			name: $(this).find("input[name=fullName]").val(), 
 			exp_mail: $(this).find("input[name=email]").val(), 
-			telephone: $(this).find("input[name=tel]").val(), 
-			street: $(this).find("input[name=street]").val(), 
-			co: $(this).find("input[name=co]").val(), 
-			postal_code: $(this).find("input[name=postalCode]").val(), 
-			city: $(this).find("input[name=city]").val(), 
-			country: $(this).find("input[name=country]").val() 
+			content: $(this).find("textarea[name=message]").val()
+			//telephone: $(this).find("input[name=tel]").val(), 
+			//street: $(this).find("input[name=street]").val(), 
+			//co: $(this).find("input[name=co]").val(), 
+			//postal_code: $(this).find("input[name=postalCode]").val(), 
+			//city: $(this).find("input[name=city]").val(), 
+			//country: $(this).find("input[name=country]").val() 
 		};
 		$.ajax({
 			type: 'POST',
