@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="...">
+
+		<title>PoppiBook</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="css/poppibook.css" rel="stylesheet">
+		<!-- Just for debugging purposes. Don't actually copy this line! -->
+		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<!-- jQuery UI -->
+        <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+
+		<!-- custom js -->
+		<script src="js/utils.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/model/storyModel.js"></script>
+		<script src="js/view/homeView.js"></script>
+		<script src="js/view/editView.js"></script>
+		<script src="js/view/previewView.js"></script>
+		<script src="js/view/orderView.js"></script>
+
+		<script src="js/controller/homeViewController.js"></script>
+		<script src="js/controller/editViewController.js"></script>
+		<script src="js/controller/previewViewController.js"></script>
+		<script src="js/controller/orderViewController.js"></script>
+        
+		 
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+		<!-- navigation view -->
+        
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href=""><img width="200" height="55" src="images/img_logo_poppibook.png"></a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<form class="navbar-right form-inline">
+						<!--<button class="btn btn-success" onclick="">CREATE YOUR BOOK </button>
+						<button class="btn btn-success" onclick="">PREVIEW</button>
+						<button class="btn btn-success" onclick="">ORDER</button>
+						<button class="btn btn-warning" onclick="">GO BACK</button>
+						<button class="btn btn-success" onclick="">CONFIRM</button>-->
+						<ol class="pagination">
+							<li id="step1" class=""><a href="#edit" class="loadPage">1.CREATE</a></li>
+							<li id="step2" class=""><a href="#preview" class="loadPage">2.PREVIEW</a></li>
+							<li id="step3" class=""><a href="#order" class="loadPage">3.ORDER</a></li>
+						</ol>
+					</form>
+				</div><!--/.navbar-collapse -->
+			</div>
+		</div>
+
+
+		<div class="container container-fluid">
+			<!--home view-->
+			<div class="row" id="homeView">
+            
+					<h2 style="margin-top:80px">Enjoy the fun of creating a unique storybook for your children</h2>
+                    Our new drag n' drop tool makes it super easy...
+
+				<div class="jumbotron">
+
+					<div class="row">
+						<div class="col-lg-4 col-md-5 col-sm-6">
+                            <img alt="step1" class="img-responsive" src="images/step1.png">
+                            Choose background, add objects and write your own text
+                            </div>
+
+						<div class="col-lg-4 col-md-5 col-sm-6">
+							<img alt="step1" class="img-responsive" src="images/step2.png">
+                            Preview and order the book and it will arrive in your mailbox
+						</div>
+						<div class="col-lg-4 col-md-5 col-sm-6">
+                            <img alt="step1" class="img-responsive" src="images/step3.png">
+                            Cuddle up on the sofa with your child and let the story begin
+						</div>
+					</div>
+					<a id="start" href="#edit" class="loadPage btn btn-success">START</a>
+                    
+				</div>
+                
+			<div class="footer">&copy; PoppiBook 2014</div>
+                
+			</div>
+
+			<!-- edit page -->
+			<div class="row" id="editView">
+            
+            
+				<!-- left sidebar view --> 
+				<div class="col-sm-3 col-md-3 col-lg-3" id="leftSideBarView">
+                							
+					<ul class="nav nav-sidebar">
+
+                   		<li class="catgories" id="icon_bg">
+							<a>
+								<img alt="select bg" class="img-responsive sidebar_icon" src="images/icon_bg_small.png">	  
+							</a>
+							<div id="cat_bgs" class="sidebar_bg"></div>
+						</li>
+                        
+                        
+						<li class="catgories" id="icon_item">
+							<a>
+								<img alt="select items" class="img-responsive sidebar_icon" src="images/icon_item_small.png">		  
+							</a>
+							<div id="cat_items" class="sidebar_bg"></div>
+						</li>
+                        
+                        
+						<li class="catgories" id="icon_text">
+							<a>
+								<img alt="write the stories" class="img-responsive sidebar_icon" src="images/icon_text_small.png">		  
+							</a>
+							<div id="cat_texts" class="sidebar_bg">
+								<div class="draggable_item_text" pb-type="3" pb-width="100" pb-height="30">
+								<div class="item_text_container"><div class="item_text" style="width:100%; height: 40%;"><p>Text</p></div></div>
+								</div>
+								<div class="draggable_item_text" pb-type="3" pb-width="50" pb-height="50">
+								<div class="item_text_container"><div class="item_text" style="width:50%; height: 50%;"><p>Text</p></div></div>
+								</div>
+								<div class="draggable_item_text" pb-type="3" pb-width="50" pb-height="100">
+								<div class="item_text_container"><div class="item_text" style="width:50%; height: 100%;"><p>Text</p></div></div>
+								</div>
+								<div class="draggable_item_text" pb-type="3" pb-width="30" pb-height="100">
+								<div class="item_text_container"><div class="item_text" style="width:40%; height: 100%;"><p>Text</p></div></div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+                
+				<!-- content view(story name, canvas)-->
+				<div class="col-sm-8 col-md-8 col-lg-8 main" >
+					<!--title -->
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+							<input type="text" class="form-control title" placeholder="Give your story a name">
+						</div>
+					</div>
+
+					<div class="row">
+
+						<div class="col-sm-12 col-md-12 col-lg-12 no_col_padding">
+							<div class="canvas_wrapper ratio_box ratio420_297">
+
+								<a class="btn_deletepage">
+									<img src="images/button_delete.png">
+									<!-- delete button-->
+								</a>
+								<a class="btn_addpage">
+									<img src="images/button_addNewPage.png">
+									<!-- add button-->
+								</a>
+								<div id="droppable_canvas" class="ratio_box_content canvas"></div>
+							</div>
+
+							<!-- navi dots,-->
+							<div class="dotNavi row">
+								<div id="toPrevious" class="col-lg-1 col-md-1 col-sm-2">
+									<span class="glyphicon glyphicon-chevron-left"></span>
+								</div>
+								<div class=" dotstyle dotstyle-fillup col-lg-7 col-md-7 col-sm-8">
+									<ul class="dot_container">
+										<li pb-idx="1" class="current"><a href="#"></a></li>
+										 
+
+									</ul>
+								</div>
+								<div id="toNext" class="col-lg-1 col-md-1 col-sm-2">
+									<span class="glyphicon glyphicon-chevron-right"></span>
+								</div>
+							</div>
+							<!--page information-->
+							<div style="text-align:right;"><span id="currentPageIdx">2</span>/<span id="totalPageNum">8</span></h3></div>
+						</div>
+					</div>          
+
+				</div>
+			</div>
+			<!-- preview page -->
+			<div class="row" id="previewView">
+				<div class="jumbotron">
+					<div class="row">
+					</div>
+					<div class="row">
+                    						<h2 class="title">Your story title</h2>
+
+						<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 no_col_padding">
+							<div class="canvas_wrapper ratio_box ratio420_297">
+								<div class="ratio_box_content canvas">
+								</div>
+							</div>
+						</div>
+					</div>
+<!--					<div class="row">
+						<label>Created by: </label>
+						<input type="text" placeholder="your name"/>
+						<input type="button" class="btn btn-success btn-lg" value="Set at Cover"/>
+					</div>-->
+					<div class="row">
+
+						<div class="thumbnail_container_wrapper col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0 col-lg-12 col-lg-offset-0 no_col_padding">
+							<ul class="jumbotron thumbnails_container">
+								<li class="thumbnail page_thumbnail"></li>
+								<li class="thumbnail page_thumbnail"></li>
+								<li class="thumbnail page_thumbnail"></li>
+								<li class="thumbnail page_thumbnail"></li>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			<div class="footer">&copy; Poppi book 2014</div>
+
+			</div>
+
+			<!-- order form -->
+			<div class="row" id="orderView">
+				<div class="jumbotron">
+					<h2 style="margin-top:40px; margin-bottom:30px;">We just need these details from you</h2>
+												
+
+					<form class="form-horizontal" id="orderForm" role="form">
+						<div class="form-group">
+							<label for="fullName" class="col-lg-2 control-label">
+								Full name:
+							</label>
+							<div class="col-lg-3">
+								<input type="text" id="fullName" class="form-control" placeholder="First Name, Last Name" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="email" class="col-lg-2 control-label">
+								Email:
+							</label>
+							<div class="col-lg-3">
+								<input type="email" id="email" class="form-control" placeholder="example@example.xom" required>
+							</div> 
+						</div>
+						<div class="form-group">
+							<label for="telephone" class="col-lg-2 control-label">
+								Telephone:
+							</label>
+							<div class="col-lg-3">
+								<input type="tel" id="telephone" class="form-control" placeholder="Telephone Number" required>
+							</div> 
+						</div>
+
+						<div class="form-group">
+
+							<label for="street" class="col-lg-2 control-label">
+								Address:
+							</label>
+							<div class="col-lg-5">
+								<input type="text" id="street" class="form-control" placeholder="Street" required>
+							</div> 
+
+						</div>
+						<div class="form-group">
+
+							<label for="Co" class="col-lg-2 control-label">
+								C/o (if any):
+							</label>
+							<div class="col-lg-5">
+								<input type="text" id="Co" class="form-control" placeholder="Optional">
+							</div> 
+
+						</div>
+						<div class="form-group">
+							<label for="postalCode" class="col-lg-2 control-label">
+								Postal Code:
+							</label>
+							<div class="col-lg-5">
+								<input type="text" id="postalCode" class="form-control" placeholder="Postal Code" required>
+							</div> 
+						</div>
+						<div class="form-group">
+							<label for="City" class="col-lg-2 control-label">
+								City:
+							</label>
+							<div class="col-lg-5">
+								<input type="text" id="city" class="form-control" placeholder="City" required>
+							</div> 
+
+						</div>
+						<div class="form-group">
+							<label for="country" class="col-lg-2 control-label">
+								Country:
+							</label>
+							<div class="col-lg-5">
+								<input type="text" id="country" class="form-control" placeholder="Country" required>
+							</div> 
+						</div>
+						<div class=" row">
+							<label for="inlineRadiobox1" class="col-lg-2" style="text-align:right">
+								Book type:  
+							</label>
+							<div class="col-lg-5 col-lg-offset-0">
+								<label class="radio-inline">
+									<input type="radio" name="bookType" id="inlineRadiobox1" value="standard">Standard (paper)
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="bookType" id="inlineRadiobox2" value="waterProof">Waterproof (plastic)
+								</label>
+							</div>
+						</div>
+						<p>
+						</p>
+						<input class="btn btn-success" type="submit" value="SUBMIT">
+					</form>
+				</div>
+                			<!-- Site footer view -->
+			<div class="footer">&copy; Poppi book 2014</div>
+			</div>
+
+
+
+		</div> <!-- /container -->
+
+
+		<!-- Bootstrap core JavaScript placed at the end of the document so the pages load faster -->
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
