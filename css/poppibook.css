@@ -24,6 +24,12 @@ body {
 .pagination {
 	font-size:12px;
 	}
+	#linkToLand>a{
+		background: #31b0d5;
+		color: #fff;
+		margin-left: 40px;
+		border-radius: 8px;
+	}
 
 .navbar {
 	
@@ -85,13 +91,14 @@ h2 {
 
 /* style for the left sidebar in editpage*/
 .nav-sidebar {
-    margin-left: -75px;
+    //margin-left: -75px;
+	margin-left: -7.5%;
     margin-top: 5%;
     position: fixed;
     background-color: #eee;
 	background-image:url(../images/menu_bg.png);
-	width: 300px;
-    height: 600px;	
+	width: 26%;
+    height: 100%;	
 }
 
 .nav-sidebar>ul{
@@ -102,8 +109,8 @@ h2 {
 .nav-sidebar>li{
     display: list-item;
     list-style-type: none;
-    width: 200px;
-    height: 100px;
+    width: 100%;
+    //height: 100px;
 }
 
 /*rewrite the style of the hover of <a> in nav li*/
@@ -111,16 +118,20 @@ h2 {
 .sidebar_bg{
     position: absolute;
     z-index: 1;  /*higher than normal icon so to cover them*/
-    width: 300px;
-    height: 600px;
+   // width: 300px;
+   // height: 600px;
     border: none;
     left:-300%;
-    top:-5%;
+    top:-8%;
     opacity: 0;
+	height: 800%;
+	width: 100%;
+	 
+	
     /*!important enable below will make draggable not working
 	overflow-y: scroll;*/
-      transition: 1s ease-in-out, background-color 1s ease-in-out;
-	 -webkit-transition:  1s ease-in-out, background-color 1s ease-in-out;
+      transition: left 1s ease-in-out, background-color .2s ease-in-out;
+	 -webkit-transition: left 1s ease-in-out, background-color .2s ease-in-out;
 	
  
 }
@@ -130,16 +141,16 @@ h2 {
 		transition:none;
 	}
 .nav-sidebar>li:hover>div, .nav-sidebar>li:active>div{
-    left:0%;
+    left:0;
     opacity: 1;
 
 }
 .nav-sidebar>li:nth-child(2)>div{
-    top:-100px;
+    top:-110px;
 }
 
 .nav-sidebar>li:nth-child(3)>div{
-    top:-200px;
+    top:-210px;
 }
 
 .nav-sidebar>li:nth-child(1):hover>div{
@@ -175,7 +186,7 @@ h2 {
 
 .nav-sidebar li img.sidebar_icon{
     position:absolute;
-    left:250px;
+    left:85%;
     top:0px;
     cursor:pointer;
     z-index: 20;
@@ -272,6 +283,8 @@ h2 {
 	height: 100%;
 }
 
+ 
+
 .dropped_item, .preview_item{
 	position: absolute;
 
@@ -282,6 +295,7 @@ h2 {
 .catgories{
 	
 	transition: z-index 0.2s ease-in-out;
+	height: 100px;
 }
 
 .catgories:hover{
@@ -311,14 +325,15 @@ h2 {
 
 .item_text_container{
 
-	width: 150px;
+	width: 60%;
 	height: 105px;
 	border-style: solid;
 	border-width: thin;
 	border-color: #555555;
 	background-color: #EEE;
-		margin-left:80px;
-		margin-top:10px;
+		margin-left: 20%;
+		margin-top:10%;
+		margin-right: 10%;
 }
 
 .item_text_container>div{
@@ -622,4 +637,33 @@ h2 {
 	font-family: sans-serif;
 
 
+}
+
+/*style for order page*/
+
+#formWrapper{
+	margin-top: 5%; 
+}
+
+#orderForm textarea{
+	 
+	height: 150px;
+}
+
+#linkToSurvey{
+	margin-top:15%;
+	border: dotted;
+	border-color:#777;
+	background-color:#FDE680;
+	border-radius: 10%;
+}
+
+#linkToSurvey>p{
+	color:#777;
+	font-size: 1.5em;
+	
+}
+#linkToSurvey a{
+	color:#269abc;
+	font-size: 1.3em;
 }

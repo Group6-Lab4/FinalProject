@@ -105,6 +105,7 @@ var EditView = function(containerObj, model) {
 				componentDiv.append($("<img>").attr("src", eachComponentData.image));
 			} else if (eachComponentData.type === PageComponent.TYPE_TEXT) {
 //				console.log(eachComponentData);
+				componentDiv.addClass("canvas_item_text");
 				componentDiv.css({
 					"width": eachComponentData.size[0] + "%",
 					"height": eachComponentData.size[1] + "%",
@@ -119,6 +120,11 @@ var EditView = function(containerObj, model) {
 			componentDiv.append(itemDelBtn);
 
 			this.canvas.append(componentDiv);
+
+			//FIXME: move below to Controller
+			componentDiv.draggable({
+				containment: "#droppable_canvas"
+			});
 		}
 
 

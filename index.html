@@ -59,15 +59,13 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<form class="navbar-right form-inline">
-						<!--<button class="btn btn-success" onclick="">CREATE YOUR BOOK </button>
-						<button class="btn btn-success" onclick="">PREVIEW</button>
-						<button class="btn btn-success" onclick="">ORDER</button>
-						<button class="btn btn-warning" onclick="">GO BACK</button>
-						<button class="btn btn-success" onclick="">CONFIRM</button>-->
+						
 						<ol class="pagination">
+							
 							<li id="step1" class=""><a href="#edit" class="loadPage">1.CREATE</a></li>
 							<li id="step2" class=""><a href="#preview" class="loadPage">2.PREVIEW</a></li>
 							<li id="step3" class=""><a href="#order" class="loadPage">3.ORDER</a></li>
+							<li id="linkToLand"><a href="/">Go back to Landing page </a></li>
 						</ol>
 					</form>
 				</div><!--/.navbar-collapse -->
@@ -241,109 +239,142 @@
 
 			<!-- order form -->
 			<div class="row" id="orderView">
-				<div class="jumbotron">
-					<h2 style="margin-top:40px; margin-bottom:30px;">We just need these details from you</h2>
-												
-
+				<div class="row">
+				 <div class="col-lg-8 col-md-8 col-sm-8" id="formWrapper">
+					
+					<h2> Join our list to be the first one to know when our service is ready</h2>
+					 
 					<form class="form-horizontal" id="orderForm" role="form">
 						<div class="form-group">
-							<label for="fullName" class="col-lg-2 control-label">
+							<label  class="col-lg-2 control-label">
 								Full name:
 							</label>
-							<div class="col-lg-3">
-								<input type="text" id="fullName" class="form-control" placeholder="First Name, Last Name" required>
+							<div class="col-lg-5">
+								<input type="text" name="fullName" class="form-control" placeholder="First Name, Last Name" required>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="email" class="col-lg-2 control-label">
+							<label class="col-lg-2 control-label">
 								Email:
 							</label>
-							<div class="col-lg-3">
-								<input type="email" id="email" class="form-control" placeholder="example@example.xom" required>
+							<div class="col-lg-5">
+								<input type="email" name="email" class="form-control" placeholder="example@example.xom" required>
 							</div> 
 						</div>
 						<div class="form-group">
-							<label for="telephone" class="col-lg-2 control-label">
-								Telephone:
+							<label class="col-lg-2 control-label">
+								Comments:
 							</label>
-							<div class="col-lg-3">
-								<input type="tel" id="telephone" class="form-control" placeholder="Telephone Number" required>
+							<div class="col-lg-5">
+								<textarea name="message" class="form-control" placeholder="Leave your comments and the lucky ones will get a PoppiBook for free!" required></textarea>
 							</div> 
 						</div>
 
-						<div class="form-group">
+					<!--	<div class="form-group">
 
-							<label for="street" class="col-lg-2 control-label">
+							<label class="col-lg-2 control-label">
 								Address:
 							</label>
-							<div class="col-lg-5">
-								<input type="text" id="street" class="form-control" placeholder="Street" required>
+							<div class="col-lg-8">
+								<input type="text" name="street" class="form-control" placeholder="Street" required>
 							</div> 
 
 						</div>
 						<div class="form-group">
 
-							<label for="Co" class="col-lg-2 control-label">
+							<label class="col-lg-2 control-label">
 								C/o (if any):
 							</label>
-							<div class="col-lg-5">
-								<input type="text" id="Co" class="form-control" placeholder="Optional">
+							<div class="col-lg-8">
+								<input type="text" name="co" class="form-control" placeholder="Optional">
 							</div> 
 
 						</div>
 						<div class="form-group">
-							<label for="postalCode" class="col-lg-2 control-label">
+							<label class="col-lg-2 control-label">
 								Postal Code:
 							</label>
 							<div class="col-lg-5">
-								<input type="text" id="postalCode" class="form-control" placeholder="Postal Code" required>
+								<input type="text" name="postalCode" class="form-control" placeholder="Postal Code" required>
 							</div> 
 						</div>
 						<div class="form-group">
-							<label for="City" class="col-lg-2 control-label">
+							<label class="col-lg-2 control-label">
 								City:
 							</label>
 							<div class="col-lg-5">
-								<input type="text" id="city" class="form-control" placeholder="City" required>
+								<input type="text" name="city" class="form-control" placeholder="City" required>
 							</div> 
 
 						</div>
 						<div class="form-group">
-							<label for="country" class="col-lg-2 control-label">
+							<label class="col-lg-2 control-label">
 								Country:
 							</label>
 							<div class="col-lg-5">
-								<input type="text" id="country" class="form-control" placeholder="Country" required>
+								<input type="text" name="country" class="form-control" placeholder="Country" required>
 							</div> 
 						</div>
-						<div class=" row">
-							<label for="inlineRadiobox1" class="col-lg-2" style="text-align:right">
-								Book type:  
-							</label>
-							<div class="col-lg-5 col-lg-offset-0">
-								<label class="radio-inline">
-									<input type="radio" name="bookType" id="inlineRadiobox1" value="standard">Standard (paper)
-								</label>
-								<label class="radio-inline">
-									<input type="radio" name="bookType" id="inlineRadiobox2" value="waterProof">Waterproof (plastic)
+					<!--	<div class=" row">
+							<div class="col-lg-2">
+								<label for="inlineRadiobox1" style="text-align:right">
+									Book type:  
 								</label>
 							</div>
-						</div>
-						<p>
-						</p>
-						<input class="btn btn-success" type="submit" value="SUBMIT">
-					</form>
-				</div>
-                			<!-- Site footer view -->
-			<div class="footer">&copy; Poppi book 2014</div>
+							<div class="col-lg-10 col-lg-offset-1">
+								<div class="row">
+									<div class="col-lg-8">
+										<label class="radio-inline">
+											<input type="radio" name="bookType" id="inlineRadiobox1" value="standard">Standard (paper)
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="bookType" id="inlineRadiobox2" value="waterProof">Waterproof (plastic)
+										</label>
+									</div>
+									<div class="col-lg-4 col-md-5 col-sm-6">
+									  <img alt="deliver" class="img-responsive" src="images/step2.png" width="40%" />
+									</div>
+								</div>		
+					        </div>
+						</div> -->
+						<div class="row">
+							 
+                              <input class="btn btn-success" type="submit" value="SUBMIT">
+							</div>
+                  </form>
+            		
+			    </div>
+					<div class="col-lg-4 col-md-4 col-sm-4" id="linkToSurvey">
+						<p class="row">Had fun with our prototype? Please help us to improve it by <br /> <a target="_blank" href="https://docs.google.com/forms/d/13fDD_Gql1O9DPcMiMwM2FNe4I92f37a3RZEhdojtaSA/viewform"> filling this questionnaire</a>!</p>
+					</div>
+               </div>			<!-- Site footer view -->
+			  <div class="row footer">&copy; Poppi book 2014</div>
 			</div>
-
-
+          
 
 		</div> <!-- /container -->
 
 
 		<!-- Bootstrap core JavaScript placed at the end of the document so the pages load faster -->
 		<script src="js/bootstrap.min.js"></script>
+		
+				<!--google analytics-->
+		<script>
+			(function(i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] || function() {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o),
+						m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+			ga('create', 'UA-49903446-1', 'poppibook.com');
+			ga('send', 'pageview');
+
+		</script>
 	</body>
 </html>
