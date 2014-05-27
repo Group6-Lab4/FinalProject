@@ -49,9 +49,10 @@ var App = {
 		$("#step2").show(200);
 		$("#step3").show(200);
 		$("#linkToLand").show(200);
-		$("#step1").addClass("active");
-		$("#step2").removeClass("active");
-		$("#step3").removeClass("active");
+		$("#step1>a").addClass("active");
+		$(".navbar-item-create:after").attr("content","create");
+		$("#step2>a").removeClass("active");
+		$("#step3>a").removeClass("active");
 		/*show the bg menu by defult first*/
 		//$("#icon_bg div").attr("id", "editDefultDiv");
 		$("#icon_bg img").attr("id", "editDefultImg");
@@ -62,18 +63,18 @@ var App = {
 		App.resetPage();
 		//$("#start").hide();
 		$("#linkToLand").show(200);
-		$("#step1").removeClass("active");
-		$("#step2").addClass("active");
-		$("#step3").removeClass("active");
+		$("#step1>a").removeClass("active");
+		$("#step2>a").addClass("active");
+		$("#step3>a").removeClass("active");
 		App.previewView.showView();
 	},
 	gotoOrderPage: function() {
 		App.resetPage();
 		//$("#start").hide();
 		$("#linkToLand").show(200);
-		$("#step1").removeClass("active");
-		$("#step2").removeClass("active");
-		$("#step3").addClass("active");
+		$("#step1>a").removeClass("active");
+		$("#step2>a").removeClass("active");
+		$("#step3>a").addClass("active");
 		App.orderView.showView();
 	}
 
