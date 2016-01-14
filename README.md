@@ -1,6 +1,6 @@
 FinalProject
 ============
-This is our group's final project in the course Interactive Programming at KTH Feb - Apr 2014. The requirement is to make interative prototypes of web pages. 
+This is our group's final project in the course Interactive Programming at KTH during Feb - Apr 2014. The requirement was to make an interative prototype of web pages. 
 
 In our project, we developed an idea called PoppiBook which is to let parents to create customised story books for their children using this online platform. The final prototype contains 4 parts (pages):
 1) a landing page to introduce the product
