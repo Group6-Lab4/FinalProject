@@ -9,3 +9,5 @@ In our project, we developed an idea called PoppiBook which is to let parents to
 4) an order page to place an order for the story book
 
 This web app is an one-page application adopting Model-View-Controller architecture using jQuery, jQuery UI and Bootstrap CSS.
+
+The working prototypes can be found at: http://weiwei-zhang.me/site/poppibook/index.html.
